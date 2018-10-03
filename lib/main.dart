@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import './post.dart';
+
 void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
@@ -100,8 +102,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
         body: TabBarView(
           controller: _tabController,
           children: <Widget>[
-            Text("test1"),
             Text("test2"),
+            Post(),
             Text("test3"),
           ],
         ),
