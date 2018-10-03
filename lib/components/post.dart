@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 
 class Post extends StatelessWidget {
 
+  String _title;
+
+  Post(String title) {
+    this._title = title;
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
       color: Theme.of(context).primaryColor.withOpacity(0.3),
       margin: const EdgeInsets.only(left: 6.0, right: 6.0, bottom: 12.0, top: 0.0),
@@ -12,6 +18,17 @@ class Post extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          //Title container
+          Container(
+            padding: EdgeInsets.only(bottom: 6.0),
+            child: Text(
+              _title.toUpperCase(),
+              style: TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          ),
           //Container for image
           Container(
             margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0),
@@ -28,17 +45,7 @@ class Post extends StatelessWidget {
             margin: EdgeInsets.only(top: 9.0),
             child: Column(
               children: <Widget> [
-                //Title container
-                Container(
-                  padding: EdgeInsets.only(bottom: 6.0),
-                  child: Text(
-                    "Texto do banco".toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
+
                 //Row with buttons
                 Row(
                   children: <Widget>[

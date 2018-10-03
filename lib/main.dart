@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import './post.dart';
+import './components/post.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([
@@ -103,7 +103,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
           controller: _tabController,
           children: <Widget>[
             Text("test2"),
-            Post(),
+            Post("Text Banco"),
             Text("test3"),
           ],
         ),
