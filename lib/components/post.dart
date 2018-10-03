@@ -18,16 +18,34 @@ class Post extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          //Title container
-          Container(
-            padding: EdgeInsets.only(bottom: 6.0),
-            child: Text(
-              _title.toUpperCase(),
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold
+          Row(
+            children:<Widget>[
+              //Perfil Circle Image
+              Container(
+                //margin: EdgeInsets.only(top: 0.0, right: 0.0, left: 18.0, bottom: 15.0),
+                width: 30.0,
+                height: 30.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage("http://1.bp.blogspot.com/-bdhuDXmNZdc/TZZDxXGvXnI/AAAAAAAAAJM/ClB1rJ_zVeQ/s1600/skol.png"),
+                  ),
+                ),
               ),
-            ),
+              //Title container
+              Expanded(
+                flex: 2,
+                //padding: EdgeInsets.only(left: 6.0),
+                child: Text(
+                  _title.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.normal
+                  ),
+                ),
+              ),
+            ],
           ),
           //Container for image
           Container(
@@ -47,20 +65,7 @@ class Post extends StatelessWidget {
               children: <Widget> [
                 //Row with buttons
                 Row(
-                  children: <Widget>[
-                    //Perfil Circle Image
-                    Container(
-                      //margin: EdgeInsets.only(top: 0.0, right: 0.0, left: 18.0, bottom: 15.0),
-                      width: 30.0,
-                      height: 30.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: NetworkImage("http://1.bp.blogspot.com/-bdhuDXmNZdc/TZZDxXGvXnI/AAAAAAAAAJM/ClB1rJ_zVeQ/s1600/skol.png"),
-                        ),
-                      ),
-                    ),
+                  children: <Widget>[        
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,          
