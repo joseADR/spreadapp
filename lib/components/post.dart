@@ -34,7 +34,7 @@ class Post extends StatelessWidget {
             margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0),
             color: Color.fromRGBO(200,200,200,.5),
             width: double.infinity,
-            height: 178.0,
+            height: 180.0,
             child: Image.network(
               'http://www.afortunadas.com.br/wp-content/uploads/2017/06/festival_de_fries_ribeirao_preto_1200x635px_0-1160x635.jpg',
               fit: BoxFit.fill,
@@ -42,18 +42,17 @@ class Post extends StatelessWidget {
           ),
           //Container with title and buttons
           Container(
-            margin: EdgeInsets.only(top: 9.0),
+            margin: EdgeInsets.only(top: 0.0),
             child: Column(
               children: <Widget> [
-
                 //Row with buttons
                 Row(
                   children: <Widget>[
                     //Perfil Circle Image
                     Container(
-                      margin: EdgeInsets.only(top: 0.0, right: 0.0, left: 18.0, bottom: 15.0),
-                      width: 49.0,
-                      height: 49.0,
+                      //margin: EdgeInsets.only(top: 0.0, right: 0.0, left: 18.0, bottom: 15.0),
+                      width: 30.0,
+                      height: 30.0,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
@@ -62,62 +61,30 @@ class Post extends StatelessWidget {
                         ),
                       ),
                     ),
-                    //Save Button,
-                    Container(
-                      padding: EdgeInsets.only(left: 0.8),
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(right: 10.0,left: 58.5,top: 5.0, bottom: 10.0),
-                            child: Column(
-                              children: <Widget>[
-                                Icon(Icons.save, size: 19.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                                Container(
-                                  padding: EdgeInsets.only(top: 6.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text( "Salvar", style: TextStyle(fontSize: 11.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7))),            
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    //Share Button
-                    Container(
-                      padding: EdgeInsets.only(right: 0.0, left: 8.0, top: 5.0, bottom: 10.0),
-                      child: Column(
-                        children: <Widget>[
-                          Icon(Icons.share, size: 19.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                          Container(
-                            padding: EdgeInsets.only(top: 6.0),
-                            child: Column(
-                              children: <Widget>[
-                                Text( "Share", style: TextStyle(fontSize: 11.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7))),            
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //Find More
                     Expanded(
-                      child: FlatButton(
-                        child: Container(
-                          padding: EdgeInsets.only(top: 30.0, left: 17.0, bottom: 13.0),
-                          child: Text(
-                            "Saiba Mais",
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              color: Theme.of(context).splashColor,                          ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,          
+                        children: <Widget> [
+                          Container(
+                            //padding: EdgeInsets.only(left: 0.8),
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  //padding: EdgeInsets.only(right: 10.0,left: 58.5,top: 5.0, bottom: 10.0),
+                                  child: Icon(Icons.favorite_border, size: 20.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      onPressed: null,
+                        //Share Button
+                          Container(
+                            //padding: EdgeInsets.only(right: 0.0, left: 8.0, top: 5.0, bottom: 10.0),
+                            child: Icon(Icons.share, size: 20.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                          ),
+                        ],
                       ),
-                    ),
+                    ),  
+                      //Find More
                   ],
                 ),
               ]
