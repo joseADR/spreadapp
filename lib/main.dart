@@ -56,14 +56,14 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
           headerSliverBuilder: (BuildContext context, bool boxIsScrolled){
             return <Widget> [
               SliverAppBar(
-                expandedHeight: 115.0,
+                expandedHeight: 110.0,
                 elevation: 5.0,
-                backgroundColor: Theme.of(context).primaryColor,
+                backgroundColor: Colors.black.withOpacity(0.7),
                 pinned: true,
                 floating: true,
                 forceElevated: boxIsScrolled,
 
-                title: Text("Teste"),
+                title: null,
                 actions: <Widget>[
                   IconButton(
                     icon: Icon(Icons.tune, color: Theme.of(context).iconTheme.color),
