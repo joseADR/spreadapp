@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class Post extends StatelessWidget {
 
-  
+  Post(String s, {this.title}); 
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
