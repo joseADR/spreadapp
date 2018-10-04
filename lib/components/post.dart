@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 class Post extends StatelessWidget {
 
-  Post(String s, {this.title}); 
+  String title;
 
-  final String title;
+  Post(title) {
+    this.title = title;
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class Post extends StatelessWidget {
           ),
           //Container with title and buttons
           Container(
-            margin: EdgeInsets.only(top: 0.0),
+            margin: EdgeInsets.only(top: 0.0, bottom: 10.0),
             child: Column(
               children: <Widget> [
                 //Row with buttons
