@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 class Post extends StatelessWidget {
 
-  Post(String s, {this.title}); 
-
-  final String title;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class Post extends StatelessWidget {
               //Title container
               Expanded(
                 child: Text(
-                  title.toUpperCase(),
+                  'Cardizim',
                   style: TextStyle(
                     fontSize: 11.0,
                     fontWeight: FontWeight.normal
