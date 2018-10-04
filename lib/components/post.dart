@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class Post extends StatelessWidget {
 
   Post(String title) {
-    this.title = title;
+    this._title = title;
   }
 
-  String title;
+  String _title;
 
 
   @override
@@ -38,7 +38,7 @@ class Post extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(bottom: 6.0),
                   child: Text(
-                    title.toUpperCase(),
+                    _title.toUpperCase(),
                     style: TextStyle(
                       fontSize: 14.0,
                       fontWeight: FontWeight.bold
