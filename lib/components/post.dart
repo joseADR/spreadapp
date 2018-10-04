@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class Post extends StatelessWidget {
 
-  Post(document, {this.title});
+  Post(String title) {
+    this.title = title;
+  }
 
-  final String title;
+  String title;
 
 
   @override
