@@ -12,7 +12,7 @@ class Post extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Theme.of(context).primaryColor.withOpacity(0.3),
+      color: Theme.of(context).primaryColor.withOpacity(0.44),
       margin: const EdgeInsets.only(left: 6.0, right: 6.0, bottom: 12.0, top: 0.0),
 
       child: Column(
