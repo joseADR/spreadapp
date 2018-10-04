@@ -31,7 +31,7 @@ class Post extends StatelessWidget {
               //Title container
               Expanded(
                 child: Text(
-                  'Cardizim',
+                  title.toUpperCase(),
                   style: TextStyle(
                     fontSize: 11.0,
                     fontWeight: FontWeight.normal
