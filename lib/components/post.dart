@@ -70,7 +70,7 @@ class Post extends StatelessWidget {
                         children: <Widget> [
                           Container(
                             //padding: EdgeInsets.only(left: 0.8),
-                                padding: EdgeInsets.only(right: 15.0,left: 10.5,top: 10.0, bottom: 25.0),
+                                padding: EdgeInsets.only(right: 15.0,left: 13.5,top: 10.0, bottom: 25.0),
                                 child: Icon(Icons.favorite_border, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                                 ),
                           Container(
@@ -79,21 +79,26 @@ class Post extends StatelessWidget {
                                 child: Icon(Icons.share, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                                 ),
                           Container(
-                                padding: EdgeInsets.only(right: 0.0, left: 237.5, top: 10.0, bottom: 25.0),
+                                padding: EdgeInsets.only(left:62.0,),
+                                child: 
+                                  Text('20/OUT',style:TextStyle(
+                                    fontSize: 18.0,
+                                    color:Color.fromRGBO(236, 30, 0, 0.9),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                 ),
+                                ), 
+                          Container(
+                                padding: EdgeInsets.only(right: 0.0, left: 110.0, top: 10.0, bottom: 25.0),
                                 child: Icon(Icons.more_vert,size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                                 ),
-                          Container(
-                                child: Column(
-                                  
-                                  ),
-                                ),      
                               ],
                             ),
                           ),
                         //Share Button 
                         ],
                       ),
-                      //Find More
+                    //Find More
                   ],
                 ),
               ),
