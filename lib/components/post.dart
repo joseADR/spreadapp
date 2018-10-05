@@ -18,6 +18,7 @@ class Post extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          //Title and Image
           Row(
             children:<Widget>[
               //Perfil Circle Image
@@ -56,7 +57,7 @@ class Post extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-          //Container with title and buttons
+          //Buttons Container
           Container(
             margin: EdgeInsets.only(top: 0.0, bottom: 10.0),
             child: Column(
@@ -68,29 +69,26 @@ class Post extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget> [
-                          Container(
-                            //padding: EdgeInsets.only(left: 0.8),
-                                padding: EdgeInsets.only(right: 15.0,left: 10.5,top: 10.0, bottom: 25.0),
-                                child: Icon(Icons.favorite_border, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                                //Save Button
+                                Container(
+                                  //padding: EdgeInsets.only(left: 0.8),
+                                  padding: EdgeInsets.only(right: 15.0,left: 10.5,top: 10.0, bottom: 25.0),
+                                  child: Icon(Icons.favorite_border, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                                 ),
-                          Container(
-                            //padding: EdgeInsets.only(left: 0.8),
-                                padding: EdgeInsets.only(right: 10.0,left: 0.0,top: 10.0, bottom: 25.0),
-                                child: Icon(Icons.share, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                                //Share Button 
+                                Container(
+                                  //padding: EdgeInsets.only(left: 0.8),
+                                  padding: EdgeInsets.only(right: 10.0,left: 0.0,top: 10.0, bottom: 25.0),
+                                  child: Icon(Icons.share, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                                 ),
-                          Container(
-                                padding: EdgeInsets.only(right: 0.0, left: 237.5, top: 10.0, bottom: 25.0),
-                                child: Icon(Icons.more_vert,size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                                //Dots Button
+                                Container(
+                                  padding: EdgeInsets.only(right: 0.0, left: 237.5, top: 10.0, bottom: 25.0),
+                                  child: Icon(Icons.more_vert,size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                                 ),
-                          Container(
-                                child: Column(
-                                  
-                                  ),
-                                ),      
                               ],
                             ),
                           ),
-                        //Share Button 
                         ],
                       ),
                       //Find More
