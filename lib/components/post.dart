@@ -69,45 +69,30 @@ class Post extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget> [
-<<<<<<< HEAD
                           Container(
                             //padding: EdgeInsets.only(left: 0.8),
-                                padding: EdgeInsets.only(right: 15.0,left: 13.5,top: 10.0, bottom: 25.0),
+                                padding: EdgeInsets.only(right: 15.0,left: 13.5,top: 10.0, bottom: 15.0),
                                 child: Icon(Icons.favorite_border, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-=======
-                                //Save Button
-                                Container(
-                                  //padding: EdgeInsets.only(left: 0.8),
-                                  padding: EdgeInsets.only(right: 15.0,left: 10.5,top: 10.0, bottom: 25.0),
-                                  child: Icon(Icons.favorite_border, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
->>>>>>> 605a7bcf7d6549f1018c5665fd33af753a1d8253
                                 ),
                                 //Share Button 
                                 Container(
                                   //padding: EdgeInsets.only(left: 0.8),
-                                  padding: EdgeInsets.only(right: 10.0,left: 0.0,top: 10.0, bottom: 25.0),
+                                  padding: EdgeInsets.only(right: 10.0,left: 0.0,top: 10.0, bottom: 15.0),
                                   child: Icon(Icons.share, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                                 ),
-<<<<<<< HEAD
                           Container(
                                 padding: EdgeInsets.only(left:62.0,),
                                 child: 
                                   Text('20/OUT',style:TextStyle(
-                                    fontSize: 18.0,
+                                    fontSize: 17.0,
                                     color:Color.fromRGBO(236, 30, 0, 0.9),
                                     fontWeight: FontWeight.bold,
                                   ),
                                  ),
                                 ), 
                           Container(
-                                padding: EdgeInsets.only(right: 0.0, left: 110.0, top: 10.0, bottom: 25.0),
+                                padding: EdgeInsets.only(right: 0.0, left: 110.0, top: 10.0, bottom: 15.0),
                                 child: Icon(Icons.more_vert,size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-=======
-                                //Dots Button
-                                Container(
-                                  padding: EdgeInsets.only(right: 0.0, left: 237.5, top: 10.0, bottom: 25.0),
-                                  child: Icon(Icons.more_vert,size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
->>>>>>> 605a7bcf7d6549f1018c5665fd33af753a1d8253
                                 ),
                               ],
                             ),
