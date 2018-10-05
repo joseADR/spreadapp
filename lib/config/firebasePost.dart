@@ -11,6 +11,7 @@ class PostList extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) return new Center(child:Text('Loading...'));
         return new ListView(
+          padding: EdgeInsets.only(top: 12.0),
           children: snapshot.data.documents.map((DocumentSnapshot document) {
             return Post(document['title']);
           }).toList(),
