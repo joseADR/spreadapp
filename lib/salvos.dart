@@ -40,22 +40,22 @@ class SavePage extends StatelessWidget {
                         fontWeight: FontWeight.normal
                       ),
                     ),
-              //espaço entre o título e a data
-              Divider(
-                height: 5.0,
-              ),
-              Text(
-                ('20/OUT'),
-                style: TextStyle(
-                  color: Theme.of(context).iconTheme.color.withOpacity(.5),
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.normal
+                    //espaço entre o título e a data
+                    Divider(
+                      height: 5.0,
+                    ),
+                    Text(
+                      "20/OUT",
+                      style: TextStyle(
+                        color: Theme.of(context).iconTheme.color.withOpacity(.5),
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.normal
+                      ),
+                    ),      
+                  ],
                 ),
-              ),      
-            ],
-          ),
-        ),
-        //icones de remoção e de compartilhamento
+              ),
+              //icones de remoção e de compartilhamento
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -69,12 +69,13 @@ class SavePage extends StatelessWidget {
                         Container(
                           child: Icon(Icons.remove_circle, size: 22.0, 
                           color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                          ),
+                        ),
                         //Share Button 
                         Container(
                           margin: const EdgeInsets.only(top:15.0,right:6.0),
-                          child: Icon(Icons.share, size: 22.0, 
-                          color: Theme.of(context).iconTheme.color.withOpacity(0.7)
+                          child: Icon(
+                            Icons.share, size: 22.0, 
+                            color: Theme.of(context).iconTheme.color.withOpacity(0.7)
                           ),
                         ),
                       ],
