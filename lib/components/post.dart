@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-
 class Post extends StatelessWidget {
-
   String title;
-
   Post(title) {
     this.title = title;
   }
-  
-
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.black.withOpacity(0.44),
-      margin: const EdgeInsets.only(left: 3.0, right: 3.0, bottom: 8.0, top: 0.0),
-
+    return 
+    Card(
+      color: Theme.of(context).primaryColorDark.withOpacity(0.44),
+      margin: const EdgeInsets.only(left: 3.0, right: 3.0, bottom: 5.0, top: 0.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -23,7 +18,7 @@ class Post extends StatelessWidget {
             children:<Widget>[
               //Perfil Circle Image
               Container(
-                margin: EdgeInsets.only(top: 5.0, left: 4.0, right: 10.0, bottom: 5.0),
+                margin: EdgeInsets.only(top: 5.0, left: 4.0, right: 10.0, bottom: 6.0),
                 width: 21.0,
                 height: 21.0,
                 decoration: BoxDecoration(
@@ -47,19 +42,23 @@ class Post extends StatelessWidget {
             ],
           ),
           //Container for image
-          Container(
-            margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 1.0,bottom: 7.0),
-            color: Color.fromRGBO(200,200,200,.5),
-            width: double.infinity,
-            height: 181.0,
-            child: Image.network(
-              'http://www.afortunadas.com.br/wp-content/uploads/2017/06/festival_de_fries_ribeirao_preto_1200x635px_0-1160x635.jpg',
-              fit: BoxFit.fill,
-            ),
+          GestureDetector(
+            onTap: null,
+            child:
+              Container(
+                margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 1.0,bottom: 1.0),
+                color: Color.fromRGBO(200,200,200,.5),
+                width: double.infinity,
+                height: 180.0,
+                child: Image.network(
+                  'http://www.afortunadas.com.br/wp-content/uploads/2017/06/festival_de_fries_ribeirao_preto_1200x635px_0-1160x635.jpg',
+                  fit: BoxFit.fill,
+                ),
+              ),
           ),
           //Buttons Container
           Container(
-            margin: EdgeInsets.only(top: 0.0, bottom: 10.0),
+            margin: EdgeInsets.only(top: 0.0, bottom: 0.0),
             child: Column(
               children: <Widget> [
                 //Row with buttons

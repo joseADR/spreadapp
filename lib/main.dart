@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import './config/firebasePost.dart';
-
+//
 void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
-
   runApp(MaterialApp(
     theme: ThemeData(
       splashColor: Colors.blue,
-      brightness:Brightness.dark,
-      primaryColorDark: Colors.black12,
+      brightness: Brightness.dark,
+      primaryColorDark: Colors.black12.withOpacity(0.6),
       iconTheme: IconThemeData(
         color: Colors.white,
       )
@@ -22,31 +20,66 @@ void main() {
     debugShowCheckedModeBanner: false,
   ));
 }
-
-
+//barra de pesquisa
+class DataSearch extends SearchDelegate<String>{
+  final recentsEvents =["lista"];
+  final events = ['lista2'];
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    //actions for app bar
+    return [
+      IconButton(
+        icon: Icon(Icons.clear), onPressed: null,)
+    ];
+  }
+  @override
+  Widget buildLeading(BuildContext context) {
+    //leading icon on the left of the app bar
+    return 
+      IconButton( 
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow, 
+          progress: transitionAnimation),
+        onPressed: (){});
+  }
+  @override
+  Widget buildResults(BuildContext context) {
+    //show some result based on the selection
+  }
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    //show when someone search for something
+    final suggestionList = query.isEmpty?recentsEvents:events;
+    return ListView.builder(
+      itemBuilder: (context,index)=>ListTile(
+        leading: Icon(Icons.near_me),
+        title: RichText(text: TextSpan( 
+          text:suggestionList[index].substring(0, query.length),
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)
+          ),
+        )
+      ),
+    );
+  }
+}
 class MyApp extends StatefulWidget {
   @override 
   _MyAppState createState() => _MyAppState();
 }
-
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
-
   TabController _tabController;
   ScrollController _scrollViewController;
-
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: 3, initialIndex: 1);
   }
-
   @override
   void dispose() {
     _tabController.dispose();
     _scrollViewController.dispose();
     super.dispose();  
   }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -58,11 +91,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
               SliverAppBar(
                 expandedHeight: 110.0,
                 elevation: 5.0,
-                backgroundColor: Colors.black.withOpacity(0.6),
+                backgroundColor:Theme.of(context).primaryColorDark,
                 pinned: true,
                 floating: true,
                 forceElevated: boxIsScrolled,
-
                 title: null,
                 actions: <Widget>[
                   IconButton(
@@ -72,7 +104,9 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
                   ),
                   IconButton(
                     icon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
-                    onPressed: null,
+                    onPressed: () {
+                      showSearch(context: context, delegate: DataSearch());
+                    },
                     tooltip: 'Buscar',
                   ),
                   IconButton(
@@ -88,7 +122,6 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
                   indicatorColor: Theme.of(context).splashColor,
                   unselectedLabelColor: Theme.of(context).iconTheme.color,
                   labelColor: Theme.of(context).splashColor,
-
                   controller: _tabController,
                   tabs: <Widget>[
                     Tab(text: "SEGUINDO"),
@@ -102,11 +135,11 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
         body: TabBarView(
           controller: _tabController,
           children: <Widget>[
-            Text("test2"),
+            FollowList(),
             PostList(),
-            Text("test3"),
-          ],
-        ),
+            SaveList(),
+            ],
+          ),
         ),
       ),
     );
