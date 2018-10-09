@@ -13,7 +13,7 @@ class PostList extends StatelessWidget {
         return new ListView(
           padding: EdgeInsets.only(top: 12.0),
           children: snapshot.data.documents.map((DocumentSnapshot document) {
-            return Post(document['title']);
+            return Post(document['title'],document['card'],document['promoter']);
           }).toList(),
         );
       },

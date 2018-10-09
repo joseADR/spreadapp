@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 class Post extends StatelessWidget {
 
-  Post(String title) {
-    this._title = title;
-  }
+  Post(this._title, this._img, this._promo);
 
-  String _title;
-
+  final String _title;
+  final String _img;
+  final String _promo;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class Post extends StatelessWidget {
             width: double.infinity,
             height: 178.0,
             child: Image.network(
-              'http://www.afortunadas.com.br/wp-content/uploads/2017/06/festival_de_fries_ribeirao_preto_1200x635px_0-1160x635.jpg',
+              _img,
               fit: BoxFit.fill,
             ),
           ),
@@ -57,7 +56,7 @@ class Post extends StatelessWidget {
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: NetworkImage("http://1.bp.blogspot.com/-bdhuDXmNZdc/TZZDxXGvXnI/AAAAAAAAAJM/ClB1rJ_zVeQ/s1600/skol.png"),
+                          image: NetworkImage(_promo),
                         ),
                       ),
                     ),
