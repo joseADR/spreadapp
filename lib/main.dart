@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './config/firebasePost.dart';
+import 'dart:async';
+import 'dart:math';
 //
 void main() {
   SystemChrome.setPreferredOrientations([
@@ -69,16 +71,30 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
   TabController _tabController;
   ScrollController _scrollViewController;
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
+  Random random;
+  List<String> list;
   @override
   void initState() {
     super.initState();
+    random = Random();
+    refreshList();
     _tabController = TabController(vsync: this, length: 3, initialIndex: 1);
+  }
+  Future<Null> refreshList() async {
+    refreshKey.currentState?.show(atTop: false);
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      list = List.generate(random.nextInt(10), (i) => "Item $i");
+    });
+    
+    return null;
   }
   @override
   void dispose() {
     _tabController.dispose();
     _scrollViewController.dispose();
-    super.dispose();  
+    super.dispose(); 
   }
   @override
   Widget build(BuildContext context) {
@@ -136,7 +152,12 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
           controller: _tabController,
           children: <Widget>[
             FollowList(),
-            PostList(),
+            RefreshIndicator(
+            key: refreshKey,
+            child:
+              PostList(),
+            onRefresh: refreshList, 
+            ),
             SaveList(),
             ],
           ),

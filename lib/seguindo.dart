@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 class FollowPage extends StatelessWidget {
-  String title;
+  final String title;
+  final String _promo;
   //String data;
-  FollowPage(title) {
-    this.title = title;
-  }
+  FollowPage( this.title, this._promo);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +24,7 @@ class FollowPage extends StatelessWidget {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage("https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"),
+                    image: NetworkImage(_promo),
                   ),
                 ),
               ),

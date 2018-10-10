@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 class SavePage extends StatelessWidget {
-  String title;
-  String data;
-  SavePage(title) {
-    this.title = title;
-  }
+  final String title;
+  final String data;
+  final String _img;
+  SavePage( this.title, this.data, this._img);
   @override
   Widget build(BuildContext context) {
     return 
@@ -24,7 +23,7 @@ class SavePage extends StatelessWidget {
                 width: 150.0,
                 height: 95.0,
                 child: Image.network(
-                  'http://www.afortunadas.com.br/wp-content/uploads/2017/06/festival_de_fries_ribeirao_preto_1200x635px_0-1160x635.jpg',
+                  _img,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -45,7 +44,7 @@ class SavePage extends StatelessWidget {
                       height: 5.0,
                     ),
                     Text(
-                      "20/OUT",
+                      data,
                       style: TextStyle(
                         color: Theme.of(context).iconTheme.color.withOpacity(.5),
                         fontSize: 13.0,
