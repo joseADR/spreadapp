@@ -19,8 +19,8 @@ class FollowPage extends StatelessWidget {
               //imagem circular do promoter
               Container(
                 margin: EdgeInsets.only(top: 12.0, left: 16.0, right: 20.0, bottom: 15.0),
-                width: 52.0,
-                height: 52.0,
+                width: 57.0,
+                height: 53.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(

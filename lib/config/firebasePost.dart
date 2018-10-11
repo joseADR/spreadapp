@@ -18,7 +18,7 @@ class PostList extends StatelessWidget {
             return Post(document['title'],document['card'],document['promoter'],document['data']);
           }).toList(),
         );
-      }
+      },
     );
   }
 }
@@ -36,7 +36,7 @@ class SaveList extends StatelessWidget {
             return SavePage(document['title'],document['card'],document['data']);
           }).toList(),
         );
-      }
+      },
     );
   }
 }
@@ -54,7 +54,7 @@ class FollowList extends StatelessWidget {
             return FollowPage(document['title'],document['promoter'],document['data']);
           }).toList(),
         );
-      }
+      },
     );
   }
 }

@@ -83,7 +83,8 @@ class Post extends StatelessWidget {
                           Container(
                                 padding: EdgeInsets.only(left:62.0,),
                                 child: 
-                                  Text(date.toUpperCase(),style:TextStyle(
+                                  Text(date.toUpperCase(),
+                                    style:TextStyle(
                                     fontSize: 14.0,
                                     color:Colors.red,
                                     fontWeight: FontWeight.bold,
