@@ -16,7 +16,7 @@ class PostList extends StatelessWidget {
           padding: EdgeInsets.only(top:10.0),
           children: snapshot.data.documents.map((DocumentSnapshot document) {
             return Post(document['title'],document['card'],document['promoter'],document['data']);
-          }).toList()
+          }).toList(),
         );
       }
     );
@@ -34,7 +34,7 @@ class SaveList extends StatelessWidget {
           padding: EdgeInsets.only(top:10.0),
           children: snapshot.data.documents.map((DocumentSnapshot document) {
             return SavePage(document['title'],document['card'],document['data']);
-          }).toList()
+          }).toList(),
         );
       }
     );
@@ -51,8 +51,8 @@ class FollowList extends StatelessWidget {
         return new ListView(
           padding: EdgeInsets.only(top:10.0),
           children: snapshot.data.documents.map((DocumentSnapshot document) {
-            return FollowPage(document['title'],document['promoter']);
-          }).toList()
+            return FollowPage(document['title'],document['promoter'],document['data']);
+          }).toList(),
         );
       }
     );

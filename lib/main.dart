@@ -87,7 +87,6 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
     setState(() {
       list = List.generate(random.nextInt(10), (i) => "Item $i");
     });
-    
     return null;
   }
   @override

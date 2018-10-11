@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 class SavePage extends StatelessWidget {
   final String title;
-  final String data;
+  final String _data;
   final String _img;
-  SavePage( this.title, this.data, this._img);
+  SavePage( this.title, this._data, this._img);
   @override
   Widget build(BuildContext context) {
     return 
@@ -23,8 +23,7 @@ class SavePage extends StatelessWidget {
                 width: 150.0,
                 height: 95.0,
                 child: Image.network(
-                  _img,
-                  fit: BoxFit.fill,
+                  _img, fit: BoxFit.cover,
                 ),
               ),
               //Titulo
@@ -44,7 +43,7 @@ class SavePage extends StatelessWidget {
                       height: 5.0,
                     ),
                     Text(
-                      data,
+                      _data.toUpperCase(),
                       style: TextStyle(
                         color: Theme.of(context).iconTheme.color.withOpacity(.5),
                         fontSize: 13.0,

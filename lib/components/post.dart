@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 class Post extends StatelessWidget {
   final String title;
-  final String data;
   final String _img;
   final String _promo; 
-  Post( this.title, this.data, this._promo, this._img);
+  final String date;
+  Post( this.title, this.date, this._promo, this._img);
   @override
   Widget build(BuildContext context) {
     return 
@@ -53,7 +53,7 @@ class Post extends StatelessWidget {
                 height: 180.0,
                 child: Image.network(
                   _img,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
               ),
           ),
@@ -83,9 +83,9 @@ class Post extends StatelessWidget {
                           Container(
                                 padding: EdgeInsets.only(left:62.0,),
                                 child: 
-                                  Text(data.toUpperCase(),style:TextStyle(
+                                  Text(date.toUpperCase(),style:TextStyle(
                                     fontSize: 14.0,
-                                    color:Color.fromRGBO(236, 30, 0, 0.9),
+                                    color:Colors.red,
                                     fontWeight: FontWeight.bold,
                                   ),
                                  ),
