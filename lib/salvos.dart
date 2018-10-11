@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 class SavePage extends StatelessWidget {
   final String title;
+  final String _promo;
   final String _data;
-  final String _img;
-  SavePage( this.title, this._data, this._img);
+  SavePage( this.title, this._promo, this._data);
   @override
   Widget build(BuildContext context) {
     return 
@@ -19,11 +19,11 @@ class SavePage extends StatelessWidget {
             children:<Widget>[
               //Imagem do evento salvo
               Container(
-                margin: EdgeInsets.only(left: 6.0,top:8.0,bottom: 9.0),   
-                width: 150.0,
-                height: 95.0,
+                margin: EdgeInsets.only(left: 8.0,top:8.0,bottom: 8.0),   
+                width: 147.0,
+                height: 85.0,
                 child: Image.network(
-                  _img, fit: BoxFit.cover,
+                  (_promo), fit: BoxFit.cover,
                 ),
               ),
               //Titulo
