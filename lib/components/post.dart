@@ -9,8 +9,9 @@ class Post extends StatelessWidget {
   Widget build(BuildContext context) {
     return 
     Card(
+      elevation: 8.0,
       color: Theme.of(context).primaryColorDark.withOpacity(0.44),
-      margin: const EdgeInsets.only(left: 3.0, right: 3.0, bottom: 5.0, top: 0.0),
+      margin: const EdgeInsets.only(left: 3.0, right: 3.0, bottom: 3.0, top: 4.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[

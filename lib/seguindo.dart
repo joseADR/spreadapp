@@ -7,8 +7,9 @@ class FollowPage extends StatelessWidget {
   FollowPage( this.title, this._promo, this._data);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).primaryColorDark.withOpacity(0.54),
+    return Card(
+      elevation: 3.0,
+      color: Theme.of(context).primaryColorDark.withOpacity(0.44),
       margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.7, top: 0.0),
       child: Column(
         verticalDirection: VerticalDirection.down,
@@ -19,10 +20,17 @@ class FollowPage extends StatelessWidget {
               //imagem circular do promoter
               Container(
                 margin: EdgeInsets.only(top: 12.0, left: 16.0, right: 20.0, bottom: 15.0),
-                width: 57.0,
-                height: 53.0,
+                width: 55.0,
+                height: 55.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.black,
+                      offset: Offset(0.0, 0.0),
+                      blurRadius: 6.0,
+                    ),
+                  ],
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(_promo),

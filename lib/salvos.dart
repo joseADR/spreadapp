@@ -7,8 +7,9 @@ class SavePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return 
-    Container(
-      color: Theme.of(context).primaryColorDark.withOpacity(0.54),
+    Card(
+      elevation: 3.0,
+      color: Theme.of(context).primaryColorDark.withOpacity(0.44),
       margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.7, top: 0.0),
       child: Column(
       verticalDirection: VerticalDirection.down,

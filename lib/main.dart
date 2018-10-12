@@ -12,7 +12,6 @@ void main() {
     theme: ThemeData(
       splashColor: Colors.blue,
       brightness: Brightness.dark,
-      primaryColorDark: Colors.black12.withOpacity(0.6),
       iconTheme: IconThemeData(
         color: Colors.white,
       )
@@ -105,8 +104,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
             return <Widget> [
               SliverAppBar(
                 expandedHeight: 110.0,
-                elevation: 5.0,
-                backgroundColor:Theme.of(context).primaryColorDark,
+                elevation: 8.0,
+                backgroundColor:Theme.of(context).primaryColorDark.withOpacity(0.6),
                 pinned: true,
                 floating: true,
                 forceElevated: boxIsScrolled,
