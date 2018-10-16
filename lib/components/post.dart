@@ -72,7 +72,7 @@ class Post extends StatelessWidget {
                         tag: 'posts',
                         child: SizedBox(
                           width: double.infinity,
-                          height: 225.0,
+                          height: 220.0,
                           child: Image.network(
                             _card,
                             fit: BoxFit.cover

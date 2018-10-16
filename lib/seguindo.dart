@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 class FollowPage extends StatelessWidget {
-  final String title;
+  final String _title;
   final String _promo;
   final String _data;
   //String data;
-  FollowPage( this.title, this._promo, this._data);
+  FollowPage( this._title, this._promo, this._data);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,82 +18,105 @@ class FollowPage extends StatelessWidget {
           Row(
             children:<Widget>[
               //imagem circular do promoter
-              Container(
-                margin: EdgeInsets.only(top: 12.0, left: 16.0, right: 20.0, bottom: 15.0),
-                width: 55.0,
-                height: 55.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.black,
-                      offset: Offset(0.0, 0.0),
-                      blurRadius: 6.0,
-                    ),
-                  ],
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(_promo),
-                  ),
-                ),
-              ),
-              //nome do promoter
-              Container(
-                margin: EdgeInsets.only(left:70.0),
-                child:Column(
-                  children: <Widget>[
-                    Text(
-                      title.toUpperCase(),
+                GestureDetector(
+                  child: ,
+            onTap: () =>  Navigator.of(context).push(
+              MaterialPageRoute<Null>(
+                builder: (BuildContext context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: Text(_title.toUpperCase(),
                       style: TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal
-                      ),
-                    ),
-                    //espaço
-                    Divider(
-                      height: 5.0,
-                    ),
-                    Text(
-                      _data.toUpperCase(),
-                      style: TextStyle(
-                        color: Theme.of(context).iconTheme.color.withOpacity(.5),
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.normal
-                      ),
-                    ),   
-                  ],
+                        fontSize:13.0
+                      )
+                    )),
+                    body:
+                    
+                       ListView(
+                        children: <Widget>[
+                                    Positioned(
+            width: 350.0,
+            top: MediaQuery.of(context).size.height / 5,
+            child: Column(
+              children: <Widget>[
+                Container(
+                    width: 150.0,
+                    height: 150.0,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
+                            fit: BoxFit.cover),
+                        borderRadius: BorderRadius.all(Radius.circular(75.0)),
+                        boxShadow: [
+                          BoxShadow(blurRadius: 7.0, color: Colors.black)
+                        ])),
+                SizedBox(height: 90.0),
+                Text(
+                  'Tom Cruise',
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat'),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget> [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:<Widget>[
-                        Container(
-                          child: Icon(Icons.remove_circle, size: 22.0, 
-                          color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                        ),
-                        //compartilhar 
-                        Container(
-                          margin: const EdgeInsets.only(top:15.0,right:6.0),
-                          child: Icon(
-                            Icons.share, size: 22.0, 
-                            color: Theme.of(context).iconTheme.color.withOpacity(0.7)
+                SizedBox(height: 15.0),
+                Text(
+                  'Subscribe guys',
+                  style: TextStyle(
+                      fontSize: 17.0,
+                      fontStyle: FontStyle.italic,
+                      fontFamily: 'Montserrat'),
+                ),
+                SizedBox(height: 25.0),
+                Container(
+                    height: 30.0,
+                    width: 95.0,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20.0),
+                      shadowColor: Colors.greenAccent,
+                      color: Colors.green,
+                      elevation: 7.0,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Center(
+                          child: Text(
+                            'Edit Name',
+                            style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+                      ),
+                    )),
+                    SizedBox(height: 25.0),
+                Container(
+                    height: 30.0,
+                    width: 95.0,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20.0),
+                      shadowColor: Colors.redAccent,
+                      color: Colors.red,
+                      elevation: 7.0,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Center(
+                          child: Text(
+                            'Log out',
+                            style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
+                          ),
+                        ),
+                      ),
+                    ))
+              ],
+            ))
+      ],
+    ));
+                }),),
+                ), 
             ],
-          ),
+        ),
         ],
-      ),
+    ),
     );
-  }
+
+}
 }
