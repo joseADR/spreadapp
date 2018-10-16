@@ -4,7 +4,9 @@ class Post extends StatelessWidget {
   final String _card;
   final String _promo; 
   final String _data;
-  Post( this._title, this._card, this._promo, this._data);
+  final String _local;
+  String card;
+  Post( this._title, this._card, this._promo, this._data, this._local);
   @override
   Widget build(BuildContext context) {
     return 
@@ -45,7 +47,201 @@ class Post extends StatelessWidget {
           ),
           //Container for image
           GestureDetector(
-            onTap: null,
+            onTap: () =>  Navigator.of(context).push(
+              MaterialPageRoute<Null>(
+                builder: (BuildContext context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: Text(_title.toUpperCase(),
+                      style: TextStyle(
+                        fontSize:13.0
+                      )
+                    )),
+                    body:
+                    
+                       ListView(
+                        children: <Widget>[
+                          Container(
+                      padding: const EdgeInsets.only(top:4.0,left: 0.0, right: 0.0),
+                      alignment: Alignment.topLeft,
+                      // Use background color to emphasize that it's a new route.
+                      color:Theme.of(context).primaryColorDark.withOpacity(0.6),
+                      child:Column(
+                        children:<Widget>[
+                          Hero(
+                        tag: 'posts',
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 225.0,
+                          child: Image.network(
+                            _card,
+                            fit: BoxFit.cover
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top:10.0,bottom: 10.0),
+                        child: Text(_title.toUpperCase(),
+                          style:TextStyle(
+                            fontWeight:FontWeight.bold
+                          ),),
+                      ),
+                      Container(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children:<Widget>[
+                            IconButton(
+                              icon:Icon(Icons.thumb_up),
+                              onPressed: null,
+                            ),
+                            IconButton(
+                              icon:Icon(Icons.check_circle_outline),
+                              onPressed: null,
+                            ),
+                            IconButton(
+                              icon:Icon(Icons.favorite_border),
+                              onPressed: null,
+                            ),
+                            IconButton(
+                              icon:Icon(Icons.share),
+                              onPressed: null,
+                            ),
+                          ]
+                        ),
+                      ),
+                      Divider(),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal:10.0),
+                        child: Column(
+
+                          children: <Widget>[
+                            Container(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(
+                                    child: Column(
+                                      children:<Widget>[
+                                         Container(
+                                           child: Row(
+                                             children: <Widget>[
+                                               Container(
+                                                 child: Column(
+                                                   mainAxisAlignment: MainAxisAlignment.start,
+                                                   crossAxisAlignment: CrossAxisAlignment.center,
+                                                   children:<Widget>[
+                                                     Container(
+                                                       decoration: BoxDecoration(
+                                                        shape:BoxShape.circle,
+                                                        image: DecorationImage(
+                                                          image: NetworkImage(_promo),
+                                                          fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                        width: 35.0, 
+                                                        height: 35.0,
+                                                     ),
+                                                   ],
+                                                 ),
+                                               ),
+                                               
+                                               Container(
+                                                child:Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children:<Widget>[
+                                                   FlatButton(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:BorderRadius.circular(20.0),
+                                                  ),
+                                                  onPressed: () => {},
+                                                  color: Colors.blue,
+                                                  child: Column( // Replace with a Row for horizontal icon + text
+                                                    children: <Widget>[
+                                                      Icon(Icons.add),
+                                                      Text("Seguir")
+                                                    ],
+                                                  ),
+                                                ),
+                                                  ],
+                                               ),
+                                               ),
+                                             ],
+                                          ),
+                                        ),
+                                        Container(
+                                          child:Row(
+                                            children: <Widget>[
+                                              Icon(Icons.location_on),
+                                              Text(_local,
+                                              style:TextStyle(
+                                                   fontSize: 11.0,
+                                                 )
+                                              )
+                                            ],
+                                          ), 
+                                        ),
+                                        Divider(
+                                          height: 5.0,
+                                        ),
+                                        Container(
+                                          child: Icon(Icons.timer),
+                                        ),
+                                        Divider(
+                                          height: 5.0,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              //margin: EdgeInsets.symmetric(horizontal:10.0),
+                              child:Text(
+                                'Descrição',
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Divider(
+                              height: 20.0,
+                            ),
+                            Container(
+                              //margin: EdgeInsets.symmetric(horizontal:10.0),
+                              child: Text(
+                                'A única área que eu acho, que vai exigir muita atenção nossa, e aí eu já aventei a hipótese de até criar um ministério. É na área de... Na área... Eu diria assim, como uma espécie de analogia com o que acontece na área agrícola.'
+                              ),
+                            ),
+                            Divider(
+                              height: 20.0,
+                            ),
+                            Container(
+
+                            ),
+                          ],
+                        ),
+                      ),
+                        ],
+                       
+                      ),
+                    ), 
+                       
+                        ],
+                       )
+          );
+          
+                },
+              )
+            ),
+             
+            
             child:
               Container(
                 margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 1.0,bottom: 1.0),
@@ -53,7 +249,7 @@ class Post extends StatelessWidget {
                 width: double.infinity,
                 height: 180.0,
                 child: Image.network(_card, fit: BoxFit.cover),
-              ),
+              )
           ),
           //Buttons Container
           Container(
