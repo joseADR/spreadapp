@@ -8,7 +8,7 @@ class SavePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return 
     Card(
-      elevation: 3.0,
+      elevation: 2.0,
       color: Theme.of(context).primaryColorDark.withOpacity(0.44),
       margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.7, top: 0.0),
       child: Column(
@@ -16,11 +16,13 @@ class SavePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           //Title and Image
-          Row(
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 12.0,vertical:12.0),
+            child: Row(
             children:<Widget>[
               //Imagem do evento salvo
               Container(
-                margin: EdgeInsets.only(left: 8.0,top:8.0,bottom: 8.0),   
+                //margin: EdgeInsets.symmetric(vertical: 8.0,horizontal:16.0),   
                 width: 147.0,
                 height: 85.0,
                 child: Image.network(
@@ -29,7 +31,7 @@ class SavePage extends StatelessWidget {
               ),
               //Titulo
               Container(
-                margin: EdgeInsets.only(left:70.0),
+                margin: EdgeInsets.symmetric(horizontal:50.0),
                 child:Column(
                   children: <Widget>[
                     Text(
@@ -75,16 +77,17 @@ class SavePage extends StatelessWidget {
                           child: Icon(
                             Icons.share, size: 22.0, 
                             color: Theme.of(context).iconTheme.color.withOpacity(0.7)
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ],
+        ], 
       ),
     );
   }

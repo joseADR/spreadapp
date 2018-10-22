@@ -49,8 +49,10 @@ class FollowList extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) return new Center(child:Text('Loading...')); 
         return new ListView(
+          padding: EdgeInsets.only(top:10.0),
+          physics: ScrollPhysics(parent: FixedExtentScrollPhysics()),
           children: snapshot.data.documents.map((DocumentSnapshot document) {
-            return FollowPage(document['title'],document['promoter'],document['data']);
+            return FollowPage(document['title'],document['promoter']);
           }).toList(),
         );
       },

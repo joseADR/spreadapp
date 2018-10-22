@@ -10,8 +10,10 @@ void main() {
   ]);
   runApp(MaterialApp(
     theme: ThemeData(
+      primaryColor: Colors.black,
       splashColor: Colors.blue,
       brightness: Brightness.dark,
+      primaryTextTheme: TextTheme(title: TextStyle(color:Colors.white,fontFamily: 'Raleway')),
       iconTheme: IconThemeData(
         color: Colors.white,
       )
@@ -66,6 +68,7 @@ class DataSearch extends SearchDelegate<String>{
 class MyApp extends StatefulWidget {
   @override 
   _MyAppState createState() => _MyAppState();
+  
 }
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
   TabController _tabController;
@@ -103,14 +106,15 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
           headerSliverBuilder: (BuildContext context, bool boxIsScrolled){
             return <Widget> [
               SliverAppBar(
+                textTheme: Theme.of(context).primaryTextTheme,
                 expandedHeight: 110.0,
-                elevation: 8.0,
+                elevation: 3.0,
                 backgroundColor:Theme.of(context).primaryColorDark.withOpacity(0.6),
                 pinned: true,
                 floating: true,
                 forceElevated: boxIsScrolled,
                 title: null,
-                actions: <Widget>[
+                actions: <Widget>[             
                   IconButton(
                     icon: Icon(Icons.tune, color: Theme.of(context).iconTheme.color),
                     onPressed: null,
