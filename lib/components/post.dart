@@ -1,128 +1,265 @@
 import 'package:flutter/material.dart';
-
 class Post extends StatelessWidget {
-
-  Post(this._title, this._img, this._promo);
-
   final String _title;
-  final String _img;
-  final String _promo;
-
+  final String _card;
+  final String _promo; 
+  final String _data;
+  final String _local;
+  Post( this._title, this._card, this._promo, this._data, this._local);
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).primaryColor.withOpacity(0.3),
-      margin: const EdgeInsets.only(left: 6.0, right: 6.0, bottom: 12.0, top: 0.0),
-
+    return 
+    Card(
+      elevation: 2.0,
+      color: Theme.of(context).primaryColorDark.withOpacity(0.44),
+      margin: const EdgeInsets.symmetric(vertical: 3.0,horizontal: 3.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          //Container for image
-          Container(
-            margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0),
-            color: Color.fromRGBO(200,200,200,.5),
-            width: double.infinity,
-            height: 178.0,
-            child: Image.network(
-              _img,
-              fit: BoxFit.fill,
-            ),
-          ),
-          //Container with title and buttons
-          Container(
-            margin: EdgeInsets.only(top: 9.0),
-            child: Column(
-              children: <Widget> [
-                //Title container
-                Container(
-                  padding: EdgeInsets.only(bottom: 6.0),
-                  child: Text(
-                    _title.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold
-                    ),
+          //Title and Image
+          Row(
+            children:<Widget>[
+              //Perfil Circle Image
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 6.0),
+                width: 21.0,
+                height: 21.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(_promo),
                   ),
                 ),
-                //Row with buttons
-                Row(
-                  children: <Widget>[
-                    //Perfil Circle Image
-                    Container(
-                      margin: EdgeInsets.only(top: 0.0, right: 0.0, left: 18.0, bottom: 15.0),
-                      width: 49.0,
-                      height: 49.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: NetworkImage(_promo),
-                        ),
-                      ),
-                    ),
-                    //Save Button,
-                    Container(
-                      padding: EdgeInsets.only(left: 0.8),
-                      child: Row(
-                        children: <Widget>[
+              ),
+              //Title container
+              Expanded(
+                child: Text(
+                  _title.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.normal
+                  ),
+                ),
+              ),
+            ],
+          ),
+          //Container for image
+          GestureDetector(
+            onTap: () =>  Navigator.of(context).push(
+              MaterialPageRoute<Null>(
+                builder: (BuildContext context) {
+                  return Scaffold(
+                    backgroundColor:Theme.of(context).primaryColor.withOpacity(0.5),
+                      body: NestedScrollView(
+                         headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled){
+                          return <Widget> [
+                            SliverAppBar(
+                              textTheme: Theme.of(context).primaryTextTheme,
+                              expandedHeight: 230.0,
+                              elevation: 1.0,
+                              pinned: true,
+                              floating: false,
+                              forceElevated: innerboxIsScrolled,
+                              title: null,
+                              flexibleSpace: FlexibleSpaceBar(
+                                centerTitle: false,
+                                background: Image.network(_card,
+                                fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ];
+                        },
+                      body: ListView(
+                        children:<Widget>[
                           Container(
-                            padding: EdgeInsets.only(right: 10.0,left: 58.5,top: 5.0, bottom: 10.0),
-                            child: Column(
+                            child:Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Icon(Icons.save, size: 19.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                                Container(
-                                  padding: EdgeInsets.only(top: 6.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text( "Salvar", style: TextStyle(fontSize: 11.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7))),            
-                                    ],
+                                Text(_title.toUpperCase(),
+                                style:TextStyle(
+                                  fontWeight:FontWeight.bold
                                   ),
-                                )
+                                ),
                               ],
+                            ), 
+                          ),
+                          Container(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:<Widget>[
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                                  icon:Icon(Icons.thumb_up),
+                                  onPressed: null,
+                                ),
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                                  icon:Icon(Icons.check_circle_outline),
+                                  onPressed: null,
+                                ),
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                                  icon:Icon(Icons.favorite_border),
+                                  onPressed: null,
+                                ),
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                                  icon:Icon(Icons.share),
+                                  onPressed: null,
+                                ),
+                              ]
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    //Share Button
-                    Container(
-                      padding: EdgeInsets.only(right: 0.0, left: 8.0, top: 5.0, bottom: 10.0),
-                      child: Column(
-                        children: <Widget>[
-                          Icon(Icons.share, size: 19.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                          Divider(color: Colors.white30,),
                           Container(
-                            padding: EdgeInsets.only(top: 6.0),
-                            child: Column(
-                              children: <Widget>[
-                                Text( "Share", style: TextStyle(fontSize: 11.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7))),            
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //Find More
-                    Expanded(
-                      child: FlatButton(
-                        child: Container(
-                          padding: EdgeInsets.only(top: 30.0, left: 17.0, bottom: 13.0),
-                          child: Text(
-                            "Saiba Mais",
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              color: Theme.of(context).splashColor,                          ),
+                          margin: EdgeInsets.symmetric(horizontal:10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.symmetric(vertical:10.0),
+                                      child: 
+                                      Text(
+                                        'Descrição',
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                   Text(_data.toUpperCase(),
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                //margin: EdgeInsets.symmetric(horizontal:10.0),
+                                child: Text(
+                                  'A única área que eu acho, que vai exigir muita atenção nossa, e aí eu já aventei a hipótese de até criar um ministério. É na área de... Na área... Eu diria assim, como uma espécie de analogia com o que acontece na área agrícola.'
+                                ),
+                              ),
+                              Divider(
+                                height: 20.0,
+                              ),
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Row(
+                                        children:<Widget>[       
+                                          Container(
+                                            padding: EdgeInsets.only(right:10.0),
+                                            child:
+                                              Icon(Icons.location_on),
+                                              ),
+                                          Container(
+                                            child:Text(_local,
+                                              style:TextStyle(
+                                              fontSize: 12.5,
+                                              )
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Row(
+                                        children:<Widget>[
+                                          Container(
+                                            padding: EdgeInsets.only(right:10.0),
+                                            child:Icon(Icons.timer),
+                                          ),
+                                          Container(
+                                            child:Text('Início 13:50 Término 18:30'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                height: 20.0,
+                              ),
+                            ],
                           ),
                         ),
-                      onPressed: null,
+                      ],    
+                    ),
+                  ),
+                );  
+              },
+            ),
+          ),
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children:<Widget>[
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5.0),
+                color: Colors.grey,
+                width: double.infinity,
+                height: 180.0,
+                child: Image.network(_card, fit: BoxFit.cover),
+              ),
+              Container(
+              //padding: EdgeInsets.only(left:62.0,),
+                child: 
+                  Text(_data.toUpperCase(),
+                    style:TextStyle(
+                      fontSize: 16.0,
+                      color:Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal:8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      child:Row(
+                        children:<Widget>[
+                          Container(
+                          padding: EdgeInsets.only(right: 10.0,left: 6.0,bottom: 10.0),
+                          child: Icon(Icons.favorite_border, size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                          ),
+                      //Share Button 
+                          Container(
+                            //padding: EdgeInsets.only(left: 0.8),
+                            padding: EdgeInsets.only(bottom: 10.0),
+                            child: Icon(Icons.share, size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                          ),
+                        ],
                       ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 5.0,bottom: 10.0),
+                      child: Icon(Icons.more_vert,size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                     ),
                   ],
                 ),
-              ]
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 }
