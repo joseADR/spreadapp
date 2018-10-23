@@ -10,7 +10,7 @@ void main() {
   ]);
   runApp(MaterialApp(
     theme: ThemeData(
-      primaryColor: Colors.black,
+
       splashColor: Colors.blue,
       brightness: Brightness.dark,
       primaryTextTheme: TextTheme(title: TextStyle(color:Colors.white,fontFamily: 'Raleway')),
@@ -68,7 +68,6 @@ class DataSearch extends SearchDelegate<String>{
 class MyApp extends StatefulWidget {
   @override 
   _MyAppState createState() => _MyAppState();
-  
 }
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
   TabController _tabController;

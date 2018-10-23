@@ -15,6 +15,7 @@ class Post extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 3.0,horizontal: 3.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           //Title and Image
           Row(
@@ -50,205 +51,164 @@ class Post extends StatelessWidget {
               MaterialPageRoute<Null>(
                 builder: (BuildContext context) {
                   return Scaffold(
-                    backgroundColor:Theme.of(context).primaryColor.withOpacity(0.50),
-                    appBar: AppBar(
-                      title: Text(_title.toUpperCase(),
-                      style: TextStyle(
-                        fontSize:14.0
-                      )
-                    ),
-                    ),
-                    body:
-                       NestedScrollView(
+                    backgroundColor:Theme.of(context).primaryColor.withOpacity(0.5),
+                      body: NestedScrollView(
                          headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled){
-                    return <Widget> [
-                      SliverAppBar(
-                        textTheme: Theme.of(context).primaryTextTheme,
-                        expandedHeight: 220.0,
-                        elevation: 3.0,
-                        pinned: true,
-                        floating: false,
-                        forceElevated: innerboxIsScrolled,
-                        title: null,
-                        flexibleSpace: FlexibleSpaceBar(
-                          centerTitle: false,
-                          background: Image.network(_card,
-                          fit: BoxFit.cover,
-                          ),
-                        ),
-                    ),];
-                        },
-                      body:ListView(
-                        children:<Widget>[
-                      Container(
-                        child:
-                          Text(_title.toUpperCase(),
-                            style:TextStyle(
-                              fontWeight:FontWeight.bold
-                              ),
-                            ),
-                      ),
-                      Container(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:<Widget>[
-                            IconButton(
-                              icon:Icon(Icons.thumb_up),
-                              onPressed: null,
-                            ),
-                            IconButton(
-                              icon:Icon(Icons.check_circle_outline),
-                              onPressed: null,
-                            ),
-                            IconButton(
-                              icon:Icon(Icons.favorite_border),
-                              onPressed: null,
-                            ),
-                            IconButton(
-                              icon:Icon(Icons.share),
-                              onPressed: null,
-                            ),
-                          ]
-                        ),
-                      ),
-                      Divider(),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal:10.0),
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              
-                              //margin: EdgeInsets.symmetric(horizontal:10.0),
-                              child:Text(
-                                'Descrição',
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.bold,
+                          return <Widget> [
+                            SliverAppBar(
+                              textTheme: Theme.of(context).primaryTextTheme,
+                              expandedHeight: 230.0,
+                              elevation: 1.0,
+                              pinned: true,
+                              floating: false,
+                              forceElevated: innerboxIsScrolled,
+                              title: null,
+                              flexibleSpace: FlexibleSpaceBar(
+                                centerTitle: false,
+                                background: Image.network(_card,
+                                fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                            
-                            Container(
-                              //margin: EdgeInsets.symmetric(horizontal:10.0),
-                              child: Text(
-                                'A única área que eu acho, que vai exigir muita atenção nossa, e aí eu já aventei a hipótese de até criar um ministério. É na área de... Na área... Eu diria assim, como uma espécie de analogia com o que acontece na área agrícola.'
-                              ),
+                          ];
+                        },
+                      body: ListView(
+                        children:<Widget>[
+                          Container(
+                            child:Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(_title.toUpperCase(),
+                                style:TextStyle(
+                                  fontWeight:FontWeight.bold
+                                  ),
+                                ),
+                              ],
+                            ), 
+                          ),
+                          Container(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:<Widget>[
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                                  icon:Icon(Icons.thumb_up),
+                                  onPressed: null,
+                                ),
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                                  icon:Icon(Icons.check_circle_outline),
+                                  onPressed: null,
+                                ),
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                                  icon:Icon(Icons.favorite_border),
+                                  onPressed: null,
+                                ),
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                                  icon:Icon(Icons.share),
+                                  onPressed: null,
+                                ),
+                              ]
                             ),
-                            Divider(
-                              height: 20.0,
-                            ),
-                            Container(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    child: Column(
-                                      children:<Widget>[
-                                         Container(
-                                           child: Row(
-                                             children: <Widget>[
-                                               Container(
-                                                 child: Column(
-                                                   mainAxisAlignment: MainAxisAlignment.start,
-                                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                                   children:<Widget>[
-                                                     
-                                               Container(
-                                                child:Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  mainAxisAlignment: MainAxisAlignment.end,
-                                                  children:<Widget>[
-                                                      Text(_data.toUpperCase(),
-                                                      style: TextStyle(
-                                                        color: Colors.red,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 16.0,
-                                                      ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                
-                                                  
-                                               ),
-                                               
-                                             ],
-                                          ),
+                          ),
+                          Divider(color: Colors.white30,),
+                          Container(
+                          margin: EdgeInsets.symmetric(horizontal:10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.symmetric(vertical:10.0),
+                                      child: 
+                                      Text(
+                                        'Descrição',
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        Container(
-                                          child:Column(
-                                            
-                                                  children:<Widget>[
-                                                    Icon(Icons.location_on),
-                                                    Text(_local,
-                                                    style:TextStyle(
-                                                      fontSize: 13.0,
-                                                      )
-                                                    ),
-                                                
-                                              
-                                                    Container(
-                                          child:Column(
-                                            children: <Widget>[
-                                              Container(
-                                                child: Row(
-                                                  children:<Widget>[
-                                                    Icon(Icons.timer),
-                                                    Text('Início 13:50 Término 18.30'),
-                                                  ],
-                                                ),
-                                              ),
-                                              
-                                            ],
-                                          ), 
-                                        ),
-                                            ],
-                                          ), 
-                                        ),
-                                        Divider(
-                                          height: 5.0,
-                                        ),
-                                  
-                                        Divider(
-                                          height: 5.0,
-                                        ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    
-                                  ),
-                                ],
+                                   Text(_data.toUpperCase(),
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Divider(
-                              height: 20.0,
-                            ),
-                            
-                            Divider(
-                              height: 20.0,
-                            ),
-                            Container(
-
-                            ),
-                          ],
+                              Container(
+                                //margin: EdgeInsets.symmetric(horizontal:10.0),
+                                child: Text(
+                                  'A única área que eu acho, que vai exigir muita atenção nossa, e aí eu já aventei a hipótese de até criar um ministério. É na área de... Na área... Eu diria assim, como uma espécie de analogia com o que acontece na área agrícola.'
+                                ),
+                              ),
+                              Divider(
+                                height: 20.0,
+                              ),
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Row(
+                                        children:<Widget>[       
+                                          Container(
+                                            padding: EdgeInsets.only(right:10.0),
+                                            child:
+                                              Icon(Icons.location_on),
+                                              ),
+                                          Container(
+                                            child:Text(_local,
+                                              style:TextStyle(
+                                              fontSize: 12.5,
+                                              )
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Row(
+                                        children:<Widget>[
+                                          Container(
+                                            padding: EdgeInsets.only(right:10.0),
+                                            child:Icon(Icons.timer),
+                                          ),
+                                          Container(
+                                            child:Text('Início 13:50 Término 18:30'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                height: 20.0,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                          ],    
-                        ),
-                      ),
-                        
-                        ],
-                  ), 
-                  ),);  
-                },
-              )
+                      ],    
+                    ),
+                  ),
+                );  
+              },
             ),
-            child:Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children:<Widget>[
+          ),
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children:<Widget>[
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 2.0, vertical: 5.0),
                 color: Colors.grey,
@@ -261,63 +221,43 @@ class Post extends StatelessWidget {
                 child: 
                   Text(_data.toUpperCase(),
                     style:TextStyle(
-                      fontSize: 15.0,
+                      fontSize: 16.0,
                       color:Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-                  Container(
-            margin: EdgeInsets.only(top: 0.0, bottom: 0.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget> [
-                //Row with buttons
-                Row(
-                  children: <Widget>[        
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget> [
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal:8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      child:Row(
+                        children:<Widget>[
                           Container(
-                            margin: EdgeInsets.symmetric(horizontal:15.0),
-                            child:Row(
-                              
-                              children:<Widget>[
-                                Container(
-                            //padding: EdgeInsets.only(left: 0.8),
-                            //padding: EdgeInsets.only(right: 15.0,left: 13.5,top: 10.0, bottom: 15.0),
-                            child: Icon(Icons.favorite_border, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                          padding: EdgeInsets.only(right: 10.0,left: 6.0,bottom: 10.0),
+                          child: Icon(Icons.favorite_border, size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                           ),
-                                //Share Button 
+                      //Share Button 
                           Container(
                             //padding: EdgeInsets.only(left: 0.8),
-                            //padding: EdgeInsets.only(right: 10.0,left: 0.0,top: 10.0, bottom: 15.0),
-                            child: Icon(Icons.share, size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                            padding: EdgeInsets.only(bottom: 10.0),
+                            child: Icon(Icons.share, size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                           ),
-                          
-                          Container(
-                            //padding: EdgeInsets.only(right: 0.0, left: 110.0, top: 10.0, bottom: 15.0),
-                            child: Icon(Icons.more_vert,size: 24.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                          ),
-                          ],
-                            ),
-                          ),
-                          
                         ],
                       ),
                     ),
+                    Container(
+                      padding: EdgeInsets.only(left: 5.0,bottom: 10.0),
+                      child: Icon(Icons.more_vert,size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                    ),
                   ],
                 ),
-              //Find More
+              ),
             ],
           ),
         ),
-              ],
-            ),
-          ),
-          //Buttons Container
-        
       ],
     ),
   );
