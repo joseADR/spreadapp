@@ -80,7 +80,8 @@ class Post extends StatelessWidget {
                               children: <Widget>[
                                 Text(_title.toUpperCase(),
                                 style:TextStyle(
-                                  fontWeight:FontWeight.bold
+                                  fontWeight:FontWeight.bold,
+                                  fontFamily: 'MontSerrat',
                                   ),
                                 ),
                               ],
@@ -132,6 +133,7 @@ class Post extends StatelessWidget {
                                         style: TextStyle(
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.bold,
+                                          fontFamily: 'MontSerrat',
                                         ),
                                       ),
                                     ),
@@ -139,6 +141,7 @@ class Post extends StatelessWidget {
                                     style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
+                                      fontFamily: 'MontSerrat',
                                       fontSize: 16.0,
                                       ),
                                     ),
@@ -148,7 +151,10 @@ class Post extends StatelessWidget {
                               Container(
                                 //margin: EdgeInsets.symmetric(horizontal:10.0),
                                 child: Text(
-                                  'A única área que eu acho, que vai exigir muita atenção nossa, e aí eu já aventei a hipótese de até criar um ministério. É na área de... Na área... Eu diria assim, como uma espécie de analogia com o que acontece na área agrícola.'
+                                  'A única área que eu acho, que vai exigir muita atenção nossa, e aí eu já aventei a hipótese de até criar um ministério. É na área de... Na área... Eu diria assim, como uma espécie de analogia com o que acontece na área agrícola.',
+                                  style: TextStyle(
+                                    fontFamily: 'MontSerrat',
+                                  ),
                                 ),
                               ),
                               Divider(
@@ -170,6 +176,7 @@ class Post extends StatelessWidget {
                                             child:Text(_local,
                                               style:TextStyle(
                                               fontSize: 12.5,
+                                              fontFamily: 'MontSerrat',
                                               )
                                             ),
                                           ),
@@ -184,7 +191,11 @@ class Post extends StatelessWidget {
                                             child:Icon(Icons.timer),
                                           ),
                                           Container(
-                                            child:Text('Início 13:50 Término 18:30'),
+                                            child:Text('Início 13:50 Término 18:30',
+                                            style: TextStyle(
+                                              fontFamily: 'MontSerrat',
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -224,6 +235,7 @@ class Post extends StatelessWidget {
                       fontSize: 16.0,
                       color:Colors.red,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'MontSerrat',
                     ),
                   ),
               ),

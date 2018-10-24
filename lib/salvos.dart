@@ -37,6 +37,7 @@ class SavePage extends StatelessWidget {
                     Text(
                       title.toUpperCase(),
                       style: TextStyle(
+                        fontFamily: 'MontSerrat',
                         fontSize: 14.0,
                         fontWeight: FontWeight.normal
                       ),
@@ -50,7 +51,8 @@ class SavePage extends StatelessWidget {
                       style: TextStyle(
                         color: Theme.of(context).iconTheme.color.withOpacity(.5),
                         fontSize: 13.0,
-                        fontWeight: FontWeight.normal
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'MontSerrat',
                       ),
                     ),      
                   ],

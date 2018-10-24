@@ -13,7 +13,7 @@ void main() {
 
       splashColor: Colors.blue,
       brightness: Brightness.dark,
-      primaryTextTheme: TextTheme(title: TextStyle(color:Colors.white,fontFamily: 'Raleway')),
+      primaryTextTheme: TextTheme(title: TextStyle(color:Colors.white,fontFamily: 'MontSerrat')),
       iconTheme: IconThemeData(
         color: Colors.white,
       )
