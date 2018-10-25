@@ -57,7 +57,7 @@ class Post extends StatelessWidget {
                           return <Widget> [
                             SliverAppBar(
                               textTheme: Theme.of(context).primaryTextTheme,
-                              expandedHeight: 230.0,
+                              expandedHeight: 220.0,
                               elevation: 1.0,
                               pinned: true,
                               floating: false,

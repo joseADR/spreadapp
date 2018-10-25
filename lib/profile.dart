@@ -50,11 +50,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(fontFamily: 'Montserrat', color: Colors.grey),
               ),
               SizedBox(
-                height: 10.0,
+                height: 15.0,
               ),
               Container(
                 color: Theme.of(context).primaryColor,
-                padding: EdgeInsets.all(30.0),
+                padding: EdgeInsets.all(15.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -133,7 +133,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               SizedBox(
-                height: 10.0,
+                height: 15.0,
               ),
               Padding(
                 padding: EdgeInsets.only(left: 20.0),
