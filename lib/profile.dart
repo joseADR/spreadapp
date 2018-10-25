@@ -10,7 +10,7 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 1.0,
+        elevation: 0.0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.white,

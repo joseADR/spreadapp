@@ -8,8 +8,8 @@ class FollowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3.0,
-      color: Theme.of(context).primaryColorDark.withOpacity(0.44),
+      elevation: 0.5,
+      color: Theme.of(context).primaryColorDark.withOpacity(0.30),
       margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.7, top: 0.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -19,7 +19,7 @@ class FollowPage extends StatelessWidget {
           children:<Widget>[
               //imagem circular do promoter
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal:15.0, vertical: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal:15.0, vertical: 15.0),
                   child:Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children:<Widget>[

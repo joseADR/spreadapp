@@ -107,7 +107,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
               SliverAppBar(
                 textTheme: Theme.of(context).primaryTextTheme,
                 expandedHeight: 110.0,
-                elevation: 3.0,
+                elevation: 2.0,
                 backgroundColor:Theme.of(context).primaryColorDark.withOpacity(0.6),
                 pinned: true,
                 floating: true,
@@ -135,13 +135,14 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
                 bottom: TabBar(
                   indicatorWeight: 1.7,
                   indicatorSize: TabBarIndicatorSize.tab,
-                  labelStyle: TextStyle(fontSize: 12.5),
+                  labelStyle: TextStyle(fontSize: 12.5,
+                  fontFamily: 'MontSerrat'),
                   indicatorColor: Theme.of(context).splashColor,
                   unselectedLabelColor: Theme.of(context).iconTheme.color,
                   labelColor: Theme.of(context).splashColor,
                   controller: _tabController,
                   tabs: <Widget>[
-                    Tab(text: "SEGUINDO"),
+                    Tab(text: "PROMOTERS"),
                     Tab(text: "INÍCIO"),
                     Tab(text: "SALVOS"),
                   ],
