@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:spreadapp/components/cardinfo.dart';
+import 'package:spreadapp/components/eventos.dart';
+import 'package:spreadapp/components/seguidores.dart';
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -7,7 +10,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
+      backgroundColor: Theme.of(context).primaryColor.withOpacity(0.65),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -56,27 +59,31 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Theme.of(context).primaryColor,
                 padding: EdgeInsets.all(15.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         ButtonBar(
-                          mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:<Widget>[
                                 IconButton(
                                   icon: Icon(Icons.people),
-                                  onPressed: () {},
+                                  splashColor: Colors.blue,
+                                  onPressed:  () =>  Navigator.of(context).push(
+                                  MaterialPageRoute<Null>(
+                                    builder: (BuildContext context) => FollowersPage(),
+                                    ),
+                                  ),
                                 ),
                                 Text('SEGUIDORES',
-                                style: TextStyle(
-                                  fontFamily: 'MontSerrat',
-                                  fontSize: 12.0,
-                                  color: Colors.grey,
-                                ),
+                                  style: TextStyle(
+                                    fontFamily: 'MontSerrat',
+                                    fontSize: 12.0,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ],
                             ),
@@ -86,22 +93,31 @@ class _ProfilePageState extends State<ProfilePage> {
                             SizedBox(
                               height: 20.0,
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children:<Widget>[
-                                IconButton(
-                                  icon: Icon(Icons.add),
-                                  color: Colors.blue,
-                                  onPressed: () {},
-                                ),
-                                Text('SEGUIR',
-                                style: TextStyle(
-                                  fontFamily: 'MontSerrat',
-                                  fontSize: 12.0,
-                                  color: Colors.grey,
-                                ),
-                                ),
-                              ],
+                            Container(
+                              padding: EdgeInsets.only(right:10.0,left: 5.0),
+                              child: Row(
+                                children:<Widget>[
+                                  SizedBox(height:30.0),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children:<Widget>[
+                                      IconButton(
+                                        icon: Icon(Icons.add),
+                                        color: Colors.blue,
+                                        splashColor: Colors.blue,
+                                        onPressed: () {},
+                                      ),
+                                      Text('SEGUIR',
+                                      style: TextStyle(
+                                        fontFamily: 'MontSerrat',
+                                        fontSize: 12.0,
+                                        color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),   
                             ),
                             SizedBox(
                               height: 20.0,
@@ -114,7 +130,12 @@ class _ProfilePageState extends State<ProfilePage> {
                               children:<Widget>[
                                 IconButton(
                                   icon: Icon(Icons.event),
-                                  onPressed: () {},
+                                  splashColor: Colors.blue,
+                                  onPressed:  () =>  Navigator.of(context).push(
+                                  MaterialPageRoute<Null>(
+                                    builder: (BuildContext context) => EventsPage(),
+                                    ),
+                                  ),
                                 ),
                                 Text('EVENTOS',
                                 style: TextStyle(
@@ -163,20 +184,27 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildImages() {
     return Padding(
       padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
-      child: Container(
+      child:
+        GestureDetector(
+          onTap: () =>  Navigator.of(context).push(
+              MaterialPageRoute<Null>(
+                builder: (BuildContext context) => CardPage(),
+            ),
+          ),
+        child:
+        Container(
           height: 180.0,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
               image: DecorationImage(
                 image: NetworkImage('https://lh3.googleusercontent.com/proxy/pvY4Y-_8-LI1VfYEilExPmR1Ps1N6_5ZXS8NCM7R5FvtJIZDApARtK59jDTB7B765RDn97R0OS44jkZX5R3vyjaawtY6H2o=w530-h298-n-rw'),
                 fit: BoxFit.cover))),
+      ),
     );
   }
-
   Widget buildInfoDetail() {
     return Padding(
-      padding:
-          EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0, bottom: 15.0),
+      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0, bottom: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -225,27 +253,43 @@ class _ProfilePageState extends State<ProfilePage> {
               InkWell(
                 onTap: () {},
                 child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image:NetworkImage('https://cinema10.com.br/upload/filmes/filmes_11871_chap12.jpg')
+                    ),
+                  ),
                   height: 20.0,
                   width: 20.0,
-                  child: Image.network('http://profilepicturesdp.com/wp-content/uploads/2018/07/png-profile-pictures-3.png'),
+                  
                 ),
               ),
               SizedBox(width: 7.0),
               InkWell(
                 onTap: () {},
                 child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image:NetworkImage('https://cinema10.com.br/upload/filmes/filmes_11871_chap12.jpg')
+                    ),
+                  ),
                   height: 20.0,
                   width: 20.0,
-                  child: Image.network('http://profilepicturesdp.com/wp-content/uploads/2018/07/png-profile-pictures-3.png'),
                 ),
               ),
               SizedBox(width: 7.0),
               InkWell(
                 onTap: () {},
                 child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image:NetworkImage('https://cinema10.com.br/upload/filmes/filmes_11871_chap12.jpg')
+                    ),
+                  ),
                   height: 22.0,
                   width: 22.0,
-                  child: Image.network('http://profilepicturesdp.com/wp-content/uploads/2018/07/png-profile-pictures-3.png'),
                 ),
               )
             ],

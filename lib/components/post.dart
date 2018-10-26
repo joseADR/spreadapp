@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
+import 'package:spreadapp/profile.dart';
 class Post extends StatelessWidget {
   final String _title;
   final String _card;
@@ -21,15 +22,22 @@ class Post extends StatelessWidget {
           Row(
             children:<Widget>[
               //Perfil Circle Image
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 6.0),
-                width: 21.0,
-                height: 21.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(_promo),
+              GestureDetector(
+                onTap:() => Navigator.of(context).push(
+                  MaterialPageRoute<Null>(
+                    builder: (BuildContext context) => ProfilePage(),
+                    ),
+                  ),
+                child:Container(
+                  margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
+                  width: 25.0,
+                  height: 25.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(_promo),
+                    ),
                   ),
                 ),
               ),
@@ -67,19 +75,7 @@ class Post extends StatelessWidget {
           ),
         ),
         Container(
-        //padding: EdgeInsets.only(left:62.0,),
-          child: 
-            Text(_data.toUpperCase(),
-              style:TextStyle(
-                fontSize: 15.0,
-                color:Colors.red,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'MontSerrat',
-              ),
-            ),
-        ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal:8.0),
+          margin: EdgeInsets.symmetric(horizontal:8.0, vertical: 5.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -99,6 +95,20 @@ class Post extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(),
+              Container(
+                padding: EdgeInsets.only(right:33.0,bottom: 5.0),
+                child: 
+                  Text(_data.toUpperCase(),
+                    style:TextStyle(
+                      fontSize: 15.0,
+                      color:Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'MontSerrat',
+                    ),
+                  ),
+              ),
+              SizedBox(),
               Container(
                 padding: EdgeInsets.only(left: 5.0,bottom: 10.0),
                 child: Icon(Icons.more_vert,size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),

@@ -10,7 +10,6 @@ void main() {
   ]);
   runApp(MaterialApp(
     theme: ThemeData(
-
       splashColor: Colors.blue,
       brightness: Brightness.dark,
       primaryTextTheme: TextTheme(title: TextStyle(color:Colors.white,fontFamily: 'MontSerrat')),

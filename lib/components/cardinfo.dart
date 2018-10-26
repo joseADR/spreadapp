@@ -4,6 +4,10 @@ class CardPage extends StatefulWidget {
   _CardState createState() => _CardState();
 }
 class _CardState extends State<CardPage> {
+  double position = 0.0;
+  double get maxSlideDistance => MediaQuery.of(context).size.height * 0.4;
+  void onSlide(double position) {
+    setState(() => this.position = position);}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +42,14 @@ class _CardState extends State<CardPage> {
                     style:TextStyle(
                       fontWeight:FontWeight.bold,
                       fontFamily: 'MontSerrat',
+                      fontSize: 17.0
                       ),
                     ),
                   ],
                 ), 
+              ),
+              SizedBox(
+                height: 15.0,
               ),
               Container(
                 child: Row(
@@ -93,14 +101,16 @@ class _CardState extends State<CardPage> {
                             ),
                           ),
                         ),
-                        Text('10/jun'.toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'MontSerrat',
-                          fontSize: 16.0,
+                        Container(
+                          child: Text('10/jun'.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MontSerrat',
+                              fontSize: 16.0,
+                            ),
                           ),
-                        ),
+                        ), 
                       ],
                     ),
                   ),
@@ -131,13 +141,16 @@ class _CardState extends State<CardPage> {
                               Container(
                                 child:Text('um local qualquer',
                                   style:TextStyle(
-                                  fontSize: 12.5,
+                                  
                                   fontFamily: 'MontSerrat',
                                   )
                                 ),
                               ),
                             ],
                           ),
+                        ),
+                        SizedBox(
+                          height: 5.0,
                         ),
                         Container(
                           child: Row(
