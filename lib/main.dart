@@ -32,6 +32,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
   TabController _tabController;
   ScrollController _scrollViewController;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool darkTheme = true;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   Random random;
   List<String> list;
@@ -61,6 +63,30 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        key: _scaffoldKey,
+        endDrawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Drawer Header'),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColorDark.withOpacity(0.5)
+                ),
+              ),
+              ListTile(
+                title: Text('Item 1'),
+                onTap: () {
+                },
+              ),
+              ListTile(
+                title: Text('Item 2'),
+                onTap: () {
+                },
+              ),
+            ],
+          ),
+        ),
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool boxIsScrolled){
             return <Widget> [
@@ -73,10 +99,18 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
                 floating: true,
                 forceElevated: boxIsScrolled,
                 title: null,
-                actions: <Widget>[             
+                actions: <Widget>[
+                  Switch(
+                    value: darkTheme,
+                    onChanged: (changed) {
+                     setState(() {
+                       darkTheme = changed;
+                     });
+                   },
+                  ),
                   IconButton(
                     icon: Icon(Icons.tune, color: Theme.of(context).iconTheme.color),
-                    onPressed: null,
+                    onPressed: () {},
                     tooltip: 'Filtrar',
                   ),
                   IconButton(
@@ -88,8 +122,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
                   ),
                   IconButton(
                     icon: Icon(Icons.account_circle, color: Theme.of(context).iconTheme.color),
-                    onPressed: null,
-                    tooltip: 'Configurações',
+                    onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
+                      tooltip: 'Configurações',
                   ),
                 ],
                 bottom: TabBar(
