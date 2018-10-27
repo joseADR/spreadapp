@@ -27,14 +27,11 @@ class Post extends StatelessWidget {
 
   Future<bool> addSavedPrefs(String id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    
-    List<String> aux= [];
-    if(prefs.getStringList('ids') != [])
-      aux = prefs.getStringList('ids');
+    List<String> aux;
+    aux = prefs.getStringList('ids')?? [];
     if(!aux.contains(id))
       aux.add(id);
     prefs.setStringList('ids',aux);
-    print(aux);
     return prefs.commit();
   }
 
