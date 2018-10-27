@@ -43,7 +43,7 @@ class _CardState extends State<CardPage> {
                     style:TextStyle(
                       fontWeight:FontWeight.bold,
                       fontFamily: 'MontSerrat',
-                      fontSize: 17.0
+                      fontSize: 16.0
                       ),
                     ),
                   ],
