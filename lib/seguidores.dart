@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class FollowersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -8,8 +9,8 @@ class FollowersPage extends StatelessWidget {
         title: Text('Seguidores',
         style: TextStyle(
           fontFamily:'MontSerrat',
-          fontSize: 18.0
-        ),),
+          fontSize: 18.0),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(

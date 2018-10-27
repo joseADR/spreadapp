@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
 import 'package:spreadapp/components/eventos.dart';
-import 'package:spreadapp/components/seguidores.dart';
+import './seguidores.dart';
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();

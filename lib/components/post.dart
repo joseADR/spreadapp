@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
 import 'package:spreadapp/profile.dart';
 class Post extends StatelessWidget {
+  Post( this._title, this._card, this._promo, this._data);
   final String _title;
   final String _card;
   final String _promo; 
   final String _data;
-  Post( this._title, this._card, this._promo, this._data);
   @override
   Widget build(BuildContext context) {
     return 
@@ -69,7 +69,7 @@ class Post extends StatelessWidget {
                 color: Colors.grey,
                 width: double.infinity,
                 height: 180.0,
-                child: Image.network(_card, fit: BoxFit.cover),
+                child: Image.network(_card, fit: BoxFit.cover)
               ),
             ],
           ),

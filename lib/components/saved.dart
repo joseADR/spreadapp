@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-class SavePage extends StatelessWidget {
+class SavedPost extends StatelessWidget {
   final String title;
   final String _promo;
   final String _data;
-  SavePage( this.title, this._promo, this._data);
+  SavedPost( this.title, this._promo, this._data);
   @override
   Widget build(BuildContext context) {
     return 
