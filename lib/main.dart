@@ -24,7 +24,6 @@ void main() {
     debugShowCheckedModeBanner: false,
   ));
 }
-
 class MyApp extends StatefulWidget {
   @override 
   _MyAppState createState() => _MyAppState();
