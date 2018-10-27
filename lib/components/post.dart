@@ -1,16 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
 import 'package:spreadapp/profile.dart';
+import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Post extends StatelessWidget {
-  Post( this._title, this._card, this._promo, this._data);
+  Post( this._title, this._card, this._promo, this._data, this._id );
   final String _title;
   final String _card;
   final String _promo; 
   final String _data;
+  final String _id;
+
+  SnackBar snackBar() {
+    return SnackBar(
+      duration: Duration(seconds: 1),
+      content: Text(_title + ' adicionado aos salvos'),
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: () {
+          // Some code to undo the change!
+        },
+      )
+    );
+  }
+
+  Future<bool> addSavedPrefs(String id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    
+    List<String> aux= [];
+    if(prefs.getStringList('ids') != [])
+      aux = prefs.getStringList('ids');
+    if(!aux.contains(id))
+      aux.add(id);
+    prefs.setStringList('ids',aux);
+    print(aux);
+    return prefs.commit();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return 
-    Card(
+    return Card(
       elevation: 1.0,
       color: Theme.of(context).primaryColorDark.withOpacity(0.30),
       margin: const EdgeInsets.symmetric(vertical: 3.0,horizontal: 3.0),
@@ -78,15 +108,22 @@ class Post extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal:8.0, vertical: 5.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
+            children: <Widget>[ 
               Container(
                 child:Row(
                   children:<Widget>[
-                    Container(
-                    padding: EdgeInsets.only(right: 10.0,left: 6.0,bottom: 10.0),
-                    child: Icon(Icons.favorite_border, size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                    //Save Button
+                    GestureDetector(
+                      onTap: () { 
+                        addSavedPrefs(_id);
+                        Scaffold.of(context).showSnackBar(snackBar());
+                      },
+                      child:Container(
+                        padding: EdgeInsets.only(right: 10.0,left: 6.0,bottom: 10.0),
+                        child: Icon(Icons.favorite_border, size: 23.0, color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                      )
                     ),
-                //Share Button 
+                    //Share Button 
                     Container(
                       //padding: EdgeInsets.only(left: 0.8),
                       padding: EdgeInsets.only(bottom: 10.0),

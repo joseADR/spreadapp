@@ -54,9 +54,9 @@ class _SavesListState extends State<SavesList> {
           return new ListView(
             padding: EdgeInsets.only(top:10.0),
             physics: ScrollPhysics(parent: FixedExtentScrollPhysics()),
-            children: snapshot.data.documents    
+            children: snapshot.data.documents  
+            .where((DocumentSnapshot document) => _savedPosts.contains(document.documentID)) 
             .map((DocumentSnapshot document) {
-              if(_savedPosts.contains(document.documentID))
                 return SavedPost(document['title'],document['promoter'],document['data']);
             }).toList()
           );

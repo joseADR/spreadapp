@@ -4,6 +4,7 @@ class CardPage extends StatefulWidget {
   _CardState createState() => _CardState();
 }
 class _CardState extends State<CardPage> {
+  
   double position = 0.0;
   double get maxSlideDistance => MediaQuery.of(context).size.height * 0.4;
   void onSlide(double position) {
