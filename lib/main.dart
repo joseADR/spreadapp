@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:spreadapp/config/loginPage.dart';
 import './config/firebasePost.dart';
 import './config/firebaseSaves.dart';
 import './config/search.dart';
@@ -31,8 +33,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
   TabController _tabController;
   ScrollController _scrollViewController;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool darkTheme = true;
+  bool isLoggedIn = false;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   Random random;
   List<String> list;
@@ -74,9 +77,14 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
                 ),
               ),
               ListTile(
-                title: Text('Item 1'),
+                title: Text('Entrar com Facebook'),
                 onTap: () {
-                },
+                  Navigator.of(context).push(
+                    MaterialPageRoute<Null>(
+                      builder: (BuildContext context) => LoginPage(),
+                    ),
+                  );
+                }
               ),
               ListTile(
                 title: Text('Item 2'),

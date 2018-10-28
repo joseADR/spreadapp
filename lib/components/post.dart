@@ -15,24 +15,23 @@ class Post extends StatelessWidget {
   SnackBar snackBar() {
     return SnackBar(
       duration: Duration(seconds: 1),
-      content: Text('$_title salvo'),
+      content: Text(_title + ' adicionado aos salvos'),
       action: SnackBarAction(
-        label: 'Undo',
-        onPressed: ()  {handleSavedPrefs(_id);}
+        label: 'Desfazer',
+        onPressed: () {
+          // Some code to undo the change!
+        },
       )
     );
   }
 
-  Future<bool> handleSavedPrefs(String id) async {
+  Future<bool> addSavedPrefs(String id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> aux;
     aux = prefs.getStringList('ids')?? [];
     if(!aux.contains(id))
       aux.add(id);
-    else 
-      aux.remove(id);
     prefs.setStringList('ids',aux);
-    
     return prefs.commit();
   }
 
@@ -113,7 +112,7 @@ class Post extends StatelessWidget {
                     //Save Button
                     GestureDetector(
                       onTap: () { 
-                        handleSavedPrefs(_id);
+                        addSavedPrefs(_id);
                         Scaffold.of(context).showSnackBar(snackBar());
                       },
                       child:Container(
