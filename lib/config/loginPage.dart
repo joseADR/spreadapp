@@ -20,9 +20,9 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _iconAnimationController = new AnimationController(
-        vsync: this, duration: new Duration(milliseconds: 500));
-    _iconAnimation = new CurvedAnimation(
+    _iconAnimationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 500));
+    _iconAnimation = CurvedAnimation(
       parent: _iconAnimationController,
       curve: Curves.bounceOut,
     );
@@ -33,28 +33,28 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
  
 
   //Facebook sign in
-  FacebookLogin fbLogin = new FacebookLogin();
+  FacebookLogin fbLogin = FacebookLogin();
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
-      body: new Stack(fit: StackFit.expand, children: <Widget>[
-        new Image(
-          image: new NetworkImage("https://media.gettyimages.com/photos/dark-blue-gradient-background-picture-id465275407?b=1&k=6&m=465275407&s=612x612&w=0&h=z9jO_kfu9F4isGf5yK5yfJig7TtojQ58yeYyuZDgh6U="),
+      body: Stack(fit: StackFit.expand, children: <Widget>[
+       Image(
+          image:  NetworkImage("https://media.gettyimages.com/photos/dark-blue-gradient-background-picture-id465275407?b=1&k=6&m=465275407&s=612x612&w=0&h=z9jO_kfu9F4isGf5yK5yfJig7TtojQ58yeYyuZDgh6U="),
           fit: BoxFit.cover,
           colorBlendMode: BlendMode.darken,
           color: Colors.black87,
         ),
-        new Theme(
-          data: new ThemeData(
+       Theme(
+          data: ThemeData(
               brightness: Brightness.dark,
-              inputDecorationTheme: new InputDecorationTheme(
+              inputDecorationTheme: InputDecorationTheme(
                 // hintStyle: new TextStyle(color: Colors.blue, fontSize: 20.0),
                 labelStyle:
-                    new TextStyle(color: Colors.tealAccent, fontSize: 25.0),
+                   TextStyle(color: Colors.tealAccent, fontSize: 25.0),
               )),
           isMaterialAppTheme: true,
-          child: new Column(
+          child:  Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children:<Widget>[
               Center(
