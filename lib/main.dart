@@ -8,20 +8,7 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
-  runApp(MaterialApp(
-    theme: ThemeData(
-
-      splashColor: Colors.blue,
-      brightness: Brightness.dark,
-      primaryTextTheme: TextTheme(title: TextStyle(color:Colors.white,fontFamily: 'Raleway')),
-      iconTheme: IconThemeData(
-        color: Colors.white,
-      )
-    ),
-    title: "Spread",
-    home: MyApp(),
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(MyApp());
 }
 //barra de pesquisa
 class DataSearch extends SearchDelegate<String>{
@@ -65,11 +52,31 @@ class DataSearch extends SearchDelegate<String>{
     );
   }
 }
-class MyApp extends StatefulWidget {
-  @override 
-  _MyAppState createState() => _MyAppState();
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+
+        splashColor: Colors.blue,
+        brightness: Brightness.dark,
+        primaryTextTheme: TextTheme(title: TextStyle(color:Colors.white,fontFamily: 'Raleway')),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        )
+      ),
+      title: "Spread",
+      home: _handleLoginPage(),
+      debugShowCheckedModeBanner: false,
+    ));
+  }
 }
-class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
+class HomePage extends StatefulWidget {
+  @override 
+  _HomePageState createState() => _HomePahgeState();
+}
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
   TabController _tabController;
   ScrollController _scrollViewController;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
