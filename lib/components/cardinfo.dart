@@ -1,18 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:map_view/map_view.dart';
+import 'package:map_view/camera_position.dart';
+const api_key ="AIzaSyBP66a3yw183ZnCraIH8Zzv9XC9R1VjO28";
 class CardPage extends StatefulWidget {
   @override
   _CardState createState() => _CardState();
 }
 class _CardState extends State<CardPage> {
-  
-  double position = 0.0;
-  double get maxSlideDistance => MediaQuery.of(context).size.height * 0.4;
-  void onSlide(double position) {
-    setState(() => this.position = position);}
+  //Maps
+  MapView mapView = MapView();
+  var staticMapProvider = StaticMapProvider(api_key);
+  CameraPosition cameraPosition;
+  Uri staticMapUri;
+  showMap(){
+    mapView.show(
+      MapOptions(
+        mapViewType: MapViewType.normal,
+        initialCameraPosition: CameraPosition(Location(-22.507820, -43.175104), 15.0),
+        showUserLocation: true
+      ),
+    );
+  }
+  @override
+  void initState(){
+    super.initState();
+      cameraPosition = CameraPosition(Location(-22.507820, -43.175104), 15.0);
+      staticMapUri = staticMapProvider.getStaticUri(
+        Location(-22.507820, -43.175104), 15,
+        height: 400, width: 900, mapType: StaticMapViewType.roadmap);  
+  }
+  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Theme.of(context).primaryColor.withOpacity(0.5),
+      backgroundColor:Theme.of(context).primaryColor,
         body: NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled){
             return <Widget> [
@@ -80,7 +101,7 @@ class _CardState extends State<CardPage> {
                   ]
                 ),
               ),
-              Divider(color: Colors.white30,),
+              Divider(color: IconTheme.of(context).color,),
               Container(
               margin: EdgeInsets.symmetric(horizontal:10.0),
               child: Column(
@@ -105,7 +126,7 @@ class _CardState extends State<CardPage> {
                         Container(
                           child: Text('10/jun'.toUpperCase(),
                             style: TextStyle(
-                              color: Colors.red,
+                              color: Color(0xffec0000),
                               fontWeight: FontWeight.bold,
                               fontFamily: 'MontSerrat',
                               fontSize: 16.0,
@@ -126,6 +147,7 @@ class _CardState extends State<CardPage> {
                   ),
                   Divider(
                     height: 20.0,
+                    color: IconTheme.of(context).color,
                   ),
                   Container(
                     child: Column(
@@ -142,7 +164,6 @@ class _CardState extends State<CardPage> {
                               Container(
                                 child:Text('um local qualquer',
                                   style:TextStyle(
-                                  
                                   fontFamily: 'MontSerrat',
                                   )
                                 ),
@@ -175,6 +196,36 @@ class _CardState extends State<CardPage> {
                   ),
                   Divider(
                     height: 20.0,
+                    color: IconTheme.of(context).color,
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    child: Column(
+                      children:<Widget>[
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:<Widget>[
+                              Text(
+                                'Como Chegar',
+                                style:TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(width:15.0),
+                              Icon(Icons.arrow_drop_down_circle
+                              ),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          child:Image.network(staticMapUri.toString()),
+                          onTap: showMap,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

@@ -9,7 +9,7 @@ class FollowPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0.5,
-      color: Theme.of(context).primaryColorDark.withOpacity(0.30),
+      //color: Theme.of(context).primaryColorDark.withOpacity(0.20),
       margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.7, top: 0.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +39,7 @@ class FollowPage extends StatelessWidget {
                                 _promo),
                                 fit: BoxFit.cover),
                             boxShadow: [
-                              BoxShadow(blurRadius: 7.0, color: Colors.black)
+                              BoxShadow(blurRadius: 3.0, color: Colors.black)
                             ],
                           ),
                         ),

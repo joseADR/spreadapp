@@ -52,13 +52,12 @@ class _SavesListState extends State<SavesList> {
           //Lista de salvos
           return new ListView(
             padding: EdgeInsets.only(top:10.0),
-            physics: ScrollPhysics(parent: FixedExtentScrollPhysics()),
             children: snapshot.data.documents  
             .where((DocumentSnapshot document) => _savedPosts.contains(document.documentID)) //Busca
             .map((DocumentSnapshot document) {
               return Card(
                 elevation: 0.5,
-                color: Theme.of(context).primaryColorDark.withOpacity(0.3),
+                //color: Theme.of(context).primaryColorDark.withOpacity(0.3),
                 margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.7, top: 0.0),
                 child: Column(
                 verticalDirection: VerticalDirection.down,
@@ -120,8 +119,8 @@ class _SavesListState extends State<SavesList> {
                                   //remover evento salvo
                                   GestureDetector(
                                     child: Container(
-                                      child: Icon(Icons.remove_circle, size: 22.0, 
-                                      color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                                      child: Icon(Icons.remove_circle, size: 22.0), 
+                                      //color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                                     ),
                                     onTap: () {removeSavedPrefs(document.documentID);},
                                   ),
@@ -129,8 +128,8 @@ class _SavesListState extends State<SavesList> {
                                   Container(
                                     margin: const EdgeInsets.only(top:15.0,right:6.0),
                                     child: Icon(
-                                      Icons.share, size: 22.0, 
-                                      color: Theme.of(context).iconTheme.color.withOpacity(0.7)
+                                      Icons.share, size: 22.0
+                                      //color: Theme.of(context).iconTheme.color.withOpacity(0.7)
                                       ),
                                     ),
                                   ],
