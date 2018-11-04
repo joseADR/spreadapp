@@ -37,7 +37,7 @@ android {
         applicationId "com.example.spreadapp"
         minSdkVersion 16
         multiDexEnabled true
-        targetSdkVersion 27
+        targetSdkVersion 23
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

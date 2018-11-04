@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
 import 'package:map_view/camera_position.dart';
-const api_key ="AIzaSyBP66a3yw183ZnCraIH8Zzv9XC9R1VjO28";
+const api_key ="tWRoRQy2jtNjN2YQAm4iXS3gJFI=";
+void cardinfo() {
+  MapView.setApiKey("AIzaSyBP66a3yw183ZnCraIH8Zzv9XC9R1VjO28");}
 class CardPage extends StatefulWidget {
   @override
   _CardState createState() => _CardState();
@@ -16,7 +18,7 @@ class _CardState extends State<CardPage> {
     mapView.show(
       MapOptions(
         mapViewType: MapViewType.normal,
-        initialCameraPosition: CameraPosition(Location(-22.507820, -43.175104), 15.0),
+        initialCameraPosition: CameraPosition(Location(45.512794, -122.679565), 15.0),
         showUserLocation: true
       ),
     );
@@ -24,9 +26,9 @@ class _CardState extends State<CardPage> {
   @override
   void initState(){
     super.initState();
-      cameraPosition = CameraPosition(Location(-22.507820, -43.175104), 15.0);
+      cameraPosition = CameraPosition(Location(45.512794, -122.679565), 15.0);
       staticMapUri = staticMapProvider.getStaticUri(
-        Location(-22.507820, -43.175104), 15,
+        Location(45.512794, -122.679565), 2,
         height: 400, width: 900, mapType: StaticMapViewType.roadmap);  
   }
   //
@@ -220,9 +222,9 @@ class _CardState extends State<CardPage> {
                             ],
                           ),
                         ),
-                        InkWell(
+                        Container(
                           child:Image.network(staticMapUri.toString()),
-                          onTap: showMap,
+                          
                         ),
                       ],
                     ),

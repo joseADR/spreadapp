@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 final ThemeData SpreadLight = new ThemeData(
-  backgroundColor: Color(0xffE0E0E0),
+  backgroundColor: Color(0xfff1f1f1),
   brightness: Brightness.light,
+  scaffoldBackgroundColor: Color(0xfff1f1f1),
+  secondaryHeaderColor: Color(0xffd2d2d2),
   primarySwatch: Colors.blue,
-  primaryColor: Color(0xffFFFFFF),
+  primaryColor: Color(0xfff1f1f1),
   primaryColorBrightness: Brightness.light,
   accentColor: Colors.blue,
   primaryTextTheme: TextTheme(title: TextStyle(color:Colors.black,fontFamily: 'MontSerrat')),
@@ -14,6 +16,7 @@ final ThemeData SpreadLight = new ThemeData(
 );
 final ThemeData SpreadDark = new ThemeData(
   backgroundColor: Color(0xff212121),
+  secondaryHeaderColor: Colors.black38,
   brightness: Brightness.dark,
   primarySwatch: Colors.blue,
   primaryColor: Color(0xff1e1e1e),

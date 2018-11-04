@@ -7,10 +7,8 @@ import './config/firebaseSaves.dart';
 import './config/search.dart';
 import 'dart:async';
 import 'dart:math';
-import 'package:map_view/map_view.dart';
 //
 void main() {
-  MapView.setApiKey("AIzaSyBP66a3yw183ZnCraIH8Zzv9XC9R1VjO28");
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);runApp(HomePage());    
@@ -94,7 +92,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             return <Widget> [
               SliverAppBar(
                 //textTheme: Theme.of(context).primaryTextTheme,
-                expandedHeight: 110.0,
+                expandedHeight: 100.0,
                 elevation: 5.0,
                 //backgroundColor:Theme.of(context).primaryColor,
                 pinned: true,

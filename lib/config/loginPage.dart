@@ -60,9 +60,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                     FlutterLogo(
                       size: _iconAnimation.value * 140.0,
                     ),
-                    
                     SizedBox(height: 100.0),
-                    
                     SizedBox(height: 15.0),
                     RaisedButton(
                       shape: RoundedRectangleBorder(borderRadius:(BorderRadius.circular(4.0))),
