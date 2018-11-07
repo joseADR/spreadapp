@@ -36,16 +36,15 @@ class Post extends StatelessWidget {
       return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4.0),
-
           color: Theme.of(context).backgroundColor,
           boxShadow:<BoxShadow>[
             BoxShadow(
               color: Theme.of(context).secondaryHeaderColor,
-              offset: Offset(1.0, 0.7),
+              offset: Offset(1.0, 0.6),
               blurRadius: 5.0),
           ],
         ),
-        margin: const EdgeInsets.symmetric(vertical: 6.5,horizontal: 3.0),
+        margin: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 3.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,

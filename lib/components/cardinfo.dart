@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
 import 'package:map_view/camera_position.dart';
-const api_key ="tWRoRQy2jtNjN2YQAm4iXS3gJFI=";
-void cardinfo() {
-  MapView.setApiKey("AIzaSyBP66a3yw183ZnCraIH8Zzv9XC9R1VjO28");}
+import 'package:spreadapp/profile.dart';
+const api_key ="AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
 class CardPage extends StatefulWidget {
   @override
   _CardState createState() => _CardState();
 }
 class _CardState extends State<CardPage> {
+  
   //Maps
   MapView mapView = MapView();
   var staticMapProvider = StaticMapProvider(api_key);
   CameraPosition cameraPosition;
   Uri staticMapUri;
-  showMap(){
-    mapView.show(
-      MapOptions(
-        mapViewType: MapViewType.normal,
-        initialCameraPosition: CameraPosition(Location(45.512794, -122.679565), 15.0),
-        showUserLocation: true
-      ),
-    );
-  }
+    showMap(){
+      mapView.show(
+        MapOptions(
+          mapViewType: MapViewType.normal,
+          initialCameraPosition: CameraPosition(Location(-22.506592, -43.185093), 15.0),
+          showUserLocation: true
+        ),
+      );
+    }
   @override
   void initState(){
     super.initState();
-      cameraPosition = CameraPosition(Location(45.512794, -122.679565), 15.0);
+      cameraPosition = CameraPosition(Location(-22.506592, -43.185093), 15.0);
       staticMapUri = staticMapProvider.getStaticUri(
-        Location(45.512794, -122.679565), 2,
+        Location(-22.506592, -43.185093), 15,
         height: 400, width: 900, mapType: StaticMapViewType.roadmap);  
   }
   //
@@ -73,34 +73,188 @@ class _CardState extends State<CardPage> {
                 ), 
               ),
               SizedBox(
-                height: 15.0,
+                height: 13.0,
               ),
               Container(
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:<Widget>[
-                    IconButton(
-                      color: Theme.of(context).iconTheme.color.withOpacity(0.7),
-                      icon:Icon(Icons.thumb_up),
-                      onPressed: null,
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 12.0,
+                                ),
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color,
+                                  icon:Icon(Icons.thumb_up,size: 27.0,),
+                                  onPressed: (){},
+                                ),
+                                Text('958',
+                                  style: TextStyle(
+                                    color: Theme.of(context).iconTheme.color,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    IconButton(
-                      color: Theme.of(context).iconTheme.color.withOpacity(0.7),
-                      icon:Icon(Icons.check_circle_outline),
-                      onPressed: null,
+                    SizedBox(width: 20.0),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(height: 12.0,), 
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color,
+                                  icon:Icon(Icons.check_circle_outline,size: 27.0),
+                                  onPressed: (){},
+                                ),
+                                Text('eu vou!',
+                                  style: TextStyle(
+                                    color: Theme.of(context).iconTheme.color,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),   
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    IconButton(
-                      color: Theme.of(context).iconTheme.color.withOpacity(0.7),
-                      icon:Icon(Icons.favorite_border),
-                      onPressed: null,
+                    SizedBox(width: 20.0),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 12.0,
+                                ),
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color,
+                                  icon:Icon(Icons.favorite_border,size: 27.0),
+                                  onPressed: (){},
+                                ),
+                                Text('salvar',
+                                  style: TextStyle(
+                                    color: Theme.of(context).iconTheme.color,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    IconButton(
-                      color: Theme.of(context).iconTheme.color.withOpacity(0.7),
-                      icon:Icon(Icons.share),
-                      onPressed: null,
+                    SizedBox(width: 20.0),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 12.0,
+                                ),
+                                IconButton(
+                                  color: Theme.of(context).iconTheme.color,
+                                  icon:Icon(Icons.share, size: 27.0,),
+                                  onPressed: (){},
+                                ),
+                                Text('compartilhar',
+                                  style: TextStyle(
+                                    color: Theme.of(context).iconTheme.color,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ]
+                ),
+              ),
+              SizedBox(height: 40.0),
+              Divider(color: IconTheme.of(context).color,),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container( 
+                      padding: EdgeInsets.symmetric(horizontal:25.0, vertical: 0.0),
+                      child:Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children:<Widget>[
+                          GestureDetector(
+                            onTap: () =>  Navigator.of(context).push(
+                              MaterialPageRoute<Null>(
+                                builder: (context) => ProfilePage(),
+                                ),
+                              ),
+                            child:Container(
+                              width: 40.0,
+                              height: 40.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    'https://media-cdn.tripadvisor.com/media/photo-s/04/c2/bf/8f/cervejaria-bohemia.jpg'),
+                                    fit: BoxFit.cover),
+                                boxShadow: [
+                                  BoxShadow(blurRadius: 3.0, color: Colors.black)
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(),
+                      child: Column(
+                        children: <Widget>[
+                          Text('Bohemia',
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold
+                            ),  
+                          ),
+                          Text('Promoter',
+                            style: TextStyle(
+                              fontSize: 11.0
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    FlatButton(
+                      shape: CircleBorder(),
+                      color: Theme.of(context).accentColor,
+                      child: Icon(Icons.add),
+                      onPressed: (){},
+                    ),
+                  ],
                 ),
               ),
               Divider(color: IconTheme.of(context).color,),
@@ -114,12 +268,12 @@ class _CardState extends State<CardPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.symmetric(vertical:10.0),
+                          margin: EdgeInsets.symmetric(vertical:12.0),
                           child: 
                           Text(
                             'Descrição',
                             style: TextStyle(
-                              fontSize: 14.0,
+                              fontSize: 15.0,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'MontSerrat',
                             ),
@@ -139,55 +293,70 @@ class _CardState extends State<CardPage> {
                     ),
                   ),
                   Container(
-                    //margin: EdgeInsets.symmetric(horizontal:10.0),
                     child: Text(
                       'A única área que eu acho, que vai exigir muita atenção nossa, e aí eu já aventei a hipótese de até criar um ministério. É na área de... Na área... Eu diria assim, como uma espécie de analogia com o que acontece na área agrícola.',
                       style: TextStyle(
                         fontFamily: 'MontSerrat',
+                        fontSize: 15.0
                       ),
                     ),
                   ),
-                  Divider(
-                    height: 20.0,
-                    color: IconTheme.of(context).color,
-                  ),
+                  SizedBox(height: 32.0),
                   Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment:MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          child: Row(
-                            children:<Widget>[       
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 5.0,
+                              ),
                               Container(
-                                padding: EdgeInsets.only(right:10.0),
-                                child:
-                                  Icon(Icons.location_on),
-                                  ),
-                              Container(
-                                child:Text('um local qualquer',
-                                  style:TextStyle(
-                                  fontFamily: 'MontSerrat',
-                                  )
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children:<Widget>[
+                                    Container(
+                                      padding: EdgeInsets.only(right:10.0),
+                                      child:Icon(Icons.timer),
+                                    ),
+                                    Container(
+                                      child:Text('Início 13:50 Término 18:30',
+                                      style: TextStyle(
+                                        fontFamily: 'MontSerrat',
+                                        fontSize: 15.0
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text('Data',
+                                      style: TextStyle(
+                                        fontSize: 15.0
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Container(
-                          child: Row(
-                            children:<Widget>[
-                              Container(
-                                padding: EdgeInsets.only(right:10.0),
-                                child:Icon(Icons.timer),
-                              ),
-                              Container(
-                                child:Text('Início 13:50 Término 18:30',
-                                style: TextStyle(
-                                  fontFamily: 'MontSerrat',
-                                  ),
+                               Container(
+                                child: Row(
+                                  children:<Widget>[       
+                                    Container(
+                                      padding: EdgeInsets.only(right:10.0),
+                                      child:
+                                        Icon(Icons.location_on
+                                      ),
+                                    ),
+                                    Container(
+                                      child:Text('um local qualquer',
+                                        style:TextStyle(
+                                        fontFamily: 'MontSerrat',
+                                        fontSize: 15.0
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -214,6 +383,7 @@ class _CardState extends State<CardPage> {
                                 'Como Chegar',
                                 style:TextStyle(
                                   fontWeight: FontWeight.bold,
+                                  fontSize: 15.0
                                 ),
                               ),
                               SizedBox(width:15.0),
@@ -222,16 +392,19 @@ class _CardState extends State<CardPage> {
                             ],
                           ),
                         ),
-                        Container(
+                        SizedBox(height: 20.0),
+                        InkWell(
                           child:Image.network(staticMapUri.toString()),
-                          
+                          onTap: showMap,
                         ),
+                        //
                       ],
                     ),
                   ),
                 ],
               ),
             ),
+            //
           ],    
         ),
       ),

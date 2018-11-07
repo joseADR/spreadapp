@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-final ThemeData SpreadLight = new ThemeData(
+final ThemeData SpreadLight = ThemeData(
   backgroundColor: Color(0xfff1f1f1),
   brightness: Brightness.light,
   scaffoldBackgroundColor: Color(0xfff1f1f1),
@@ -13,18 +13,22 @@ final ThemeData SpreadLight = new ThemeData(
   splashColor: Colors.blue,
   iconTheme: IconThemeData(color: Colors.black),
   textSelectionColor: Colors.blue,
+  dividerColor: Colors.grey[400],
 );
-final ThemeData SpreadDark = new ThemeData(
-  backgroundColor: Color(0xff212121),
-  secondaryHeaderColor: Colors.black38,
+final ThemeData SpreadDark = ThemeData(
+  backgroundColor: Color(0xff202121),
+  scaffoldBackgroundColor: Color(0xff202121),
+  secondaryHeaderColor: Colors.black.withOpacity(0.5),
   brightness: Brightness.dark,
   primarySwatch: Colors.blue,
-  primaryColor: Color(0xff1e1e1e),
+  primaryColor: Color(0xff202121),
   primaryColorBrightness: Brightness.dark,
   accentColor: Colors.blue,
   accentColorBrightness: Brightness.dark,
   splashColor: Colors.blue[300],
   primaryTextTheme: TextTheme(title: TextStyle(color:Colors.white,fontFamily: 'MontSerrat')),
-  iconTheme: IconThemeData(color: Colors.white30),
+  iconTheme: IconThemeData(color: Colors.grey),
   textSelectionColor: Colors.blue,
+  unselectedWidgetColor: Colors.grey[400],
+  dividerColor: Colors.grey[800],
 );  

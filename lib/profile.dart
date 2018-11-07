@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
 import 'package:spreadapp/components/eventos.dart';
-import './seguidores.dart';
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -72,11 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 IconButton(
                                   icon: Icon(Icons.people),
                                   splashColor: Colors.blue,
-                                  onPressed:  () =>  Navigator.of(context).push(
-                                  MaterialPageRoute<Null>(
-                                    builder: (BuildContext context) => FollowersPage(),
-                                    ),
-                                  ),
+                                  onPressed:  () {},
                                 ),
                                 Text('SEGUIDORES',
                                   style: TextStyle(

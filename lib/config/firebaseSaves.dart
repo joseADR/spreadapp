@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
+import 'package:spreadapp/components/cardinfo.dart';
+
 
 class SavesList extends StatefulWidget {
   @override 
@@ -55,10 +57,18 @@ class _SavesListState extends State<SavesList> {
             children: snapshot.data.documents  
             .where((DocumentSnapshot document) => _savedPosts.contains(document.documentID)) //Busca
             .map((DocumentSnapshot document) {
-              return Card(
-                elevation: 0.5,
-                //color: Theme.of(context).primaryColorDark.withOpacity(0.3),
-                margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.7, top: 0.0),
+              return Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).backgroundColor,
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Theme.of(context).secondaryHeaderColor,
+                      offset: Offset(1.0, 0.7),
+                      blurRadius: 5.0
+                    ),
+                  ],
+                ),
+                margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 10.0, top: 0.0),
                 child: Column(
                 verticalDirection: VerticalDirection.down,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,12 +79,19 @@ class _SavesListState extends State<SavesList> {
                       child: Row(
                       children:<Widget>[
                         //Imagem do evento salvo
-                        Container(
-                          //margin: EdgeInsets.symmetric(vertical: 8.0,horizontal:16.0),   
-                          width: 147.0,
-                          height: 85.0,
-                          child: Image.network(
-                            (document['promoter']), fit: BoxFit.cover,
+                        GestureDetector(
+                          child: Container(
+                            //margin: EdgeInsets.symmetric(vertical: 8.0,horizontal:16.0),   
+                            width: 147.0,
+                            height: 85.0,
+                            child: Image.network(
+                              (document['promoter']), fit: BoxFit.cover,
+                            ),
+                          ),
+                          onTap: () =>  Navigator.of(context).push(
+                            MaterialPageRoute<Null>(
+                              builder: (BuildContext context) => CardPage(),
+                            ),
                           ),
                         ),
                         //Titulo

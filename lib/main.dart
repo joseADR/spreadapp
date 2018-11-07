@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:map_view/map_view.dart';
 import 'package:spreadapp/config/loginPage.dart';
 import 'package:spreadapp/config/theme.dart' as Theme;
 import './config/firebasePost.dart';
@@ -7,8 +8,9 @@ import './config/firebaseSaves.dart';
 import './config/search.dart';
 import 'dart:async';
 import 'dart:math';
-//
+const api_key ="AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
 void main() {
+  MapView.setApiKey(api_key);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);runApp(HomePage());    
@@ -100,13 +102,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 forceElevated: boxIsScrolled,
                 //title: null,
                 actions: <Widget>[
-                  Switch(
-                    value: darkThemeEnabled,
-                    onChanged: (changed) {
-                     setState(() {
-                       darkThemeEnabled = changed;
-                     });
-                   },
+                  Container(
+                    padding: EdgeInsets.only(right: 6.0),
+                    child: Switch(
+                      value: darkThemeEnabled,
+                      onChanged: (changed) {
+                        setState(() {
+                          darkThemeEnabled = changed;
+                          }
+                        );
+                      },
+                    ),
                   ),
                   IconButton(
                     icon: Icon(Icons.tune), //color: Theme.of(context).iconTheme.color),
@@ -129,8 +135,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 bottom: TabBar(
                   indicatorWeight: 2.0,
                   indicatorSize: TabBarIndicatorSize.tab,
-                  labelStyle: TextStyle(fontSize: 13.0,
-                  fontFamily: 'MontSerrat'),
+                  labelStyle: TextStyle(
+                    fontSize: 13.0,
+                    fontFamily: 'MontSerrat',
+                    fontWeight: FontWeight.bold
+                    ),
                   indicatorColor: Colors.blue,
                   unselectedLabelColor: Colors.grey[600],
                   labelColor: Colors.blue,
