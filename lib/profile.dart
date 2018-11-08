@@ -22,6 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
       body: ListView(
+        padding: EdgeInsets.only(top:7.0),
         children: <Widget>[
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -32,6 +33,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 125.0,
                   width: 125.0,
                   decoration: BoxDecoration(
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        offset: Offset(0.5,0.6),
+                        blurRadius: 5.5
+                      ),
+                    ],
                       borderRadius: BorderRadius.circular(62.5),
                       image: DecorationImage(
                           fit: BoxFit.cover,
@@ -55,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 15.0,
               ),
               Container(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).secondaryHeaderColor.withOpacity(0.1),
                 padding: EdgeInsets.all(15.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,19 +103,28 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children:<Widget>[
-                                      IconButton(
-                                        icon: Icon(Icons.add),
-                                        color: Colors.blue,
-                                        splashColor: Colors.blue,
-                                        onPressed: () {},
-                                      ),
-                                      Text('SEGUIR',
-                                      style: TextStyle(
-                                        fontFamily: 'MontSerrat',
-                                        fontSize: 12.0,
-                                        color: Colors.grey,
+                                      Container(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          shape: BoxShape.circle
+                                        ),
+                                        child: IconButton(
+                                          icon: Icon(Icons.add),
+                                          color: Colors.white,
+                                          splashColor: Colors.blue,
+                                          onPressed: () {},
                                         ),
                                       ),
+                                      //SizedBox(height: 5.0,), 
+                                      //Text('SEGUIR',
+                                      //style: TextStyle(
+                                      //  fontFamily: 'MontSerrat',
+                                      //  fontSize: 12.0,
+                                      //  color: Colors.grey,
+                                      //  ),
+                                      //),
                                     ],
                                   ),
                                 ],

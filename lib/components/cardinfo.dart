@@ -17,6 +17,9 @@ class _CardState extends State<CardPage> {
     showMap(){
       mapView.show(
         MapOptions(
+          hideToolbar: false,
+          showMyLocationButton: true,
+          title: "Spread",
           mapViewType: MapViewType.normal,
           initialCameraPosition: CameraPosition(Location(-22.506592, -43.185093), 15.0),
           showUserLocation: true
@@ -195,9 +198,14 @@ class _CardState extends State<CardPage> {
                   ]
                 ),
               ),
-              SizedBox(height: 40.0),
-              Divider(color: IconTheme.of(context).color,),
+              SizedBox(height: 45.0),
+              Divider(color: Theme.of(context).dividerColor,
+              height: 0.0,),
               Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).secondaryHeaderColor.withOpacity(0.15),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -231,7 +239,6 @@ class _CardState extends State<CardPage> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(),
                       child: Column(
                         children: <Widget>[
                           Text('Bohemia',
@@ -257,9 +264,10 @@ class _CardState extends State<CardPage> {
                   ],
                 ),
               ),
-              Divider(color: IconTheme.of(context).color,),
+              Divider(color: Theme.of(context).dividerColor,
+              height: 0.0,),
               Container(
-              margin: EdgeInsets.symmetric(horizontal:10.0),
+              margin: EdgeInsets.symmetric(horizontal:10.0,vertical: 10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -279,16 +287,6 @@ class _CardState extends State<CardPage> {
                             ),
                           ),
                         ),
-                        Container(
-                          child: Text('10/jun'.toUpperCase(),
-                            style: TextStyle(
-                              color: Color(0xffec0000),
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'MontSerrat',
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ), 
                       ],
                     ),
                   ),
@@ -310,9 +308,7 @@ class _CardState extends State<CardPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              SizedBox(
-                                height: 5.0,
-                              ),
+                              
                               Container(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -322,12 +318,17 @@ class _CardState extends State<CardPage> {
                                       child:Icon(Icons.timer),
                                     ),
                                     Container(
-                                      child:Text('Início 13:50 Término 18:30',
+                                      child:Text('De 13:50 até 18:30',
                                       style: TextStyle(
                                         fontFamily: 'MontSerrat',
                                         fontSize: 15.0
                                         ),
                                       ),
+                                    ), 
+                                    SizedBox(width: 30.0),
+                                    Container(
+                                      padding: EdgeInsets.only(right: 10.0),
+                                      child: Icon(Icons.calendar_today),
                                     ),
                                     Container(
                                       child: Text('Data',
@@ -336,8 +337,22 @@ class _CardState extends State<CardPage> {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(width: 10.0),
+                                    Container(
+                                      child: Text('10/jun'.toUpperCase(),
+                                        style: TextStyle(
+                                          color: Color(0xffec0000),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'MontSerrat',
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    ), 
                                   ],
                                 ),
+                              ),
+                              SizedBox(
+                                height: 5.0,
                               ),
                                Container(
                                 child: Row(
@@ -365,17 +380,21 @@ class _CardState extends State<CardPage> {
                       ],
                     ),
                   ),
-                  Divider(
-                    height: 20.0,
-                    color: IconTheme.of(context).color,
-                  ),
                   SizedBox(
                     height: 10.0,
+                  ),
+                  Divider(
+                    height: 20.0,
+                    color: Theme.of(context).dividerColor,
                   ),
                   Container(
                     child: Column(
                       children:<Widget>[
                         Container(
+                          height: 70.0,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).secondaryHeaderColor.withOpacity(0.1)
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:<Widget>[
@@ -386,16 +405,26 @@ class _CardState extends State<CardPage> {
                                   fontSize: 15.0
                                 ),
                               ),
-                              SizedBox(width:15.0),
+                              SizedBox(width:10.0),
                               Icon(Icons.arrow_drop_down_circle
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(height: 20.0),
-                        InkWell(
-                          child:Image.network(staticMapUri.toString()),
-                          onTap: showMap,
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: Theme.of(context).secondaryHeaderColor,
+                                offset: Offset(0.1, 0.6),
+                                blurRadius: 5.0
+                              ),
+                            ],
+                          ),
+                          child: InkWell(
+                            child:Image.network(staticMapUri.toString()),
+                            onTap: showMap,
+                          ),
                         ),
                         //
                       ],
@@ -404,10 +433,113 @@ class _CardState extends State<CardPage> {
                 ],
               ),
             ),
-            //
-          ],    
+            Divider(
+              height: 10.0,
+              color: Theme.of(context).dividerColor,
+            ),
+            SizedBox(height: 20.0),
+            Center(child: Text('Quem Vai ?',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15.0
+                ),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Center(child: 
+              Container(
+                height: 100.0,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: 6,
+                  itemBuilder: (BuildContext context, int index){
+                    return _buildFriends(index);
+                  },
+                ),
+              )
+            ),
+            SizedBox(height: 20.0),
+            Center(child:
+              Container(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      color: Theme.of(context).secondaryHeaderColor.withOpacity(0.1),
+                      height: 80.0,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: 6,
+                        itemBuilder: (BuildContext context, int index){
+                          return _buildMoreEvents(index);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ), 
+            ),
+            SizedBox(height: 10.0),
+          ],
         ),
       ),
-    );  
+    );
+  }
+  Widget _buildFriends(int index) {return 
+    Center(child:
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+            width: 100.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0) ,
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  offset: Offset(0.6, 0.6),
+                  blurRadius: 10.0
+                ),
+              ],
+            ),
+          child: Image.network(
+            ('https://img.ibxk.com.br/2015/08/27/27151441599410.jpg?w=1040'),
+            fit: BoxFit.cover,
+            ),
+          ),
+        ],
+      ),  
+    );
+  }
+  Widget _buildMoreEvents(int index) {return 
+    Center(child:
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+            width: 100.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0) ,
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  offset: Offset(0.6, 0.6),
+                  blurRadius: 10.0
+                ),
+              ],
+            ),
+          child: Image.network(
+            ('https://img.ibxk.com.br/2015/08/27/27151441599410.jpg?w=1040'),
+            fit: BoxFit.cover,
+            ),
+          ),
+        ],
+      ),  
+    );
   }
 }

@@ -11,9 +11,9 @@ final ThemeData SpreadLight = ThemeData(
   primaryTextTheme: TextTheme(title: TextStyle(color:Colors.black,fontFamily: 'MontSerrat')),
   accentColorBrightness: Brightness.light,
   splashColor: Colors.blue,
-  iconTheme: IconThemeData(color: Colors.black),
+  iconTheme: IconThemeData(color: Colors.black87),
   textSelectionColor: Colors.blue,
-  dividerColor: Colors.grey[400],
+  dividerColor: Colors.grey,
 );
 final ThemeData SpreadDark = ThemeData(
   backgroundColor: Color(0xff202121),
@@ -30,5 +30,5 @@ final ThemeData SpreadDark = ThemeData(
   iconTheme: IconThemeData(color: Colors.grey),
   textSelectionColor: Colors.blue,
   unselectedWidgetColor: Colors.grey[400],
-  dividerColor: Colors.grey[800],
+  dividerColor: Colors.grey[700],
 );  
