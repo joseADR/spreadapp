@@ -88,7 +88,7 @@ class Post extends StatelessWidget {
             GestureDetector(
               onTap: () =>  Navigator.of(context).push(
                 MaterialPageRoute<Null>(
-                  builder: (BuildContext context) => CardPage(),
+                  builder: (BuildContext context) => CardPage(_id),
               ),
             ),
             child:Column(

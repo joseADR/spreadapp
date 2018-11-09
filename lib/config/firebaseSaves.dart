@@ -90,7 +90,7 @@ class _SavesListState extends State<SavesList> {
                           ),
                           onTap: () =>  Navigator.of(context).push(
                             MaterialPageRoute<Null>(
-                              builder: (BuildContext context) => CardPage(),
+                              builder: (BuildContext context) => CardPage(''),
                             ),
                           ),
                         ),

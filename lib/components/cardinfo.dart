@@ -2,37 +2,62 @@ import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
 import 'package:map_view/camera_position.dart';
 import 'package:spreadapp/profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 const api_key ="AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
 class CardPage extends StatefulWidget {
+  //Construtor para o id
+  CardPage(this.id);
+  final String id;
   @override
-  _CardState createState() => _CardState();
+  _CardState createState() => _CardState(id);
 }
 class _CardState extends State<CardPage> {
-  
+  _CardState(this._id) {
+    
+  }
+
+  String _id;
+  String _title = '';
+  String _description = '';
+  String _promo = '';
+  String _data = '';
+  String _card = '';
+
   //Maps
   MapView mapView = MapView();
   var staticMapProvider = StaticMapProvider(api_key);
   CameraPosition cameraPosition;
   Uri staticMapUri;
-    showMap(){
-      mapView.show(
-        MapOptions(
-          hideToolbar: false,
-          showMyLocationButton: true,
-          title: "Spread",
-          mapViewType: MapViewType.normal,
-          initialCameraPosition: CameraPosition(Location(-22.506592, -43.185093), 15.0),
-          showUserLocation: true
-        ),
-      );
-    }
+  showMap(){
+    mapView.show(
+      MapOptions(
+        hideToolbar: false,
+        showMyLocationButton: true,
+        title: "Spread",
+        mapViewType: MapViewType.normal,
+        initialCameraPosition: CameraPosition(Location(-22.506592, -43.185093), 15.0),
+        showUserLocation: true
+      ),
+    );
+  }
   @override
   void initState(){
+    
     super.initState();
-      cameraPosition = CameraPosition(Location(-22.506592, -43.185093), 15.0);
-      staticMapUri = staticMapProvider.getStaticUri(
-        Location(-22.506592, -43.185093), 15,
-        height: 400, width: 900, mapType: StaticMapViewType.roadmap);  
+    Firestore.instance.collection('posts').document(_id).get().then((data) {
+        setState(() {
+          this._description = data['description'];
+          this._card = data['card'];
+          this._promo = data['promoter'];
+          this._title = data['title'];
+          this._data = data['data'];     
+        });
+    });
+    cameraPosition = CameraPosition(Location(-22.506592, -43.185093), 15.0);
+    staticMapUri = staticMapProvider.getStaticUri(
+      Location(-22.506592, -43.185093), 15,
+      height: 400, width: 900, mapType: StaticMapViewType.roadmap
+    );  
   }
   //
   @override
@@ -52,7 +77,7 @@ class _CardState extends State<CardPage> {
                 title: null,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: false,
-                  background: Image.network('http://soupetropolis.com/wp-content/uploads/2018/06/bauernfest-foto-divulga%C3%A7%C3%A3o.jpg',
+                  background: Image.network(_card,
                   fit: BoxFit.cover,
                   ),
                 ),
@@ -65,7 +90,7 @@ class _CardState extends State<CardPage> {
                 child:Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('bauernfest'.toUpperCase(),
+                    Text(_title,
                     style:TextStyle(
                       fontWeight:FontWeight.bold,
                       fontFamily: 'MontSerrat',
@@ -303,9 +328,8 @@ class _CardState extends State<CardPage> {
                     ),
                   ),
                   Container(
-                    child: Text(
-                      'A única área que eu acho, que vai exigir muita atenção nossa, e aí eu já aventei a hipótese de até criar um ministério. É na área de... Na área... Eu diria assim, como uma espécie de analogia com o que acontece na área agrícola.',
-                      style: TextStyle(
+                    child: Text(_description ,
+                        style: TextStyle(
                         fontFamily: 'MontSerrat',
                         fontSize: 15.0
                       ),
@@ -351,7 +375,7 @@ class _CardState extends State<CardPage> {
                                     ),
                                     SizedBox(width: 10.0),
                                     Container(
-                                      child: Text('10/jun'.toUpperCase(),
+                                      child: Text(_data.toUpperCase(),
                                         style: TextStyle(
                                           color: Color(0xffec0000),
                                           fontWeight: FontWeight.bold,
@@ -530,9 +554,8 @@ class _CardState extends State<CardPage> {
                 ),
               ), 
             ),
-            
-            Container(child:
-              Row(
+            Container(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Container(
@@ -556,9 +579,9 @@ class _CardState extends State<CardPage> {
       ),
     );
   }
-  Widget _buildFriends(int index) {return 
-    Center(child:
-      Row(
+  Widget _buildFriends(int index) {
+    return Center(
+      child:Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Card(

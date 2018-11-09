@@ -195,7 +195,7 @@ class _ProfilePageState extends State<ProfilePage> {
         GestureDetector(
           onTap: () =>  Navigator.of(context).push(
               MaterialPageRoute<Null>(
-                builder: (BuildContext context) => CardPage(),
+                builder: (BuildContext context) => CardPage(''),
             ),
           ),
         child:
