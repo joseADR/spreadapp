@@ -202,7 +202,7 @@ class _CardState extends State<CardPage> {
               Divider(color: Theme.of(context).dividerColor,
               height: 0.0,),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10.0),
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                 decoration: BoxDecoration(
                   color: Theme.of(context).secondaryHeaderColor.withOpacity(0.15),
                 ),
@@ -212,14 +212,13 @@ class _CardState extends State<CardPage> {
                     Container( 
                       padding: EdgeInsets.symmetric(horizontal:25.0, vertical: 0.0),
                       child:Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children:<Widget>[
                           GestureDetector(
                             onTap: () =>  Navigator.of(context).push(
                               MaterialPageRoute<Null>(
                                 builder: (context) => ProfilePage(),
-                                ),
                               ),
+                            ),
                             child:Container(
                               width: 40.0,
                               height: 40.0,
@@ -239,6 +238,7 @@ class _CardState extends State<CardPage> {
                       ),
                     ),
                     Container(
+                      //padding: EdgeInsets.only(left: 20.0),
                       child: Column(
                         children: <Widget>[
                           Text('Bohemia',
@@ -254,12 +254,24 @@ class _CardState extends State<CardPage> {
                           ),
                         ],
                       ),
-                    ),
-                    FlatButton(
-                      shape: CircleBorder(),
-                      color: Theme.of(context).accentColor,
-                      child: Icon(Icons.add),
-                      onPressed: (){},
+                    ), 
+                    Container(
+                      child: OutlineButton(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                        child: Text('SEGUIR',
+                          style: TextStyle(
+                            color: Theme.of(context).buttonColor,
+                            ),
+                          ),
+                        disabledBorderColor: Theme.of(context).buttonColor,
+                        highlightedBorderColor: Theme.of(context).buttonColor,
+                        highlightColor: Theme.of(context).buttonColor,
+                        splashColor: Colors.blue,
+                        borderSide: BorderSide(
+                          color: Theme.of(context).buttonColor,
+                        ),
+                        onPressed: () {}, 
+                      ),
                     ),
                   ],
                 ),
@@ -438,7 +450,7 @@ class _CardState extends State<CardPage> {
               color: Theme.of(context).dividerColor,
             ),
             SizedBox(height: 20.0),
-            Center(child: Text('Quem Vai ?',
+            Center(child: Text('Quem vai ?',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15.0
@@ -448,7 +460,7 @@ class _CardState extends State<CardPage> {
             SizedBox(height: 10.0),
             Center(child: 
               Container(
-                height: 100.0,
+                height: 150.0,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
@@ -460,14 +472,50 @@ class _CardState extends State<CardPage> {
                 ),
               )
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 0.0),
+            Container(child:
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 13.0),
+                    child: GestureDetector(
+                      onTap: (){},
+                      child: Text('Ver todos',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),  
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20.0,),
+            Container(
+              color: Theme.of(context).backgroundColor.withOpacity(0.1),
+              child: Row( 
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: Text('Mais eventos como este',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0
+                      ),
+                    ),
+                  ), 
+                ],
+              ),
+            ),
+            //SizedBox(height: 20.0,),
             Center(child:
               Container(
                 child: Column(
                   children: <Widget>[
                     Container(
                       color: Theme.of(context).secondaryHeaderColor.withOpacity(0.1),
-                      height: 80.0,
+                      height: 175.0,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
@@ -482,7 +530,27 @@ class _CardState extends State<CardPage> {
                 ),
               ), 
             ),
-            SizedBox(height: 10.0),
+            
+            Container(child:
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    color: Theme.of(context).backgroundColor,
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: GestureDetector(
+                      onTap: (){},
+                      child: Text('Ver todos',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),  
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20.0,),
           ],
         ),
       ),
@@ -493,26 +561,31 @@ class _CardState extends State<CardPage> {
       Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Container(
+          Card(
+            color: Theme.of(context).backgroundColor,
+            elevation: 3.0,
             margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-            width: 100.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0) ,
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  offset: Offset(0.6, 0.6),
-                  blurRadius: 10.0
-                ),
-              ],
-            ),
-          child: Image.network(
-            ('https://img.ibxk.com.br/2015/08/27/27151441599410.jpg?w=1040'),
-            fit: BoxFit.cover,
-            ),
+            child:Container(
+              height: 125.0,
+              margin: EdgeInsets.all(5.0),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 100.0,
+                    width: 90.0,
+                    child: Image.network(
+                      ('https://img.ibxk.com.br/2015/08/27/27151441599410.jpg?w=1040'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(height: 8.0,),
+                  Text('Nome') 
+                ],
+              ), 
+            ), 
           ),
         ],
-      ),  
+      ),
     );
   }
   Widget _buildMoreEvents(int index) {return 
@@ -520,22 +593,27 @@ class _CardState extends State<CardPage> {
       Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Container(
+          Card(
+            color: Theme.of(context).backgroundColor,
+            elevation: 3.0,
             margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-            width: 100.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0) ,
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  offset: Offset(0.6, 0.6),
-                  blurRadius: 10.0
-                ),
-              ],
-            ),
-          child: Image.network(
-            ('https://img.ibxk.com.br/2015/08/27/27151441599410.jpg?w=1040'),
-            fit: BoxFit.cover,
+            child: Container(
+              height: 130.0,
+              margin: EdgeInsets.all(0.5),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 95.0,
+                    width: 160.0,
+                    child: Image.network(
+                      ('https://eventostop.com.br/wp-content/uploads/2018/07/20880_image_35842459_1677012075722768_6502674786445950976_n.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(height: 8.0,),
+                  Text('Nome do evento')
+                ],
+              ),
             ),
           ),
         ],

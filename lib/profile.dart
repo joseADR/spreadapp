@@ -65,99 +65,95 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Theme.of(context).secondaryHeaderColor.withOpacity(0.1),
                 padding: EdgeInsets.all(15.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        ButtonBar(
-                          children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children:<Widget>[
-                                IconButton(
-                                  icon: Icon(Icons.people),
-                                  splashColor: Colors.blue,
-                                  onPressed:  () {},
-                                ),
-                                Text('SEGUIDORES',
-                                  style: TextStyle(
-                                    fontFamily: 'MontSerrat',
-                                    fontSize: 12.0,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(right:10.0,left: 5.0),
-                              child: Row(
+                        SizedBox(
+                          child: ButtonBar(
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children:<Widget>[
-                                  SizedBox(height:30.0),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children:<Widget>[
-                                      Container(
-                                        height: 50.0,
-                                        width: 50.0,
-                                        decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          shape: BoxShape.circle
-                                        ),
-                                        child: IconButton(
-                                          icon: Icon(Icons.add),
-                                          color: Colors.white,
-                                          splashColor: Colors.blue,
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                      //SizedBox(height: 5.0,), 
-                                      //Text('SEGUIR',
-                                      //style: TextStyle(
-                                      //  fontFamily: 'MontSerrat',
-                                      //  fontSize: 12.0,
-                                      //  color: Colors.grey,
-                                      //  ),
-                                      //),
-                                    ],
+                                  IconButton(
+                                    icon: Icon(Icons.people),
+                                    splashColor: Colors.blue,
+                                    onPressed:  () {},
                                   ),
-                                ],
-                              ),   
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children:<Widget>[
-                                IconButton(
-                                  icon: Icon(Icons.event),
-                                  splashColor: Colors.blue,
-                                  onPressed:  () =>  Navigator.of(context).push(
-                                  MaterialPageRoute<Null>(
-                                    builder: (BuildContext context) => EventsPage(),
+                                  Text('SEGUIDORES',
+                                    style: TextStyle(
+                                      fontFamily: 'MontSerrat',
+                                      fontSize: 12.0,
+                                      color: Theme.of(context).buttonColor
                                     ),
                                   ),
-                                ),
-                                Text('EVENTOS',
-                                style: TextStyle(
-                                  fontFamily: 'MontSerrat',
-                                  fontSize: 12.0,
-                                  color: Colors.grey,
-                                ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                              SizedBox(height: 30.0,),
+                              Container(
+                                child: Row(
+                                  children:<Widget>[
+                                    SizedBox(height:30.0),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children:<Widget>[
+                                        Container(
+                                          padding: EdgeInsets.only(right: 15.0),
+                                          child: OutlineButton(
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                                            child: Text('SEGUIR',
+                                              style: TextStyle(
+                                                color: Theme.of(context).buttonColor,
+                                                ),
+                                              ),
+                                            disabledBorderColor: Theme.of(context).buttonColor,
+                                            highlightedBorderColor: Theme.of(context).buttonColor,
+                                            highlightColor: Theme.of(context).buttonColor,
+                                            splashColor: Colors.blue,
+                                            borderSide: BorderSide(
+                                              color: Theme.of(context).buttonColor,
+                                            ),
+                                            onPressed: () {}, 
+                                          ),
+                                        ),
+                                        //SizedBox(height: 5.0,), 
+                                        //Text('SEGUIR',
+                                        //style: TextStyle(
+                                        //  fontFamily: 'MontSerrat',
+                                        //  fontSize: 12.0,
+                                        //  color: Colors.grey,
+                                        //  ),
+                                        //),
+                                      ],
+                                    ),
+                                  ],
+                                ),   
+                              ),
+                              SizedBox(height: 30.0,),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children:<Widget>[
+                                  IconButton(
+                                    icon: Icon(Icons.event),
+                                    splashColor: Colors.blue,
+                                    onPressed:  () =>  Navigator.of(context).push(
+                                    MaterialPageRoute<Null>(
+                                      builder: (BuildContext context) => EventsPage(),
+                                      ),
+                                    ),
+                                  ),
+                                  Text('EVENTOS',
+                                    style: TextStyle(
+                                      fontFamily: 'MontSerrat',
+                                      fontSize: 12.0,
+                                      color: Theme.of(context).buttonColor
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     )
@@ -206,10 +202,13 @@ class _ProfilePageState extends State<ProfilePage> {
         Container(
           height: 180.0,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
-              image: DecorationImage(
-                image: NetworkImage('https://lh3.googleusercontent.com/proxy/pvY4Y-_8-LI1VfYEilExPmR1Ps1N6_5ZXS8NCM7R5FvtJIZDApARtK59jDTB7B765RDn97R0OS44jkZX5R3vyjaawtY6H2o=w530-h298-n-rw'),
-                fit: BoxFit.cover))),
+            borderRadius: BorderRadius.circular(5.0),
+            image: DecorationImage(
+              image: NetworkImage('https://lh3.googleusercontent.com/proxy/pvY4Y-_8-LI1VfYEilExPmR1Ps1N6_5ZXS8NCM7R5FvtJIZDApARtK59jDTB7B765RDn97R0OS44jkZX5R3vyjaawtY6H2o=w530-h298-n-rw'),
+              fit: BoxFit.cover
+            ),
+          ),
+        ),
       ),
     );
   }

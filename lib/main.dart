@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     ),
                   indicatorColor: Colors.blue,
                   unselectedLabelColor: Colors.grey[600],
-                  labelColor: Colors.blue,
+                  labelColor: Colors.blue[400],
                   controller: _tabController,
                   tabs: <Widget>[
                     Tab(text: "PROMOTERS"),
