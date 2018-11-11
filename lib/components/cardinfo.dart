@@ -12,9 +12,7 @@ class CardPage extends StatefulWidget {
   _CardState createState() => _CardState(id);
 }
 class _CardState extends State<CardPage> {
-  _CardState(this._id) {
-    
-  }
+  _CardState(this._id);
 
   String _id;
   String _title = '';
@@ -22,6 +20,7 @@ class _CardState extends State<CardPage> {
   String _promo = '';
   String _data = '';
   String _card = '';
+  String _local = '';
 
   //Maps
   MapView mapView = MapView();
@@ -50,7 +49,8 @@ class _CardState extends State<CardPage> {
           this._card = data['card'];
           this._promo = data['promoter'];
           this._title = data['title'];
-          this._data = data['data'];     
+          this._data = data['data'];
+          this._local = data['local'];     
         });
     });
     cameraPosition = CameraPosition(Location(-22.506592, -43.185093), 15.0);
@@ -90,7 +90,7 @@ class _CardState extends State<CardPage> {
                 child:Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(_title,
+                    Text(_title.toUpperCase(),
                     style:TextStyle(
                       fontWeight:FontWeight.bold,
                       fontFamily: 'MontSerrat',
@@ -328,11 +328,17 @@ class _CardState extends State<CardPage> {
                     ),
                   ),
                   Container(
-                    child: Text(_description ,
-                        style: TextStyle(
-                        fontFamily: 'MontSerrat',
-                        fontSize: 15.0
-                      ),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          child: Text(_description ,
+                            style: TextStyle(
+                            fontFamily: 'MontSerrat',
+                            fontSize: 15.0
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 32.0),
@@ -391,20 +397,26 @@ class _CardState extends State<CardPage> {
                                 height: 5.0,
                               ),
                                Container(
-                                child: Row(
+                                child: Column(
                                   children:<Widget>[       
                                     Container(
-                                      padding: EdgeInsets.only(right:10.0),
-                                      child:
-                                        Icon(Icons.location_on
-                                      ),
-                                    ),
-                                    Container(
-                                      child:Text('um local qualquer',
-                                        style:TextStyle(
-                                        fontFamily: 'MontSerrat',
-                                        fontSize: 15.0
-                                        ),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Container(
+                                            padding: EdgeInsets.only(right:10.0),
+                                            child:
+                                              Icon(Icons.location_on
+                                            ),
+                                          ),
+                                          Container(
+                                            child:Text(_local,
+                                              style:TextStyle(
+                                              fontFamily: 'MontSerrat',
+                                              fontSize: 15.0
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],

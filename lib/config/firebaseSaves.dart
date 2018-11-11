@@ -85,7 +85,7 @@ class _SavesListState extends State<SavesList> {
                             width: 147.0,
                             height: 85.0,
                             child: Image.network(
-                              (document['promoter']), fit: BoxFit.cover,
+                              (document['card']), fit: BoxFit.cover,
                             ),
                           ),
                           onTap: () =>  Navigator.of(context).push(

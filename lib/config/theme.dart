@@ -19,7 +19,7 @@ final ThemeData SpreadLight = ThemeData(
 final ThemeData SpreadDark = ThemeData(
   backgroundColor: Color(0xff202121),
   scaffoldBackgroundColor: Color(0xff202121),
-  secondaryHeaderColor: Colors.black.withOpacity(0.5),
+  secondaryHeaderColor: Colors.black54.withOpacity(0.5),
   brightness: Brightness.dark,
   primarySwatch: Colors.blue,
   primaryColor: Color(0xff202121),
