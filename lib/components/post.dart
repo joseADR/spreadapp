@@ -15,7 +15,7 @@ class Post extends StatelessWidget {
         duration: Duration(seconds: 1),
         content: Text(_title + ' adicionado aos salvos'),
         action: SnackBarAction(
-          label: 'Desfazer',
+          label: 'DESFAZER',
           onPressed: () {
             // Some code to undo the change!
           },
@@ -56,7 +56,7 @@ class Post extends StatelessWidget {
                 GestureDetector(
                   onTap:() => Navigator.of(context).push(
                     MaterialPageRoute<Null>(
-                      builder: (BuildContext context) => ProfilePage(),
+                      builder: (BuildContext context) => ProfilePage(_id),
                       ),
                     ),
                   child:Container(

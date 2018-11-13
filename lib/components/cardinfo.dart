@@ -31,7 +31,7 @@ class _CardState extends State<CardPage> {
     mapView.show(
       MapOptions(
         hideToolbar: false,
-        showMyLocationButton: true,
+        showMyLocationButton: false,
         title: "Spread",
         mapViewType: MapViewType.normal,
         initialCameraPosition: CameraPosition(Location(-22.506592, -43.185093), 15.0),
@@ -241,7 +241,7 @@ class _CardState extends State<CardPage> {
                           GestureDetector(
                             onTap: () =>  Navigator.of(context).push(
                               MaterialPageRoute<Null>(
-                                builder: (context) => ProfilePage(),
+                                builder: (context) => ProfilePage(_id),
                               ),
                             ),
                             child:Container(
@@ -251,7 +251,7 @@ class _CardState extends State<CardPage> {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                    'https://media-cdn.tripadvisor.com/media/photo-s/04/c2/bf/8f/cervejaria-bohemia.jpg'),
+                                    _promo),
                                     fit: BoxFit.cover),
                                 boxShadow: [
                                   BoxShadow(blurRadius: 3.0, color: Colors.black)
@@ -343,14 +343,13 @@ class _CardState extends State<CardPage> {
                   ),
                   SizedBox(height: 32.0),
                   Container(
-                    child: Row(
-                      mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                    child: Wrap(
+                      direction: Axis.vertical,
                       children: <Widget>[
                         Container(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              
                               Container(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -396,31 +395,24 @@ class _CardState extends State<CardPage> {
                               SizedBox(
                                 height: 5.0,
                               ),
-                               Container(
-                                child: Column(
-                                  children:<Widget>[       
-                                    Container(
-                                      child: Row(
-                                        children: <Widget>[
-                                          Container(
-                                            padding: EdgeInsets.only(right:10.0),
-                                            child:
-                                              Icon(Icons.location_on
-                                            ),
-                                          ),
-                                          Container(
-                                            child:Text(_local,
-                                              style:TextStyle(
-                                              fontFamily: 'MontSerrat',
-                                              fontSize: 15.0
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                              Wrap(
+                                crossAxisAlignment: WrapCrossAlignment.end,
+                                children: <Widget>[
+                                  Container(
+                                    padding: EdgeInsets.only(right:10.0),
+                                    child:
+                                      Icon(Icons.location_on
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Text(_local,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                    style:TextStyle(
+                                    fontFamily: 'MontSerrat',
+                                    fontSize: 15.0
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -641,12 +633,12 @@ class _CardState extends State<CardPage> {
                     height: 95.0,
                     width: 160.0,
                     child: Image.network(
-                      ('https://eventostop.com.br/wp-content/uploads/2018/07/20880_image_35842459_1677012075722768_6502674786445950976_n.jpg'),
+                      (_card),
                       fit: BoxFit.cover,
                     ),
                   ),
                   SizedBox(height: 8.0,),
-                  Text('Nome do evento')
+                  Text(_title)
                 ],
               ),
             ),

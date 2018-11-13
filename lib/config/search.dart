@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class DataSearch extends SearchDelegate<String>{
   final recentsEvents =["lista"];
   final events = ['lista2'];

@@ -1,11 +1,35 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
 import 'package:spreadapp/components/eventos.dart';
 class ProfilePage extends StatefulWidget {
+  ProfilePage(this.id);
+  final id;
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _ProfilePageState createState() => _ProfilePageState(id);
+  
 }
 class _ProfilePageState extends State<ProfilePage> {
+  _ProfilePageState(this._id);
+
+  String _id;
+  String _nome = '';
+  String _title = '';
+  String _promo = '';
+  String _card = '';
+  
+  @override
+  void initState(){
+    super.initState();
+    Firestore.instance.collection('promoters').document(_id).get().then((data) {
+        setState(() {
+          this._nome = data['nome'];
+          this._title = data['title'];
+          this._promo = data['promoter'];
+          this._card = data['card'];  
+        });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Hero(
-                tag: 'https://media-cdn.tripadvisor.com/media/photo-s/04/c2/bf/8f/cervejaria-bohemia.jpg',
+                tag: _promo,
                 child: Container(
                   height: 125.0,
                   width: 125.0,
@@ -42,12 +66,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.circular(62.5),
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage('https://media-cdn.tripadvisor.com/media/photo-s/04/c2/bf/8f/cervejaria-bohemia.jpg'))),
+                          image: NetworkImage(_promo))),
                 ),
               ),
               SizedBox(height: 20.0),
               Text(
-                'BOHEMIA',
+                _nome,
                 style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 18.0,
@@ -117,14 +141,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                             onPressed: () {}, 
                                           ),
                                         ),
-                                        //SizedBox(height: 5.0,), 
-                                        //Text('SEGUIR',
-                                        //style: TextStyle(
-                                        //  fontFamily: 'MontSerrat',
-                                        //  fontSize: 12.0,
-                                        //  color: Colors.grey,
-                                        //  ),
-                                        //),
                                       ],
                                     ),
                                   ],
@@ -195,7 +211,7 @@ class _ProfilePageState extends State<ProfilePage> {
         GestureDetector(
           onTap: () =>  Navigator.of(context).push(
               MaterialPageRoute<Null>(
-                builder: (BuildContext context) => CardPage('5F8mLHaA5KnPOQ24Lmvo'),
+                builder: (BuildContext context) => CardPage(_id),
             ),
           ),
         child:
@@ -204,7 +220,7 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.0),
             image: DecorationImage(
-              image: NetworkImage('https://lh3.googleusercontent.com/proxy/pvY4Y-_8-LI1VfYEilExPmR1Ps1N6_5ZXS8NCM7R5FvtJIZDApARtK59jDTB7B765RDn97R0OS44jkZX5R3vyjaawtY6H2o=w530-h298-n-rw'),
+              image: NetworkImage(_card),
               fit: BoxFit.cover
             ),
           ),
@@ -222,7 +238,7 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Maiara e Maraisa - 8 Dias atrás',
+                _title,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',

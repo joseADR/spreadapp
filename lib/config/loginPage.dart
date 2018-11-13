@@ -9,6 +9,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+  bool get opaque => false;
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
   @override
@@ -24,7 +25,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     _iconAnimationController.forward();
   }
   //google sign in
-  GoogleSignIn googleAuth = new GoogleSignIn();
+  GoogleSignIn googleAuth = GoogleSignIn();
   //Facebook sign in
   FacebookLogin fbLogin = FacebookLogin();
   @override
@@ -42,7 +43,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
           data: ThemeData(
               brightness: Brightness.dark,
               inputDecorationTheme: InputDecorationTheme(
-                 hintStyle: new TextStyle(color: Colors.blue, fontSize: 20.0),
+                 hintStyle: TextStyle(color: Colors.blue, fontSize: 20.0),
                 labelStyle:
                   TextStyle(color: Colors.tealAccent, fontSize: 25.0),
             )
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                                 print('Signed in as ${signedInUser.displayName}');
                                 Navigator
                                     .of(context)
-                                    .pushReplacementNamed('/home');
+                                    .pushReplacementNamed('/homePage');
                               }).catchError((e) {
                                 print(e);
                               });

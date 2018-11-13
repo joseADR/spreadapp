@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:spreadapp/profile.dart';
 class FollowPage extends StatelessWidget {
-  final String _title;
+  final String _nome;
   final String _promo;
+  final String _id;
   //String data;
-  FollowPage( this._title, this._promo,);
+  FollowPage( this._nome, this._promo,this._id, [document]);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,6 +13,7 @@ class FollowPage extends StatelessWidget {
       //color: Theme.of(context).primaryColorDark.withOpacity(0.20),
       margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.7, top: 0.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Row(
@@ -26,7 +28,7 @@ class FollowPage extends StatelessWidget {
                     GestureDetector(
                       onTap: () =>  Navigator.of(context).push(
                         MaterialPageRoute<Null>(
-                          builder: (context) => ProfilePage(),
+                          builder: (context) => ProfilePage(_id),
                           ),
                         ),
                       child:Container(
@@ -51,7 +53,7 @@ class FollowPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget> [
                     Container(
-                      child: Text('Promoter',
+                      child: Text(_nome,
                       style: TextStyle(
                         fontFamily:'MontSerrat',
                         fontSize: 15.0,

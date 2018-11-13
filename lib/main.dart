@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:map_view/map_view.dart';
@@ -23,17 +24,24 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   TabController _tabController;
   ScrollController _scrollViewController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool isLoggedIn = false;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   Random random;
   List<String> list;
-  @override
+    bool isLoggedIn;
   void initState() {
     super.initState();
     random = Random();
     refreshList();
     _tabController = TabController(vsync: this, length: 3, initialIndex: 1);
+    isLoggedIn = false;
+    FirebaseAuth.instance.currentUser().then((user) => user != null
+        ? setState(() {
+            isLoggedIn = true;
+          })
+        : null);
+    super.initState();
   }
+    // new Future.delayed(const Duration(seconds: 2));
   Future<Null> refreshList() async {
     refreshKey.currentState?.show(atTop: false);
     await Future.delayed(Duration(seconds: 2));
@@ -42,16 +50,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     });
     return null;
   }
+  
   @override
   void dispose() {
     _tabController.dispose();
     _scrollViewController.dispose();
     super.dispose(); 
   }
-  bool darkThemeEnabled = true;
+  bool lightThemeEnabled = true;
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: darkThemeEnabled ? Theme.SpreadLight: Theme.SpreadDark,
+      theme: lightThemeEnabled ? Theme.SpreadLight: Theme.SpreadDark,
       home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -70,16 +79,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 //decoration: BoxDecoration(
                  //color: Theme.of(context).primaryColor.withOpacity(0.5)
                // ),
-              ),
-              ListTile(
-                title: Text('Entrar com Facebook'),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<Null>(
-                      builder: (BuildContext context) => LoginPage(),
-                    ),
-                  );
-                }
               ),
               ListTile(
                 title: Text('Item 2'),
@@ -105,10 +104,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   Container(
                     padding: EdgeInsets.only(right: 6.0),
                     child: Switch(
-                      value: darkThemeEnabled,
+                      value: lightThemeEnabled,
                       onChanged: (changed) {
                         setState(() {
-                          darkThemeEnabled = changed;
+                          lightThemeEnabled = changed;
                           }
                         );
                       },
@@ -128,8 +127,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   ),
                   IconButton(
                     icon: Icon(Icons.account_circle),// color: Theme.of(context).iconTheme.color),
-                    onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
-                      tooltip: 'Configurações',
+                    onPressed: () {
+                      isLoggedIn ? _scaffoldKey.currentState.openEndDrawer() : LoginPage();
+                    }
                   ),
                 ],
                 bottom: TabBar(
