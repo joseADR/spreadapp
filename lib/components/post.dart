@@ -40,11 +40,11 @@ class Post extends StatelessWidget {
           boxShadow:<BoxShadow>[
             BoxShadow(
               color: Theme.of(context).secondaryHeaderColor,
-              offset: Offset(1.0, 0.6),
-              blurRadius: 5.0),
+              offset: Offset(.2, 0.2),
+              blurRadius: 7.0),
           ],
         ),
-        margin: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 3.0),
+        margin: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 6.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,8 +99,8 @@ class Post extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 5.0),
                   color: Colors.grey,
                   width: double.infinity,
-                  height: 185.0,
-                  child: Image.network(_card, fit: BoxFit.cover)
+                  height: 180.0,
+                  child: Image.network(_card, fit: BoxFit.fill)
                 ),
               ],
             ),

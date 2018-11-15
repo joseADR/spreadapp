@@ -6,18 +6,16 @@ class ProfilePage extends StatefulWidget {
   ProfilePage(this.id);
   final id;
   @override
-  _ProfilePageState createState() => _ProfilePageState(id);
-  
+  _ProfilePageState createState() => _ProfilePageState(id); 
 }
 class _ProfilePageState extends State<ProfilePage> {
   _ProfilePageState(this._id);
-
   String _id;
   String _nome = '';
   String _title = '';
   String _promo = '';
   String _card = '';
-  
+  String _seg = '';
   @override
   void initState(){
     super.initState();
@@ -26,7 +24,8 @@ class _ProfilePageState extends State<ProfilePage> {
           this._nome = data['nome'];
           this._title = data['title'];
           this._promo = data['promoter'];
-          this._card = data['card'];  
+          this._card = data['card'];
+          this._seg = data['seguidores'];  
         });
     });
   }
@@ -100,10 +99,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:<Widget>[
-                                  IconButton(
-                                    icon: Icon(Icons.people),
-                                    splashColor: Colors.blue,
-                                    onPressed:  () {},
+                                  Text(
+                                    _seg
                                   ),
                                   Text('SEGUIDORES',
                                     style: TextStyle(

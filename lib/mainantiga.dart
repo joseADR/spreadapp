@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:map_view/map_view.dart';
 import 'package:spreadapp/config/loginPage.dart';
-import 'package:spreadapp/config/theme.dart' as Temas;
+import 'package:spreadapp/config/theme.dart' as Theme;
 import './config/firebasePost.dart';
 import './config/firebaseSaves.dart';
 import './config/search.dart';
@@ -60,90 +60,16 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   bool lightThemeEnabled = true;
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: lightThemeEnabled ? Temas.SpreadLight: Temas.SpreadDark,
+      theme: lightThemeEnabled ? Theme.SpreadLight: Theme.SpreadDark,
       home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
-  Widget HomePage() {
+    Widget HomePage() {
     return DefaultTabController(
       length: 3,
       child:Scaffold(
         key: _scaffoldKey,
-        bottomNavigationBar: TabBar(
-          indicatorWeight: 1.5,
-            indicatorSize: TabBarIndicatorSize.tab,
-            labelStyle: TextStyle(
-              fontSize: 9.0,
-              fontFamily: 'MontSerrat',
-              fontWeight: FontWeight.bold
-              ),
-          indicatorColor: Colors.blue,
-          unselectedLabelColor: lightThemeEnabled ? Colors.black.withOpacity(0.7) : Colors.grey,
-          labelColor: Colors.blue[400],
-          controller: _tabController,
-          tabs: <Widget>[
-            SizedBox(
-              height: 58.0,
-              child: Tab(
-                icon:Icon(Icons.people, 
-                  size: 23.0),
-                text: 'PROMOTERS',  
-              ),
-            ),
-            SizedBox(
-              height: 58.0,
-              child: Tab(
-                icon:Icon(Icons.home, 
-                  size: 23.0),
-                text: 'INÍCIO',  
-              ),
-            ),
-            SizedBox(
-              height: 58.0,
-              child: Tab(
-                icon:Icon(Icons.favorite_border, 
-                  size: 23.0),
-                text: 'SALVOS',  
-              ),
-            ),
-          ],
-        ),
-        appBar: AppBar(
-          elevation: 0.0,
-          actions: <Widget>[
-            Container(
-              padding: EdgeInsets.only(right: 6.0),
-              child: Switch(
-                value: lightThemeEnabled,
-                onChanged: (changed) {
-                  setState(() {
-                    lightThemeEnabled = changed;
-                    }
-                  );
-                },
-              ),
-            ),
-            IconButton(
-              icon: Icon(Icons.tune), //color: Theme.of(context).iconTheme.color),
-              onPressed: () {},
-              tooltip: 'Filtrar',
-            ),
-            IconButton(
-              icon: Icon(Icons.search),// color: Theme.of(context).iconTheme.color),
-              onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
-              },
-              tooltip: 'Buscar',
-            ),
-            IconButton(
-              icon: Icon(Icons.account_circle),// color: Theme.of(context).iconTheme.color),
-              onPressed: () {
-                isLoggedIn ? _scaffoldKey.currentState.openEndDrawer() : LoginPage();
-              }
-            ),
-          ],
-        ),
         endDrawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -162,6 +88,71 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             ],
           ),
         ),
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool boxIsScrolled){
+            return <Widget> [
+              SliverAppBar(
+                //textTheme: Theme.of(context).primaryTextTheme,
+                expandedHeight: 100.0,
+                elevation: 5.0,
+                //backgroundColor:Theme.of(context).primaryColor,
+                pinned: true,
+                floating: true,
+                forceElevated: boxIsScrolled,
+                //title: null,
+                actions: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(right: 6.0),
+                    child: Switch(
+                      value: lightThemeEnabled,
+                      onChanged: (changed) {
+                        setState(() {
+                          lightThemeEnabled = changed;
+                          }
+                        );
+                      },
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.tune), //color: Theme.of(context).iconTheme.color),
+                    onPressed: () {},
+                    tooltip: 'Filtrar',
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.search),// color: Theme.of(context).iconTheme.color),
+                    onPressed: () {
+                      showSearch(context: context, delegate: DataSearch());
+                    },
+                    tooltip: 'Buscar',
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.account_circle),// color: Theme.of(context).iconTheme.color),
+                    onPressed: () {
+                      isLoggedIn ? _scaffoldKey.currentState.openEndDrawer() : LoginPage();
+                    }
+                  ),
+                ],
+                bottom: TabBar(
+                  indicatorWeight: 2.0,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  labelStyle: TextStyle(
+                    fontSize: 13.0,
+                    fontFamily: 'MontSerrat',
+                    fontWeight: FontWeight.bold
+                    ),
+                  indicatorColor: Colors.blue,
+                  unselectedLabelColor: Colors.grey[600],
+                  labelColor: Colors.blue[400],
+                  controller: _tabController,
+                  tabs: <Widget>[
+                    Tab(text: "PROMOTERS"),
+                    Tab(text: "INÍCIO"),
+                    Tab(text: "SALVOS"),
+                  ],
+                ),
+              ),
+            ];
+          },
         body: TabBarView(
           controller: _tabController,
           children: <Widget>[
@@ -173,7 +164,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             onRefresh: refreshList, 
             ),
             SavesList(),
-          ],
+            ],
+          ),
         ),
       ),
     );

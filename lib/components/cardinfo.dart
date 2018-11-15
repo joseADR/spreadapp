@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
 import 'package:map_view/camera_position.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spreadapp/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; 
 const api_key ="AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
@@ -22,6 +24,18 @@ class _CardState extends State<CardPage> {
   String _card = '';
   String _local = '';
 
+  SnackBar snackBar() {
+    return SnackBar(
+      duration: Duration(seconds: 1),
+      content: Text(_title + ' adicionado aos salvos'),
+      action: SnackBarAction(
+        label: 'DESFAZER',
+        onPressed: () {
+          // Some code to undo the change!
+        },
+      )
+    );
+  }
   //Maps
   MapView mapView = MapView();
   var staticMapProvider = StaticMapProvider(api_key);
@@ -39,6 +53,15 @@ class _CardState extends State<CardPage> {
       ),
     );
   }
+  Future<bool> addSavedPrefs(String id) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      List<String> aux;
+      aux = prefs.getStringList('ids')?? [];
+      if(!aux.contains(id))
+        aux.add(id);
+      prefs.setStringList('ids',aux);
+      return prefs.commit();
+    }
   @override
   void initState(){
     
@@ -53,6 +76,7 @@ class _CardState extends State<CardPage> {
           this._local = data['local'];     
         });
     });
+    
     cameraPosition = CameraPosition(Location(-22.506592, -43.185093), 15.0);
     staticMapUri = staticMapProvider.getStaticUri(
       Location(-22.506592, -43.185093), 15,
@@ -69,7 +93,7 @@ class _CardState extends State<CardPage> {
             return <Widget> [
               SliverAppBar(
                 textTheme: Theme.of(context).primaryTextTheme,
-                expandedHeight: 220.0,
+                expandedHeight: 210.0,
                 elevation: 1.0,
                 pinned: true,
                 floating: false,
@@ -78,7 +102,7 @@ class _CardState extends State<CardPage> {
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: false,
                   background: Image.network(_card,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   ),
                 ),
               ),
@@ -176,7 +200,10 @@ class _CardState extends State<CardPage> {
                                 IconButton(
                                   color: Theme.of(context).iconTheme.color,
                                   icon:Icon(Icons.favorite_border,size: 27.0),
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    addSavedPrefs(_id);
+                                    Scaffold.of(context).showSnackBar(snackBar());
+                                  },
                                 ),
                                 Text('salvar',
                                   style: TextStyle(
