@@ -33,7 +33,6 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     return Scaffold(
       backgroundColor: Color(0xfff1f1f1),
       body: Stack(fit: StackFit.expand, children: <Widget>[
-          image:  NetworkImage("https://media.gettyimages.com/photos/dark-blue-gradient-background-picture-id465275407?b=1&k=6&m=465275407&s=612x612&w=0&h=z9jO_kfu9F4isGf5yK5yfJig7TtojQ58yeYyuZDgh6U="),
        
        Theme(
           data: ThemeData(

@@ -14,7 +14,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String _nome = '';
   //String _title = '';
   String _promo = '';
-  String _posts = '';
+  String _posts = 'card';
   String _seg = '';
   @override
   void initState(){

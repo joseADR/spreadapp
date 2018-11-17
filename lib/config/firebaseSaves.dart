@@ -82,7 +82,7 @@ class _SavesListState extends State<SavesList> {
                           child: Container(
                             //margin: EdgeInsets.symmetric(vertical: 8.0,horizontal:16.0),   
                             width: 145.0,
-                            height: 85.0,
+                            height: 80.0,
                             child: Image.network(
                               (document['card']), fit: BoxFit.cover,
                             ),
