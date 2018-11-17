@@ -43,8 +43,6 @@ class _SavesListState extends State<SavesList> {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('posts').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -68,21 +66,22 @@ class _SavesListState extends State<SavesList> {
                     ),
                   ],
                 ),
-                margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 10.0, top: 0.0),
+                margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 12.0, top: 0.0),
                 child: Column(
                 verticalDirection: VerticalDirection.down,
                 crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     //Title and Image
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 12.0,vertical:12.0),
+                      margin: EdgeInsets.symmetric(horizontal: 12.0,vertical:6.0),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children:<Widget>[
                         //Imagem do evento salvo
                         GestureDetector(
                           child: Container(
                             //margin: EdgeInsets.symmetric(vertical: 8.0,horizontal:16.0),   
-                            width: 147.0,
+                            width: 145.0,
                             height: 85.0,
                             child: Image.network(
                               (document['card']), fit: BoxFit.cover,
@@ -96,7 +95,7 @@ class _SavesListState extends State<SavesList> {
                         ),
                         //Titulo
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal:50.0),
+                          //margin: EdgeInsets.symmetric(horizontal:50.0),
                           child:Column(
                             children: <Widget>[
                               Text(
@@ -124,27 +123,28 @@ class _SavesListState extends State<SavesList> {
                           ),
                         ),
                         //icones de remoção e de compartilhamento
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                        Material(
+                          color: Theme.of(context).backgroundColor,
+                          child: Row( 
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget> [
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                //mainAxisAlignment: MainAxisAlignment.end,
+                                //crossAxisAlignment: CrossAxisAlignment.start,
                                 children:<Widget>[
                                   //remover evento salvo
-                                  GestureDetector(
-                                    child: Container(
+                                  IconButton(
+                                    icon: Container(
                                       child: Icon(Icons.remove_circle, size: 22.0), 
                                       //color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                                     ),
-                                    onTap: () {removeSavedPrefs(document.documentID);},
+                                    onPressed: () {removeSavedPrefs(document.documentID);},
                                   ),
                                   //Share Button 
-                                  Container(
-                                    margin: const EdgeInsets.only(top:15.0,right:6.0),
-                                    child: Icon(
+                                  IconButton(
+                                    onPressed: (){},
+                                    //margin: const EdgeInsets.only(top:15.0,right:6.0),
+                                    icon: Icon(
                                       Icons.share, size: 22.0
                                       //color: Theme.of(context).iconTheme.color.withOpacity(0.7)
                                       ),

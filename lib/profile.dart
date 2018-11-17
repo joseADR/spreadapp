@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
 import 'package:spreadapp/components/eventos.dart';
 class ProfilePage extends StatefulWidget {
-  ProfilePage(this.id);
+  ProfilePage(this.id,[document]);
   final id;
   @override
   _ProfilePageState createState() => _ProfilePageState(id); 
@@ -12,9 +12,9 @@ class _ProfilePageState extends State<ProfilePage> {
   _ProfilePageState(this._id);
   String _id;
   String _nome = '';
-  String _title = '';
+  //String _title = '';
   String _promo = '';
-  String _card = '';
+  String _posts = '';
   String _seg = '';
   @override
   void initState(){
@@ -22,9 +22,9 @@ class _ProfilePageState extends State<ProfilePage> {
     Firestore.instance.collection('promoters').document(_id).get().then((data) {
         setState(() {
           this._nome = data['nome'];
-          this._title = data['title'];
+          //this._title = data['title'];
           this._promo = data['promoter'];
-          this._card = data['card'];
+          this._posts = data['posts'];
           this._seg = data['seguidores'];  
         });
     });
@@ -217,7 +217,7 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.0),
             image: DecorationImage(
-              image: NetworkImage(_card),
+              image: NetworkImage(_posts),
               fit: BoxFit.cover
             ),
           ),
@@ -235,7 +235,7 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                _title,
+                _nome,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',

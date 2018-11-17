@@ -33,132 +33,149 @@ class Post extends StatelessWidget {
     }
     @override
     Widget build(BuildContext context) {
-      return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4.0),
-          color: Theme.of(context).backgroundColor,
-          boxShadow:<BoxShadow>[
-            BoxShadow(
-              color: Theme.of(context).secondaryHeaderColor,
-              offset: Offset(.2, 0.2),
-              blurRadius: 7.0),
-          ],
-        ),
-        margin: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 6.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            //Title and Image
-            Row(
-              children:<Widget>[
-                //Perfil Circle Image
-                GestureDetector(
-                  onTap:() => Navigator.of(context).push(
-                    MaterialPageRoute<Null>(
-                      builder: (BuildContext context) => ProfilePage(_id),
+      return SafeArea(
+          top: true,
+          bottom: true,
+          child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4.0),
+            color: Theme.of(context).backgroundColor,
+            boxShadow:<BoxShadow>[
+              BoxShadow(
+                color: Theme.of(context).secondaryHeaderColor,
+                offset: Offset(.2, 0.2),
+                blurRadius: 7.0),
+            ],
+          ),
+          margin: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 6.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              //Title and Image
+              Row(
+                children:<Widget>[
+                  //Perfil Circle Image
+                  GestureDetector(
+                    onTap:() => Navigator.of(context).push(
+                      MaterialPageRoute<Null>(
+                        builder: (BuildContext context) => ProfilePage(_id),
+                        ),
+                      ),
+                    child:Container(
+                      margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 5.0),
+                      width: 23.0,
+                      height: 23.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(_promo),
+                        ),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    width: 3.0,
+                  ),
+                  //Title container
+                  Expanded(
+                    child: Text(
+                      _title.toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.normal
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              //Container for image
+              GestureDetector(
+                onTap: () =>  Navigator.of(context).push(
+                  MaterialPageRoute<Null>(
+                    builder: (BuildContext context) => CardPage(_id),
+                ),
+              ),
+                child: 
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children:<Widget>[
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 5.0),
+                        color: Colors.grey,
+                        width: double.infinity,
+                        height: 180.0,
+                        child: Image.network(_card, fit: BoxFit.fill)
+                      ),
+                    ],
+                  ), 
+                ),
+                Material(
+                  color: Theme.of(context).backgroundColor,
                   child:Container(
-                    margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-                    width: 22.0,
-                    height: 22.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(_promo),
+                    margin: EdgeInsets.symmetric(horizontal:8.0, vertical: 3.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[ 
+                        Container(
+                          child:Row(
+                            children:<Widget>[
+                              //Save Button
+                              IconButton(
+                                splashColor: null,
+                                onPressed: () { 
+                                  addSavedPrefs(_id);
+                                  Scaffold.of(context).showSnackBar(snackBar());
+                                },
+                                icon:
+                                  //color: Colors.transparent,
+                                  //padding: EdgeInsets.only(right: 0.0,left: 0.0,bottom: 6.0,top: 3.0),
+                                  Icon(Icons.favorite_border, size: 26.0),
+                                // color: Theme.of(context).iconTheme.color.withOpacity(0.7)), 
+                              ),
+                          //Share Button
+                              IconButton(
+                                splashColor: null,
+                                onPressed: (){},
+                                icon: Container(
+                                //padding: EdgeInsets.only(left: 0.8),
+                                  //padding: EdgeInsets.only(bottom: 6.0,top: 3.0),
+                                  child: RotatedBox(
+                                    quarterTurns: 2,
+                                    child:Icon(Icons.reply, size: 26.0), 
+                                  ), 
+                                ),
+                              ), 
+                          // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                        ],
                       ),
                     ),
-                  ),
-                ),
-                //Title container
-                Expanded(
-                  child: Text(
-                    _title.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.normal
+                    SizedBox(),
+                    Container(
+                      padding: EdgeInsets.only(right:65.0,bottom: 6.0),
+                      child: 
+                        Text(_data.toUpperCase(),
+                          style:TextStyle(
+                            fontSize: 15.7,
+                            color:Color(0xffec0000),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'MontSerrat',
+                          ),
+                        ),
                     ),
-                  ),
+                    SizedBox(),
+                    Container(
+                      padding: EdgeInsets.only(left: 5.0,bottom: 6.0,top: 3.0),
+                      child: Icon(Icons.more_vert,size: 24.0),// color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            //Container for image
-            GestureDetector(
-              onTap: () =>  Navigator.of(context).push(
-                MaterialPageRoute<Null>(
-                  builder: (BuildContext context) => CardPage(_id),
               ),
             ),
-            child:Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children:<Widget>[
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 5.0),
-                  color: Colors.grey,
-                  width: double.infinity,
-                  height: 180.0,
-                  child: Image.network(_card, fit: BoxFit.fill)
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal:8.0, vertical: 3.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[ 
-                Container(
-                  child:Row(
-                    children:<Widget>[
-                      //Save Button
-                      GestureDetector(
-                        onTap: () { 
-                          addSavedPrefs(_id);
-                          Scaffold.of(context).showSnackBar(snackBar());
-                        },
-                        child:Container(
-                          padding: EdgeInsets.only(right: 8.0,left: 3.0,bottom: 6.0,top: 3.0),
-                          child: Icon(Icons.favorite_border, size: 24.0),// color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                        )
-                      ),
-                      //Share Button 
-                      Container(
-                        //padding: EdgeInsets.only(left: 0.8),
-                        padding: EdgeInsets.only(bottom: 6.0,top: 3.0),
-                        child: RotatedBox(
-                          quarterTurns: 2,
-                          child:Icon(Icons.reply, size: 24.0), 
-                        ), 
-                      ),
-                        // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                    ],
-                  ),
-                ),
-                SizedBox(),
-                Container(
-                  padding: EdgeInsets.only(right:28.0,bottom: 6.0),
-                  child: 
-                    Text(_data.toUpperCase(),
-                      style:TextStyle(
-                        fontSize: 15.7,
-                        color:Color(0xffec0000),
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'MontSerrat',
-                      ),
-                    ),
-                ),
-                SizedBox(),
-                Container(
-                  padding: EdgeInsets.only(left: 5.0,bottom: 6.0,top: 3.0),
-                  child: Icon(Icons.more_vert,size: 24.0),// color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,20 +1,34 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:map_view/map_view.dart';
 import 'package:spreadapp/config/loginPage.dart';
 import 'package:spreadapp/config/theme.dart' as Temas;
+import 'package:spreadapp/services/auth.service.dart';
 import './config/firebasePost.dart';
 import './config/firebaseSaves.dart';
 import './config/search.dart';
 import 'dart:async';
 import 'dart:math';
 const api_key ="AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
-void main() {
+AuthService appAuth = new AuthService();
+void main() async {
+  Widget _defaultHome = LoginPage();
+  bool _result = await appAuth.login();
+  if (_result) {
+    _defaultHome = HomePage();
+  }
   MapView.setApiKey(api_key);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
-  ]);runApp(HomePage());    
+  ]);
+  runApp( MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: _defaultHome,
+    routes: <String, WidgetBuilder>{
+      '/home': (BuildContext context) => HomePage(),
+      '/login': (BuildContext context) => LoginPage(),
+    }
+  ));    
 }
 class HomePage extends StatefulWidget {
   @override 
@@ -27,19 +41,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   Random random;
   List<String> list;
-    bool isLoggedIn;
+    
   void initState() {
     super.initState();
     random = Random();
     refreshList();
     _tabController = TabController(vsync: this, length: 3, initialIndex: 1);
-    isLoggedIn = false;
-    FirebaseAuth.instance.currentUser().then((user) => user != null
-        ? setState(() {
-            isLoggedIn = true;
-          })
-        : null);
-    super.initState();
   }
     // new Future.delayed(const Duration(seconds: 2));
   Future<Null> refreshList() async {
@@ -96,7 +103,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               child: Tab(
                 icon:Icon(Icons.home, 
                   size: 23.0),
-                text: 'INÍCIO',  
+                text: 'INÍCIO',
               ),
             ),
             SizedBox(
@@ -139,7 +146,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             IconButton(
               icon: Icon(Icons.account_circle),// color: Theme.of(context).iconTheme.color),
               onPressed: () {
-                isLoggedIn ? _scaffoldKey.currentState.openEndDrawer() : LoginPage();
+                _scaffoldKey.currentState.openEndDrawer();
               }
             ),
           ],
@@ -157,6 +164,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               ListTile(
                 title: Text('Item 2'),
                 onTap: () {
+                  appAuth.logout().then(
+                  (_) => Navigator.of(context).pushReplacementNamed('/login')
+                  );
                 },
               ),
             ],

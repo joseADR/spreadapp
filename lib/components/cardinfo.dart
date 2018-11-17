@@ -27,7 +27,7 @@ class _CardState extends State<CardPage> {
   SnackBar snackBar() {
     return SnackBar(
       duration: Duration(seconds: 1),
-      content: Text(_title + ' adicionado aos salvos'),
+      content: Text(_title.toUpperCase() + ' adicionado aos salvos'),
       action: SnackBarAction(
         label: 'DESFAZER',
         onPressed: () {
@@ -76,7 +76,6 @@ class _CardState extends State<CardPage> {
           this._local = data['local'];     
         });
     });
-    
     cameraPosition = CameraPosition(Location(-22.506592, -43.185093), 15.0);
     staticMapUri = staticMapProvider.getStaticUri(
       Location(-22.506592, -43.185093), 15,
@@ -93,7 +92,7 @@ class _CardState extends State<CardPage> {
             return <Widget> [
               SliverAppBar(
                 textTheme: Theme.of(context).primaryTextTheme,
-                expandedHeight: 210.0,
+                expandedHeight: 190.0,
                 elevation: 1.0,
                 pinned: true,
                 floating: false,
@@ -370,81 +369,81 @@ class _CardState extends State<CardPage> {
                   ),
                   SizedBox(height: 32.0),
                   Container(
-                    child: Wrap(
-                      direction: Axis.vertical,
-                      children: <Widget>[
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children:<Widget>[
+                    child: FittedBox(
+                      //direction: Axis.vertical,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children:<Widget>[
+                                      Container(
+                                        padding: EdgeInsets.only(right:10.0),
+                                        child:Icon(Icons.timer),
+                                      ),
+                                      Container(
+                                        child:Text('De 13:50 até 18:30',
+                                        style: TextStyle(
+                                          fontFamily: 'MontSerrat',
+                                          fontSize: 16.0
+                                          ),
+                                        ),
+                                      ), 
+                                      SizedBox(width: 50.0),
+                                      Container(
+                                        padding: EdgeInsets.only(right: 10.0),
+                                        child: Icon(Icons.calendar_today),
+                                      ),
+                                      Container(
+                                        child: Text('Data',
+                                        style: TextStyle(
+                                          fontSize: 16.0
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 20.0),
+                                      Container(
+                                        child: Text(_data.toUpperCase(),
+                                          style: TextStyle(
+                                            color: Color(0xffec0000),
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'MontSerrat',
+                                            fontSize: 20.0,
+                                          ),
+                                        ),
+                                      ), 
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  children: <Widget>[
                                     Container(
                                       padding: EdgeInsets.only(right:10.0),
-                                      child:Icon(Icons.timer),
-                                    ),
-                                    Container(
-                                      child:Text('De 13:50 até 18:30',
-                                      style: TextStyle(
-                                        fontFamily: 'MontSerrat',
-                                        fontSize: 15.0
-                                        ),
-                                      ),
-                                    ), 
-                                    SizedBox(width: 30.0),
-                                    Container(
-                                      padding: EdgeInsets.only(right: 10.0),
-                                      child: Icon(Icons.calendar_today),
-                                    ),
-                                    Container(
-                                      child: Text('Data',
-                                      style: TextStyle(
-                                        fontSize: 15.0
-                                        ),
+                                      child:
+                                        Icon(Icons.location_on
                                       ),
                                     ),
-                                    SizedBox(width: 10.0),
-                                    Container(
-                                      child: Text(_data.toUpperCase(),
-                                        style: TextStyle(
-                                          color: Color(0xffec0000),
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'MontSerrat',
-                                          fontSize: 16.0,
-                                        ),
+                                    Text(_local,
+                                      style:TextStyle(
+                                      fontFamily: 'MontSerrat',
+                                      fontSize: 15.0
                                       ),
-                                    ), 
+                                    ),
                                   ],
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.end,
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.only(right:10.0),
-                                    child:
-                                      Icon(Icons.location_on
-                                    ),
-                                  ),
-                                  Text(_local,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
-                                    style:TextStyle(
-                                    fontFamily: 'MontSerrat',
-                                    fontSize: 15.0
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(

@@ -9,7 +9,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
-  bool get opaque => false;
+  bool get opaque => true;
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
   @override
@@ -31,14 +31,10 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xfff1f1f1),
       body: Stack(fit: StackFit.expand, children: <Widget>[
-       Image(
           image:  NetworkImage("https://media.gettyimages.com/photos/dark-blue-gradient-background-picture-id465275407?b=1&k=6&m=465275407&s=612x612&w=0&h=z9jO_kfu9F4isGf5yK5yfJig7TtojQ58yeYyuZDgh6U="),
-          fit: BoxFit.cover,
-          colorBlendMode: BlendMode.darken,
-          color: Colors.black26,
-        ),
+       
        Theme(
           data: ThemeData(
               brightness: Brightness.dark,
@@ -63,68 +59,69 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                     ),
                     SizedBox(height: 100.0),
                     SizedBox(height: 15.0),
-                    RaisedButton(
-                      shape: RoundedRectangleBorder(borderRadius:(BorderRadius.circular(4.0))),
-                      child: Text('Entrar com o Facebook',style: TextStyle(fontFamily:'MontSerrat')),
-                      color: Color.fromRGBO(59, 89, 152, 1.0),
-                      textColor: Colors.white,
-                      elevation: 7.0,
-                      onPressed: () {
-                        fbLogin.logInWithReadPermissions(
-                            ['email', 'public_profile']).then((result) {
-                          switch (result.status) {
-                            case FacebookLoginStatus.loggedIn:
-                              FirebaseAuth.instance
-                                  .signInWithFacebook(
-                                      accessToken: result.accessToken.token)
-                                  .then((signedInUser) {
-                                print('Signed in as ${signedInUser.displayName}');
-                                Navigator
-                                    .of(context)
-                                    .pushReplacementNamed('/homePage');
-                              }).catchError((e) {
-                                print(e);
-                              });
-                              break;
-                            case FacebookLoginStatus.cancelledByUser:
-                              print('Cancelled by you');
-                              break;
-                            case FacebookLoginStatus.error:
-                              print('Error');
-                              break;
-                          }
-                        }).catchError((e) {
-                          print(e);
-                        });
-                      },
-                    ),
-                    SizedBox(height: 15.0),
-                    RaisedButton(
-                      shape: RoundedRectangleBorder(borderRadius:(BorderRadius.circular(4.0))),
-                      child: Text('Entrar com o Google',style: TextStyle(fontFamily:'MontSerrat')),
-                      color: Color.fromRGBO(221, 75, 57, 1.0),
-                      textColor: Colors.white,
-                      elevation: 7.0,
-                      onPressed: () {
-                        googleAuth.signIn().then((result) {
-                          result.authentication.then((googleKey) {
-                            FirebaseAuth.instance
-                                .signInWithGoogle(
-                                    idToken: googleKey.idToken,
-                                    accessToken: googleKey.accessToken)
-                                .then((signedInUser) {
-                              print('Signed in as ${signedInUser.displayName}');
-                              Navigator.of(context).pushReplacementNamed('/home');
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                          iconSize: 90.0,
+                          icon: Icon(Icons.account_circle),
+                          color: Color.fromRGBO(59, 89, 152, 1.0),
+                          onPressed: () {
+                            fbLogin.logInWithReadPermissions(
+                                ['email', 'public_profile']).then((result) {
+                              switch (result.status) {
+                                case FacebookLoginStatus.loggedIn:
+                                  FirebaseAuth.instance
+                                      .signInWithFacebook(
+                                          accessToken: result.accessToken.token)
+                                      .then((signedInUser) {
+                                    print('Signed in as ${signedInUser.displayName}');
+                                    Navigator
+                                        .of(context)
+                                        .pushReplacementNamed('/home');
+                                  }).catchError((e) {
+                                    print(e);
+                                  });
+                                  break;
+                                case FacebookLoginStatus.cancelledByUser:
+                                  print('Cancelled by you');
+                                  break;
+                                case FacebookLoginStatus.error:
+                                  print('Error');
+                                  break;
+                              }
                             }).catchError((e) {
                               print(e);
                             });
-                          }).catchError((e) {
-                            print(e);
-                          });
-                        }).catchError((e) {
-                          print(e);
-                        });
-                      }, 
+                          },
+                        ),
+                        SizedBox(width: 15.0),
+                        IconButton(
+                          icon: Icon(Icons.account_circle),                         
+                          color: Color.fromRGBO(221, 75, 57, 1.0),
+                          iconSize: 90.0,
+                          onPressed: () {
+                            googleAuth.signIn().then((result) {
+                              result.authentication.then((googleKey) {
+                                FirebaseAuth.instance
+                                    .signInWithGoogle(
+                                        idToken: googleKey.idToken,
+                                        accessToken: googleKey.accessToken)
+                                    .then((signedInUser) {
+                                  print('Signed in as ${signedInUser.displayName}');
+                                  Navigator.of(context).pushReplacementNamed('/home');
+                                }).catchError((e) {
+                                  print(e);
+                                });
+                              }).catchError((e) {
+                                print(e);
+                              });
+                            }).catchError((e) {
+                              print(e);
+                            });
+                          }, 
+                        ),
+                      ],
                     ),
                   ],
                 ),
