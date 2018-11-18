@@ -5,11 +5,13 @@ import 'package:spreadapp/config/loginPage.dart';
 import 'package:spreadapp/config/theme.dart' as Temas;
 import 'package:spreadapp/services/auth.service.dart';
 import './config/firebasePost.dart';
+import './config/firebaseFollows.dart';
 import './config/firebaseSaves.dart';
 import './config/search.dart';
 import 'dart:async';
 import 'dart:math';
 const api_key ="AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
+
 AuthService appAuth = new AuthService();
 void main() async {
   Widget _defaultHome = LoginPage();

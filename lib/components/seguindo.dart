@@ -5,7 +5,7 @@ class FollowPage extends StatelessWidget {
   final String _promo;
   final String _id;
   //String data;
-  FollowPage( this._nome, this._promo,this._id, [document]);
+  FollowPage( this._nome, this._promo,this._id);
   @override
   Widget build(BuildContext context) {
     return Container(

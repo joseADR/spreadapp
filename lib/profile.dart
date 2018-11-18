@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
 import 'package:spreadapp/components/eventos.dart';
 class ProfilePage extends StatefulWidget {
-  ProfilePage(this.id,[document]);
+  ProfilePage(this.id);
   final id;
   @override
   _ProfilePageState createState() => _ProfilePageState(id); 
@@ -11,26 +11,29 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   _ProfilePageState(this._id);
   String _id;
-  String _nome = '';
+  String _name = '';
   //String _title = '';
   String _promo = '';
-  String _posts = 'card';
+  List <DocumentReference> _posts = [];
   String _seg = '';
+  String _place = '';
+ 
   @override
   void initState(){
     super.initState();
     Firestore.instance.collection('promoters').document(_id).get().then((data) {
         setState(() {
-          this._nome = data['nome'];
-          //this._title = data['title'];
+          this._name = data['nome'];
+          this._place = data['localidade'];
           this._promo = data['promoter'];
-          this._posts = data['posts'];
           this._seg = data['seguidores'];  
+          this._posts = data['posts'].toList();
         });
     });
   }
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
@@ -70,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 20.0),
               Text(
-                _nome,
+                _name,
                 style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 18.0,
@@ -78,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 4.0),
               Text(
-                'Petrópolis, RJ',
+                _place,
                 style: TextStyle(fontFamily: 'Montserrat', color: Colors.grey),
               ),
               SizedBox(
@@ -135,7 +138,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             borderSide: BorderSide(
                                               color: Theme.of(context).buttonColor,
                                             ),
-                                            onPressed: () {}, 
+                                            onPressed: () {print(_posts);}, 
                                           ),
                                         ),
                                       ],
@@ -202,6 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget buildImages() {
+    
     return Padding(
       padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
       child:
@@ -217,7 +221,7 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.0),
             image: DecorationImage(
-              image: NetworkImage(_posts),
+              image: NetworkImage(_promo),
               fit: BoxFit.cover
             ),
           ),
@@ -235,7 +239,7 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                _nome,
+                _name,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
