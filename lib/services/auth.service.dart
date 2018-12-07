@@ -7,7 +7,7 @@ class AuthService {
     // Simulate a future for response after 2 second.
     return await  Future<bool>.delayed(
        Duration(
-        seconds: 2
+        seconds: 3
       ), () =>  Random().nextBool()
     );
   }

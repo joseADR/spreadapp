@@ -9,31 +9,34 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState(id); 
 }
 class _ProfilePageState extends State<ProfilePage> {
+
   _ProfilePageState(this._id);
   String _id;
   String _name = '';
   //String _title = '';
   String _promo = '';
-  List <DocumentReference> _posts = [];
+  //List <DocumentReference> _posts = [];
   String _seg = '';
   String _place = '';
- 
+  String _tag = '';
+  //String _card = '';
   @override
   void initState(){
     super.initState();
     Firestore.instance.collection('promoters').document(_id).get().then((data) {
-        setState(() {
-          this._name = data['nome'];
-          this._place = data['localidade'];
-          this._promo = data['promoter'];
-          this._seg = data['seguidores'];  
-          this._posts = data['posts'].toList();
-        });
+      setState(() {
+        this._name = data['nome'];
+        this._place = data['localidade'];
+        this._promo = data['promoter'];
+        this._seg = data['seguidores'];
+        this._tag = data['tag']; 
+        //this._posts = data['posts'].toList(); 
+        //this._posts = data['posts'].toList();
+      });
     });
   }
   @override
-  Widget build(BuildContext context) {
-    
+  Widget build(BuildContext context) {   
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
@@ -54,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Hero(
-                tag: _promo,
+                tag: _tag,
                 child: Container(
                   height: 125.0,
                   width: 125.0,
@@ -103,7 +106,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:<Widget>[
                                   Text(
-                                    _seg
+                                    _seg,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold
+                                    ),
                                   ),
                                   Text('SEGUIDORES',
                                     style: TextStyle(
@@ -114,7 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 30.0,),
+                              SizedBox(height: 30.0),
                               Container(
                                 child: Row(
                                   children:<Widget>[
@@ -125,7 +131,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         Container(
                                           padding: EdgeInsets.only(right: 15.0),
                                           child: OutlineButton(
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0),
+                                            side: BorderSide(width: 0.5)),
                                             child: Text('SEGUIR',
                                               style: TextStyle(
                                                 color: Theme.of(context).buttonColor,
@@ -138,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             borderSide: BorderSide(
                                               color: Theme.of(context).buttonColor,
                                             ),
-                                            onPressed: () {print(_posts);}, 
+                                            onPressed: () {}//{print(_posts);}, 
                                           ),
                                         ),
                                       ],
@@ -203,9 +210,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-
   Widget buildImages() {
-    
     return Padding(
       padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
       child:
@@ -221,7 +226,7 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.0),
             image: DecorationImage(
-              image: NetworkImage(_promo),
+              image: NetworkImage('http://amgestoroutput.s3.amazonaws.com/amgestor/img_produtos/no-image.png'),
               fit: BoxFit.cover
             ),
           ),
