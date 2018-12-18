@@ -54,36 +54,35 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   checkUser() async {
-   newUser = await _getCurrentUser();
+    newUser = await _getCurrentUser();
     if (mCurrentUser != null) {
       initiateFacebookLogin2();
-    } 
-    else {
+    } else {
       _login();
     }
   }
+
   var login;
-  _login() async{
+  _login() async {
     login = await _initiateFacebookLogin1();
-    if(isLoggedIn){
-     _userId = await _getUserId();
-    }
-    else {
+    if (isLoggedIn) {
+      _userId = await _getUserId();
+    } else {
       print("fatal error");
     }
   }
 
   _getUserId() async {
-    await new Future.delayed(const Duration(seconds : 3));
+    await new Future.delayed(const Duration(seconds: 3));
     _userId = await _auth.currentUser();
     print('Hello'.toString());
     setState(() {
       _userId != null ? _userId = _userId : print('não deu');
     });
 
-    if( _userId != null ){
-       _onCreate();
-     }
+    if (_userId != null) {
+      _onCreate();
+    }
   }
 
   _onCreate() async {
@@ -91,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
         .collection("users")
         .document(_userId.uid)
         .setData(profileData);
-    await new Future.delayed(const Duration(seconds : 1));
+    await new Future.delayed(const Duration(seconds: 1));
     Navigator.of(context).pushReplacementNamed('/home');
   }
 
@@ -216,21 +215,16 @@ class _LoginPageState extends State<LoginPage> {
                       padding: EdgeInsets.all(25.0),
                       child: Column(
                         children: <Widget>[
-                          SizedBox(height: 20.0),
+                          SizedBox(height: 60.0),
                           Container(
-                            height: 200.0,
-                            width: 200.0,
+                            height: 120.0,
+                            width: 130.0,
                             child: Image.asset(
                               'android/assets/logo.png',
                               fit: BoxFit.cover,
                             ),
                           ),
-                          Container(
-                            height: 50.0,
-                            width: 150.0,
-                            child: Image.asset('android/assets/escrita.png'),
-                          ),
-                          SizedBox(height: 25.0),
+                          SizedBox(height: 100.0),
                           Column(
                             children: <Widget>[
                               _displayLoginButton(),
@@ -300,7 +294,9 @@ class _LoginPageState extends State<LoginPage> {
                                     ],
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed('/home');
+                                },
                               ),
                               SizedBox(
                                 height: 40.0,
@@ -309,9 +305,11 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.transparent,
                                 child: Row(
                                   children: <Widget>[
-                                    //Checkbox(
-                                    //  value: false,
-                                    //),
+                                    Checkbox(
+                                      value: false, onChanged: (bool value) {
+                                        
+                                      },
+                                    ),
                                     Text(
                                       'Aceito os Termos de Uso e Privacidade',
                                       style: TextStyle(

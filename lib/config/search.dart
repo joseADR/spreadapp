@@ -10,9 +10,8 @@ class DataSearch extends SearchDelegate<String> {
   @override
   List<Widget> buildActions(BuildContext context) {
     MaterialApp(
-      theme: lightThemeEnabled ? Temas.SpreadLight : Temas.SpreadDark,
-      home: HomePage(),
-    );
+        theme: lightThemeEnabled ? Temas.SpreadLight : Temas.SpreadDark,
+        home: HomePage(''));
 
     //actions for app bar
     return [

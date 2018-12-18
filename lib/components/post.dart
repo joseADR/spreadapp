@@ -48,7 +48,7 @@ class Post extends StatelessWidget {
                 blurRadius: 1.5),
           ],
         ),
-        margin: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
+        margin: const EdgeInsets.symmetric(vertical: 3.0, horizontal: .0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,9 +65,9 @@ class Post extends StatelessWidget {
                       ),
                   child: Container(
                     margin:
-                        EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
-                    width: 23.0,
-                    height: 23.0,
+                        EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
+                    width: 20.0,
+                    height: 20.0,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -84,10 +84,8 @@ class Post extends StatelessWidget {
                 Expanded(
                   child: Text(
                     _title.toUpperCase(),
-                    style: TextStyle(
-                        fontFamily: 'MontSerrat',
-                        fontSize: 11.0,
-                        fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.title,
+                    textScaleFactor: .5,
                   ),
                 ),
               ],
@@ -104,11 +102,22 @@ class Post extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8.0),
-                      color: Colors.grey,
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height / 3.6,
-                      child: Image.network(_card, fit: BoxFit.fill)),
+                    margin: EdgeInsets.symmetric(horizontal: 0.0),
+                    //color: Theme.of(context).secondaryHeaderColor,
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height / 3.3,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          colorFilter: ColorFilter.mode(
+                              Colors.black12.withOpacity(.3),
+                              BlendMode.overlay),
+                          fit: BoxFit.fill,
+                          image: NetworkImage(_card)),
+                    ),
+                    child: Hero(
+                        tag: _card,
+                        child: Image.network(_card, fit: BoxFit.fill)),
+                  ),
                 ],
               ),
             ),
@@ -132,7 +141,7 @@ class Post extends StatelessWidget {
                             icon:
                                 //color: Colors.transparent,
                                 //padding: EdgeInsets.only(right: 0.0,left: 0.0,bottom: 6.0,top: 3.0),
-                                Icon(Icons.favorite_border, size: 24.0),
+                                Icon(Icons.favorite_border, size: 22.0),
                             // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                           ),
                           //Share Button
@@ -144,7 +153,7 @@ class Post extends StatelessWidget {
                               //padding: EdgeInsets.only(bottom: 6.0,top: 3.0),
                               child: RotatedBox(
                                 quarterTurns: 2,
-                                child: Icon(Icons.reply, size: 24.0),
+                                child: Icon(Icons.reply, size: 22.0),
                               ),
                             ),
                           ),
@@ -158,7 +167,7 @@ class Post extends StatelessWidget {
                       child: Text(
                         _data.toUpperCase(),
                         style: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 13.0,
                           color: Color(0xffec0000),
                           fontWeight: FontWeight.bold,
                           fontFamily: 'MontSerrat',
@@ -170,7 +179,7 @@ class Post extends StatelessWidget {
                       //padding: EdgeInsets.only(left: 5.0,top: .0),
                       child: Icon(Icons.more_vert,
                           size:
-                              24.0), // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                              22.0), // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                     ),
                   ],
                 ),

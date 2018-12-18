@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ void main() async {
   Widget _defaultHome = login.LoginPage();
   bool _result = await appAuth.login();
   if (_result) {
-    _defaultHome = HomePage();
+    _defaultHome = HomePage('');
   }
   MapView.setApiKey(api_key);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -27,15 +28,17 @@ void main() async {
       debugShowCheckedModeBanner: false,
       home: _defaultHome,
       routes: <String, WidgetBuilder>{
-        '/home': (BuildContext context) => HomePage(),
+        '/home': (BuildContext context) => HomePage(''),
         '/login': (BuildContext context) => login.LoginPage(),
       }));
 }
 
 class HomePage extends StatefulWidget {
+  HomePage(this.id);
+  final String id;
   //final FacebookLogin facebookSignIn;
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(id);
 }
 
 FirebaseAuth _auth = FirebaseAuth.instance;
@@ -43,6 +46,11 @@ FirebaseUser mCurrentUser;
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  _HomePageState(this._id);
+  String _name = '';
+  String _picture = '';
+  String _id;
+
   _getCurrentUser() async {
     mCurrentUser = await _auth.currentUser();
     print('Hello'.toString());
@@ -58,6 +66,18 @@ class _HomePageState extends State<HomePage>
     random = Random();
     refreshList();
     _getCurrentUser();
+    Future.delayed(const Duration(seconds: 3));
+    Firestore.instance
+        .collection('users')
+        .document()
+        .get()
+        .then((data) {
+      setState(() {
+        this._name = data['name'];
+        this._picture = data['picture'];
+        this._id = data['id'];
+      });
+    });
   }
 
   TabController _tabController;
@@ -105,34 +125,41 @@ class _HomePageState extends State<HomePage>
           controller: _tabController,
           tabs: <Widget>[
             SizedBox(
-              height: 58.0,
+              height: 50.0,
               child: Tab(
-                icon: Icon(Icons.people, size: 23.0),
+                icon: Icon(Icons.people, size: 20.0),
                 text: 'PROMOTERS',
               ),
             ),
             SizedBox(
-              height: 58.0,
+              height: 50.0,
               child: Tab(
-                icon: Icon(Icons.home, size: 23.0),
+                icon: Icon(Icons.home, size: 20.0),
                 text: 'INÍCIO',
               ),
             ),
             SizedBox(
-              height: 58.0,
+              height: 50.0,
               child: Tab(
-                icon: Icon(Icons.favorite_border, size: 23.0),
+                icon: Icon(Icons.favorite_border, size: 20.0),
                 text: 'SALVOS',
               ),
             ),
           ],
         ),
         appBar: AppBar(
-          leading: Image.asset('android/assets/logo-completa.png'),
+            //child: Image.asset('android/assets/logo-completa.png',
+          //height: 20.0,
+         //fit: BoxFit.fill,),
           elevation: 0.0,
           actions: <Widget>[
             Container(
-              padding: EdgeInsets.only(right: 6.0),
+              padding: EdgeInsets.only(right: 108.0),
+              child: ImageIcon(AssetImage('android/assets/logo.png'),
+            size: 25.0),
+            ),
+            Container(
+              padding: EdgeInsets.only(right: 8.0),
               child: Switch(
                 value: lightThemeEnabled,
                 onChanged: (changed) {
@@ -144,13 +171,16 @@ class _HomePageState extends State<HomePage>
             ),
             IconButton(
               icon:
-                  Icon(Icons.tune), //color: Theme.of(context).iconTheme.color),
+                  Icon(Icons.tune),
+              iconSize: 20.0,
+              //color: Theme.of(context).iconTheme.color),
               onPressed: () {},
               tooltip: 'Filtrar',
             ),
             IconButton(
               icon: Icon(
                   Icons.search), // color: Theme.of(context).iconTheme.color),
+              iconSize: 20.0,
               onPressed: () {
                 showSearch(context: context, delegate: DataSearch());
               },
@@ -159,6 +189,7 @@ class _HomePageState extends State<HomePage>
             IconButton(
                 icon: Icon(Icons
                     .account_circle), // color: Theme.of(context).iconTheme.color),
+                iconSize: 20.0,
                 onPressed: () {
                   _scaffoldKey.currentState.openEndDrawer();
                 }),
@@ -181,7 +212,7 @@ class _HomePageState extends State<HomePage>
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(''),
+                            image: NetworkImage('mCurrentUser.photoUrl'),
                           ),
                           boxShadow: <BoxShadow>[
                             BoxShadow(
@@ -192,7 +223,7 @@ class _HomePageState extends State<HomePage>
                           ],
                         ),
                       ),
-                      Text('displayName'),
+                      Text('mCurrentUser.displayName'),
                     ],
                   ),
                 ),

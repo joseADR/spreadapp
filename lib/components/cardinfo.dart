@@ -5,6 +5,7 @@ import 'package:map_view/camera_position.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spreadapp/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 const api_key = "AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
 
 class CardPage extends StatefulWidget {
@@ -95,22 +96,26 @@ class _CardState extends State<CardPage> {
         headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              automaticallyImplyLeading: false,
+              snap: false,
               textTheme: Theme.of(context).primaryTextTheme,
               expandedHeight: 190.0,
-              elevation: 1.0,
+              elevation: 2.0,
               pinned: true,
               floating: false,
-              forceElevated: innerboxIsScrolled,
+              forceElevated: true,
               title: null,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: false,
                 background: GestureDetector(
-                  
-                  child: Image.network(
-                    _card,
-                    fit: BoxFit.fill,
+                  child: Hero(
+                    tag: _card,
+                    child: Image.network(
+                      _card,
+                      fit: BoxFit.fill,
+                    ),
                   ),
-                ), 
+                ),
               ),
             ),
           ];
@@ -384,10 +389,10 @@ class _CardState extends State<CardPage> {
                             text: TextSpan(
                               text: _description,
                               style: TextStyle(
-                                color: Theme.of(context).buttonColor,
-                                letterSpacing: 0.0,
-                                fontFamily: 'MontSerrat',
-                                fontSize: 15.0),
+                                  color: Theme.of(context).buttonColor,
+                                  letterSpacing: 0.0,
+                                  fontFamily: 'MontSerrat',
+                                  fontSize: 15.0),
                             ),
                           ),
                         ),
@@ -651,27 +656,27 @@ class _CardState extends State<CardPage> {
               margin: EdgeInsets.all(3.0),
               child: Column(
                 children: <Widget>[
-                  Container( height: 60.0,
+                  Container(
+                    height: 60.0,
                     width: 60.0,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                      ('https://img.ibxk.com.br/2015/08/27/27151441599410.jpg?w=1040'),
-                      )
-                    ),
-
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            ('https://img.ibxk.com.br/2015/08/27/27151441599410.jpg?w=1040'),
+                          )),
                     ),
                   ),
                   SizedBox(
                     height: 5.0,
                   ),
                   Container(
-                    margin: EdgeInsets.all(1.0),
-                    child:Text('William da Guitarra',
-                      overflow: TextOverflow.ellipsis,)
-                  ),
+                      margin: EdgeInsets.all(1.0),
+                      child: Text(
+                        'William da Guitarra',
+                        overflow: TextOverflow.ellipsis,
+                      )),
                 ],
               ),
             ),
@@ -710,13 +715,13 @@ class _CardState extends State<CardPage> {
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Text(_title.toUpperCase(),
+                    child: Text(
+                      _title.toUpperCase(),
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 11.0,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'MontSerrat'
-                      ),
+                          fontSize: 11.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'MontSerrat'),
                     ),
                   ),
                 ],
