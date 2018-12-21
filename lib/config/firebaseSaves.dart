@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
-
 import 'package:spreadapp/components/cardinfo.dart';
 
-
 class SavesList extends StatefulWidget {
-  @override 
+  @override
   _SavesListState createState() => _SavesListState();
 }
 
-class _SavesListState extends State<SavesList> {
-
+class _SavesListState extends State<SavesList>
+    with SingleTickerProviderStateMixin {
+  TextEditingController controller = TextEditingController();
   List<String> _savedPosts = [];
 
   Future<List<String>> getSavedPrefs() async {
@@ -25,11 +24,11 @@ class _SavesListState extends State<SavesList> {
     List<String> aux = _savedPosts;
     aux.remove(id);
     updateState(aux);
-    prefs.setStringList('ids',aux);
+    prefs.setStringList('ids', aux);
   }
 
   void updateState(List<String> list) {
-    if(list != null)
+    if (list != null)
       setState(() {
         this._savedPosts = list;
       });
@@ -43,136 +42,200 @@ class _SavesListState extends State<SavesList> {
 
   @override
   Widget build(BuildContext context) {
-    
-
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('posts').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if(!snapshot.hasData) 
-          return Center(child: Text('Loading...'),);
-        else {
-          //Lista de salvos
-          return new ListView(
-            padding: EdgeInsets.only(top:10.0),
-            children: snapshot.data.documents  
-            .where((DocumentSnapshot document) => _savedPosts.contains(document.documentID)) //Busca
-            .map((DocumentSnapshot document) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Theme.of(context).secondaryHeaderColor,
-                      offset: Offset(1.0, 0.7),
-                      blurRadius: 5.0
-                    ),
-                  ],
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Card(
+            shape: RoundedRectangleBorder(
+                side: BorderSide(width: 0.1),
+                borderRadius: BorderRadius.circular(15.0)),
+            color: Theme.of(context).backgroundColor,
+            margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+            elevation: .0,
+            child: ListTile(
+              leading: Icon(Icons.search),
+              title: TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                    enabledBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    hintText: 'Buscar em Salvos',
+                    hintStyle: TextStyle(
+                        textBaseline: TextBaseline.alphabetic, fontSize: 14.0)),
+              ),
+            ),
+          ),
+          Container(
+            color: Theme.of(context).secondaryHeaderColor.withOpacity(0.1),
+            height: 50.0,
+            padding: EdgeInsets.only(left: 15.0),
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Eventos Salvos',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.title,
+                  textScaleFactor: .6,
                 ),
-                margin: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 10.0, top: 0.0),
-                child: Column(
-                verticalDirection: VerticalDirection.down,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    //Title and Image
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 12.0,vertical:12.0),
-                      child: Row(
-                      children:<Widget>[
-                        //Imagem do evento salvo
-                        GestureDetector(
-                          child: Container(
-                            //margin: EdgeInsets.symmetric(vertical: 8.0,horizontal:16.0),   
-                            width: 147.0,
-                            height: 85.0,
-                            child: Image.network(
-                              (document['promoter']), fit: BoxFit.cover,
-                            ),
-                          ),
-                          onTap: () =>  Navigator.of(context).push(
-                            MaterialPageRoute<Null>(
-                              builder: (BuildContext context) => CardPage(),
-                            ),
-                          ),
-                        ),
-                        //Titulo
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal:50.0),
-                          child:Column(
-                            children: <Widget>[
-                              Text(
-                                document['title'].toUpperCase(),
-                                style: TextStyle(
-                                  fontFamily: 'MontSerrat',
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.normal
-                                ),
-                              ),
-                              //espaço entre o título e a data
-                              Divider(
-                                height: 5.0,
-                              ),
-                              Text(
-                                document['data'].toUpperCase(),
-                                style: TextStyle(
-                                  color: Theme.of(context).iconTheme.color.withOpacity(.5),
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: 'MontSerrat',
-                                ),
-                              ),      
+              ],
+            ),
+          ),
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: Firestore.instance.collection('posts').snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData)
+                  return Center(child: Text('Loading...'));
+                else {
+                  //Lista de salvos
+                  return new ListView(
+                      padding: EdgeInsets.only(top: 11.0),
+                      children: snapshot.data.documents
+                          .where((DocumentSnapshot document) =>
+                              _savedPosts.contains(document.documentID)) //Busca
+                          .map((DocumentSnapshot document) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: Theme.of(context).backgroundColor,
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  color: Theme.of(context).secondaryHeaderColor,
+                                  offset: Offset(0.0, 0.0),
+                                  blurRadius: 3.0),
                             ],
                           ),
-                        ),
-                        //icones de remoção e de compartilhamento
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                          margin: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, bottom: 10.0, top: 0.0),
+                          child: Column(
+                            verticalDirection: VerticalDirection.down,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget> [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children:<Widget>[
-                                  //remover evento salvo
-                                  GestureDetector(
-                                    child: Container(
-                                      child: Icon(Icons.remove_circle, size: 22.0), 
-                                      //color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                            children: <Widget>[
+                              //Title and Image
+                              Container(
+                                margin: EdgeInsets.only(left: 8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    //Imagem do evento salvo
+                                    GestureDetector(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              colorFilter: ColorFilter.mode(
+                                                  Colors.grey.withOpacity(0.1),
+                                                  BlendMode.overlay),
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(
+                                                  (document['card']))),
+                                          borderRadius:
+                                              BorderRadius.circular(3.0),
+                                        ),
+                                        width: 140.0,
+                                        height: 80.0,
+                                      ),
+                                      onTap: () => Navigator.of(context).push(
+                                            MaterialPageRoute<Null>(
+                                              builder: (BuildContext context) =>
+                                                  CardPage(document.documentID),
+                                            ),
+                                          ),
                                     ),
-                                    onTap: () {removeSavedPrefs(document.documentID);},
-                                  ),
-                                  //Share Button 
-                                  Container(
-                                    margin: const EdgeInsets.only(top:15.0,right:6.0),
-                                    child: Icon(
-                                      Icons.share, size: 22.0
-                                      //color: Theme.of(context).iconTheme.color.withOpacity(0.7)
+                                    //Titulo
+                                    Container(
+                                      //margin: EdgeInsets.symmetric(horizontal:50.0),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                            document['title'].toUpperCase(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .title,
+                                            textScaleFactor: .45,
+                                          ),
+                                          //espaço entre o título e a data
+                                          Divider(
+                                            height: 5.0,
+                                          ),
+                                          Text(
+                                            document['data'].toUpperCase(),
+                                            style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color
+                                                  .withOpacity(.5),
+                                              fontSize: 11.0,
+                                              fontWeight: FontWeight.normal,
+                                              fontFamily: 'MontSerrat',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    //icones de remoção e de compartilhamento
+                                    Material(
+                                      elevation: 0.8,
+                                      shadowColor: Theme.of(context)
+                                          .secondaryHeaderColor
+                                          .withOpacity(0.9),
+                                      color: Theme.of(context).backgroundColor,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          SizedBox(
+                                            child: Column(
+                                              children: <Widget>[
+                                                //remover evento salvo
+                                                IconButton(
+                                                  icon: Container(
+                                                    height: 10.0,
+                                                    child: Icon(
+                                                        Icons.remove_circle,
+                                                        size: 20.0),
+                                                    //color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                                                  ),
+                                                  onPressed: () {
+                                                    removeSavedPrefs(
+                                                        document.documentID);
+                                                  },
+                                                ),
+                                                //Share Button
+                                                IconButton(
+                                                  onPressed: () {},
+                                                  //margin: const EdgeInsets.only(top:15.0,right:6.0),
+                                                  icon: Container(
+                                                    //height: 10.0,
+                                                    child: Icon(Icons.share,
+                                                        size: 20.0
+                                                        //color: Theme.of(context).iconTheme.color.withOpacity(0.7)
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  ], 
-                ),
-              );
-            }).toList()
-          );
-        }
-      },
+                        );
+                      }).toList());
+                }
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-
-
-
-
-
-
-
-
-

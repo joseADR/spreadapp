@@ -1,171 +1,270 @@
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
-import 'package:spreadapp/config/loginPage.dart';
-import 'package:spreadapp/config/theme.dart' as Theme;
+import 'package:spreadapp/config/loginPage.dart' as login;
+import 'package:spreadapp/config/theme.dart' as Temas;
+import 'package:spreadapp/services/auth.service.dart';
 import './config/firebasePost.dart';
+import './config/firebaseFollows.dart';
 import './config/firebaseSaves.dart';
 import './config/search.dart';
 import 'dart:async';
 import 'dart:math';
-const api_key ="AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
-void main() {
+
+const api_key = "AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
+
+AuthService appAuth = AuthService();
+void main() async {
+  Widget _defaultHome = login.LoginPage();
+  bool _result = await appAuth.login();
+  if (_result) {
+    _defaultHome = HomePage('');
+  }
   MapView.setApiKey(api_key);
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp
-  ]);runApp(HomePage());    
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: _defaultHome,
+      routes: <String, WidgetBuilder>{
+        '/home': (BuildContext context) => HomePage(''),
+        '/login': (BuildContext context) => login.LoginPage(),
+      }));
 }
+
 class HomePage extends StatefulWidget {
-  @override 
-  _HomePageState createState() => _HomePageState();
+  HomePage(this.id);
+  final String id;
+  //final FacebookLogin facebookSignIn;
+  @override
+  _HomePageState createState() => _HomePageState(id);
 }
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
-  TabController _tabController;
-  ScrollController _scrollViewController;
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool isLoggedIn = false;
-  var refreshKey = GlobalKey<RefreshIndicatorState>();
-  Random random;
-  List<String> list;
+
+FirebaseAuth _auth = FirebaseAuth.instance;
+FirebaseUser mCurrentUser;
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  _HomePageState(this._id);
+  String _name = '';
+  String _picture = '';
+  String _id;
+
+  _getCurrentUser() async {
+    mCurrentUser = await _auth.currentUser();
+    print('Hello'.toString());
+    setState(() {
+      mCurrentUser != null ? mCurrentUser = mCurrentUser : print('não logado');
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(vsync: this, length: 3, initialIndex: 1);
     random = Random();
     refreshList();
-    _tabController = TabController(vsync: this, length: 3, initialIndex: 1);
+    _getCurrentUser();
+    Future.delayed(const Duration(seconds: 3));
+    Firestore.instance
+        .collection('users')
+        .document()
+        .get()
+        .then((data) {
+      setState(() {
+        this._name = data['name'];
+        this._picture = data['picture'];
+        this._id = data['id'];
+      });
+    });
   }
+
+  TabController _tabController;
+  //ScrollController _scrollViewController;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
+  Random random;
+  List<String> list;
+
+  // new Future.delayed(const Duration(seconds: 2));
   Future<Null> refreshList() async {
-    refreshKey.currentState?.show(atTop: false);
+    refreshKey.currentState?.show(atTop: true);
     await Future.delayed(Duration(seconds: 2));
     setState(() {
       list = List.generate(random.nextInt(10), (i) => "Item $i");
     });
     return null;
   }
-  @override
-  void dispose() {
-    _tabController.dispose();
-    _scrollViewController.dispose();
-    super.dispose(); 
-  }
-  bool darkThemeEnabled = true;
+
+  bool lightThemeEnabled = true;
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: darkThemeEnabled ? Theme.SpreadLight: Theme.SpreadDark,
+      theme: lightThemeEnabled ? Temas.SpreadLight : Temas.SpreadDark,
       home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
-    Widget HomePage() {
+
+  Widget HomePage() {
     return DefaultTabController(
       length: 3,
-      child:Scaffold(
+      child: Scaffold(
         key: _scaffoldKey,
+        bottomNavigationBar: TabBar(
+          indicatorWeight: 1.5,
+          indicatorSize: TabBarIndicatorSize.tab,
+          labelStyle: TextStyle(
+              fontSize: 9.0,
+              fontFamily: 'MontSerrat',
+              fontWeight: FontWeight.bold),
+          indicatorColor: Colors.blue,
+          unselectedLabelColor:
+              lightThemeEnabled ? Colors.black.withOpacity(0.7) : Colors.grey,
+          labelColor: Colors.blue[400],
+          controller: _tabController,
+          tabs: <Widget>[
+            SizedBox(
+              height: 50.0,
+              child: Tab(
+                icon: Icon(Icons.people, size: 20.0),
+                text: 'PROMOTERS',
+              ),
+            ),
+            SizedBox(
+              height: 50.0,
+              child: Tab(
+                icon: Icon(Icons.home, size: 20.0),
+                text: 'INÍCIO',
+              ),
+            ),
+            SizedBox(
+              height: 50.0,
+              child: Tab(
+                icon: Icon(Icons.favorite_border, size: 20.0),
+                text: 'SALVOS',
+              ),
+            ),
+          ],
+        ),
+        appBar: AppBar(
+            //child: Image.asset('android/assets/logo-completa.png',
+          //height: 20.0,
+         //fit: BoxFit.fill,),
+          elevation: 0.0,
+          actions: <Widget>[
+            Container(
+              padding: EdgeInsets.only(right: 108.0),
+              child: ImageIcon(AssetImage('android/assets/logo.png'),
+            size: 25.0),
+            ),
+            Container(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Switch(
+                value: lightThemeEnabled,
+                onChanged: (changed) {
+                  setState(() {
+                    lightThemeEnabled = changed;
+                  });
+                },
+              ),
+            ),
+            IconButton(
+              icon:
+                  Icon(Icons.tune),
+              iconSize: 20.0,
+              //color: Theme.of(context).iconTheme.color),
+              onPressed: () {},
+              tooltip: 'Filtrar',
+            ),
+            IconButton(
+              icon: Icon(
+                  Icons.search), // color: Theme.of(context).iconTheme.color),
+              iconSize: 20.0,
+              onPressed: () {
+                showSearch(context: context, delegate: DataSearch());
+              },
+              tooltip: 'Buscar',
+            ),
+            IconButton(
+                icon: Icon(Icons
+                    .account_circle), // color: Theme.of(context).iconTheme.color),
+                iconSize: 20.0,
+                onPressed: () {
+                  _scaffoldKey.currentState.openEndDrawer();
+                }),
+          ],
+        ),
         endDrawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                child: Text('Drawer Header'),
-                //decoration: BoxDecoration(
-                 //color: Theme.of(context).primaryColor.withOpacity(0.5)
-               // ),
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        height: 60.0,
+                        width: 60.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage('mCurrentUser.photoUrl'),
+                          ),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              blurRadius: 3.0,
+                              color: Theme.of(context).secondaryHeaderColor,
+                              offset: Offset(0.0, 0.3),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text('mCurrentUser.displayName'),
+                    ],
+                  ),
+                ),
               ),
               ListTile(
-                title: Text('Entrar com Facebook'),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<Null>(
-                      builder: (BuildContext context) => LoginPage(),
-                    ),
-                  );
-                }
+                leading: Icon(Icons.history),
+                title: Text('Histórico'),
+                onTap: () {},
               ),
               ListTile(
-                title: Text('Item 2'),
+                leading: Icon(Icons.note),
+                title: Text('Termos de Uso e Privacidade'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('Configurações'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Sair'),
                 onTap: () {
+                  appAuth.logout().then((_) =>
+                      Navigator.of(context).pushReplacementNamed('/login'));
                 },
               ),
             ],
           ),
         ),
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool boxIsScrolled){
-            return <Widget> [
-              SliverAppBar(
-                //textTheme: Theme.of(context).primaryTextTheme,
-                expandedHeight: 100.0,
-                elevation: 5.0,
-                //backgroundColor:Theme.of(context).primaryColor,
-                pinned: true,
-                floating: true,
-                forceElevated: boxIsScrolled,
-                //title: null,
-                actions: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(right: 6.0),
-                    child: Switch(
-                      value: darkThemeEnabled,
-                      onChanged: (changed) {
-                        setState(() {
-                          darkThemeEnabled = changed;
-                          }
-                        );
-                      },
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.tune), //color: Theme.of(context).iconTheme.color),
-                    onPressed: () {},
-                    tooltip: 'Filtrar',
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.search),// color: Theme.of(context).iconTheme.color),
-                    onPressed: () {
-                      showSearch(context: context, delegate: DataSearch());
-                    },
-                    tooltip: 'Buscar',
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.account_circle),// color: Theme.of(context).iconTheme.color),
-                    onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
-                      tooltip: 'Configurações',
-                  ),
-                ],
-                bottom: TabBar(
-                  indicatorWeight: 2.0,
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  labelStyle: TextStyle(
-                    fontSize: 13.0,
-                    fontFamily: 'MontSerrat',
-                    fontWeight: FontWeight.bold
-                    ),
-                  indicatorColor: Colors.blue,
-                  unselectedLabelColor: Colors.grey[600],
-                  labelColor: Colors.blue[400],
-                  controller: _tabController,
-                  tabs: <Widget>[
-                    Tab(text: "PROMOTERS"),
-                    Tab(text: "INÍCIO"),
-                    Tab(text: "SALVOS"),
-                  ],
-                ),
-              ),
-            ];
-          },
         body: TabBarView(
           controller: _tabController,
           children: <Widget>[
             FollowList(),
             RefreshIndicator(
-            key: refreshKey,
-            child:
-              PostList(),
-            onRefresh: refreshList, 
+              key: refreshKey,
+              child: PostList(),
+              onRefresh: refreshList,
             ),
             SavesList(),
-            ],
-          ),
+          ],
         ),
       ),
     );

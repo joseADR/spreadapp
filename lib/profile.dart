@@ -1,13 +1,42 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
 import 'package:spreadapp/components/eventos.dart';
 class ProfilePage extends StatefulWidget {
+  ProfilePage(this.id);
+  final id;
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _ProfilePageState createState() => _ProfilePageState(id); 
 }
 class _ProfilePageState extends State<ProfilePage> {
+
+  _ProfilePageState(this._id);
+  String _id;
+  String _name = '';
+  //String _title = '';
+  String _promo = '';
+  //List <DocumentReference> _posts = [];
+  String _seg = '';
+  String _place = '';
+  String _tag = '';
+  //String _card = '';
   @override
-  Widget build(BuildContext context) {
+  void initState(){
+    super.initState();
+    Firestore.instance.collection('promoters').document(_id).get().then((data) {
+      setState(() {
+        this._name = data['nome'];
+        this._place = data['localidade'];
+        this._promo = data['promoter'];
+        this._seg = data['seguidores'];
+        this._tag = data['tag']; 
+        //this._posts = data['posts'].toList(); 
+        //this._posts = data['posts'].toList();
+      });
+    });
+  }
+  @override
+  Widget build(BuildContext context) {   
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
@@ -28,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Hero(
-                tag: 'https://media-cdn.tripadvisor.com/media/photo-s/04/c2/bf/8f/cervejaria-bohemia.jpg',
+                tag: _tag,
                 child: Container(
                   height: 125.0,
                   width: 125.0,
@@ -42,12 +71,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.circular(62.5),
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage('https://media-cdn.tripadvisor.com/media/photo-s/04/c2/bf/8f/cervejaria-bohemia.jpg'))),
+                          image: NetworkImage(_promo))),
                 ),
               ),
               SizedBox(height: 20.0),
               Text(
-                'BOHEMIA',
+                _name,
                 style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 18.0,
@@ -55,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 4.0),
               Text(
-                'Petrópolis, RJ',
+                _place,
                 style: TextStyle(fontFamily: 'Montserrat', color: Colors.grey),
               ),
               SizedBox(
@@ -76,10 +105,11 @@ class _ProfilePageState extends State<ProfilePage> {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:<Widget>[
-                                  IconButton(
-                                    icon: Icon(Icons.people),
-                                    splashColor: Colors.blue,
-                                    onPressed:  () {},
+                                  Text(
+                                    _seg,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold
+                                    ),
                                   ),
                                   Text('SEGUIDORES',
                                     style: TextStyle(
@@ -90,7 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 30.0,),
+                              SizedBox(height: 30.0),
                               Container(
                                 child: Row(
                                   children:<Widget>[
@@ -101,7 +131,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         Container(
                                           padding: EdgeInsets.only(right: 15.0),
                                           child: OutlineButton(
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0),
+                                            side: BorderSide(width: 0.5)),
                                             child: Text('SEGUIR',
                                               style: TextStyle(
                                                 color: Theme.of(context).buttonColor,
@@ -114,17 +145,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                             borderSide: BorderSide(
                                               color: Theme.of(context).buttonColor,
                                             ),
-                                            onPressed: () {}, 
+                                            onPressed: () {}//{print(_posts);}, 
                                           ),
                                         ),
-                                        //SizedBox(height: 5.0,), 
-                                        //Text('SEGUIR',
-                                        //style: TextStyle(
-                                        //  fontFamily: 'MontSerrat',
-                                        //  fontSize: 12.0,
-                                        //  color: Colors.grey,
-                                        //  ),
-                                        //),
                                       ],
                                     ),
                                   ],
@@ -187,7 +210,6 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-
   Widget buildImages() {
     return Padding(
       padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
@@ -195,7 +217,7 @@ class _ProfilePageState extends State<ProfilePage> {
         GestureDetector(
           onTap: () =>  Navigator.of(context).push(
               MaterialPageRoute<Null>(
-                builder: (BuildContext context) => CardPage(),
+                builder: (BuildContext context) => CardPage(_id),
             ),
           ),
         child:
@@ -204,7 +226,7 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.0),
             image: DecorationImage(
-              image: NetworkImage('https://lh3.googleusercontent.com/proxy/pvY4Y-_8-LI1VfYEilExPmR1Ps1N6_5ZXS8NCM7R5FvtJIZDApARtK59jDTB7B765RDn97R0OS44jkZX5R3vyjaawtY6H2o=w530-h298-n-rw'),
+              image: NetworkImage('http://amgestoroutput.s3.amazonaws.com/amgestor/img_produtos/no-image.png'),
               fit: BoxFit.cover
             ),
           ),
@@ -222,7 +244,7 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Maiara e Maraisa - 8 Dias atrás',
+                _name,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
