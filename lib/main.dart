@@ -9,7 +9,6 @@ import 'package:spreadapp/services/auth.service.dart';
 import './config/firebasePost.dart';
 import './config/firebaseFollows.dart';
 import './config/firebaseSaves.dart';
-import './config/search.dart';
 import 'dart:async';
 import 'dart:math';
 
@@ -34,11 +33,14 @@ void main() async {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage(this.id);
+  HomePage(
+    this.id,
+  );
   final String id;
+
   //final FacebookLogin facebookSignIn;
   @override
-  _HomePageState createState() => _HomePageState(id);
+  _HomePageState createState() => _HomePageState();
 }
 
 FirebaseAuth _auth = FirebaseAuth.instance;
@@ -46,16 +48,30 @@ FirebaseUser mCurrentUser;
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  _HomePageState(this._id);
+  _HomePageState();
+
   String _name = '';
   String _picture = '';
-  String _id;
 
   _getCurrentUser() async {
     mCurrentUser = await _auth.currentUser();
     print('Hello'.toString());
     setState(() {
       mCurrentUser != null ? mCurrentUser = mCurrentUser : print('não logado');
+    });
+  }
+
+  _userInfo() async {
+    await Future.delayed(Duration(seconds: 3));
+    await _getCurrentUser();
+    Firestore.instance
+        .collection('users')
+        .document(mCurrentUser.uid)
+        .get()
+        .then((data) {
+      setState(() {
+        this._name = data['name'];
+      });
     });
   }
 
@@ -66,18 +82,8 @@ class _HomePageState extends State<HomePage>
     random = Random();
     refreshList();
     _getCurrentUser();
-    Future.delayed(const Duration(seconds: 3));
-    Firestore.instance
-        .collection('users')
-        .document()
-        .get()
-        .then((data) {
-      setState(() {
-        this._name = data['name'];
-        this._picture = data['picture'];
-        this._id = data['id'];
-      });
-    });
+    Future.delayed(Duration(seconds: 3));
+    _userInfo();
   }
 
   TabController _tabController;
@@ -148,15 +154,15 @@ class _HomePageState extends State<HomePage>
           ],
         ),
         appBar: AppBar(
-            //child: Image.asset('android/assets/logo-completa.png',
+          //child: Image.asset('android/assets/logo-completa.png',
           //height: 20.0,
-         //fit: BoxFit.fill,),
+          //fit: BoxFit.fill,),
           elevation: 0.0,
           actions: <Widget>[
             Container(
               padding: EdgeInsets.only(right: 108.0),
-              child: ImageIcon(AssetImage('android/assets/logo.png'),
-            size: 25.0),
+              child:
+                  ImageIcon(AssetImage('android/assets/logo.png'), size: 25.0),
             ),
             Container(
               padding: EdgeInsets.only(right: 8.0),
@@ -170,8 +176,7 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             IconButton(
-              icon:
-                  Icon(Icons.tune),
+              icon: Icon(Icons.tune),
               iconSize: 20.0,
               //color: Theme.of(context).iconTheme.color),
               onPressed: () {},
@@ -182,7 +187,7 @@ class _HomePageState extends State<HomePage>
                   Icons.search), // color: Theme.of(context).iconTheme.color),
               iconSize: 20.0,
               onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
+                //showSearch(context: context, delegate: DataSearch());
               },
               tooltip: 'Buscar',
             ),
@@ -206,13 +211,13 @@ class _HomePageState extends State<HomePage>
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        height: 60.0,
-                        width: 60.0,
+                        height: 62.0,
+                        width: 62.0,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage('mCurrentUser.photoUrl'),
+                            image: NetworkImage(mCurrentUser.photoUrl),
                           ),
                           boxShadow: <BoxShadow>[
                             BoxShadow(
@@ -223,7 +228,7 @@ class _HomePageState extends State<HomePage>
                           ],
                         ),
                       ),
-                      Text('mCurrentUser.displayName'),
+                      Text(_name),
                     ],
                   ),
                 ),

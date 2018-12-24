@@ -49,7 +49,7 @@ class _CardState extends State<CardPage> {
     mapView.show(
       MapOptions(
           hideToolbar: false,
-          showMyLocationButton: false,
+          showMyLocationButton: true,
           title: "Spread",
           mapViewType: MapViewType.normal,
           initialCameraPosition:
@@ -157,7 +157,7 @@ class _CardState extends State<CardPage> {
                                   color: Theme.of(context).iconTheme.color,
                                   icon: Icon(
                                     Icons.thumb_up,
-                                    size: 25.0,
+                                    size: 23.0,
                                   ),
                                   onPressed: () {},
                                 ),
@@ -174,7 +174,7 @@ class _CardState extends State<CardPage> {
                         ],
                       ),
                     ),
-                    SizedBox(width: 20.0),
+                    SizedBox(width: 15.0),
                     Container(
                       child: Row(
                         children: <Widget>[
@@ -185,19 +185,19 @@ class _CardState extends State<CardPage> {
                                 SizedBox(
                                   height: 12.0,
                                 ),
-                                IconButton(
-                                  color: Theme.of(context).iconTheme.color,
-                                  icon: Icon(Icons.check_circle_outline,
-                                      size: 25.0),
-                                  onPressed: () {},
-                                ),
-                                Text(
-                                  'eu vou!',
-                                  style: TextStyle(
-                                      color: Theme.of(context).iconTheme.color,
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                //IconButton(
+                                //  color: Theme.of(context).iconTheme.color,
+                                //  icon: Icon(Icons.check_circle_outline,
+                                //      size: 25.0),
+                                //  onPressed: () {},
+                                //),
+                                //Text(
+                                //  'eu vou!',
+                                //  style: TextStyle(
+                                //      color: Theme.of(context).iconTheme.color,
+                                //      fontSize: 13.0,
+                                //      fontWeight: FontWeight.bold),
+                                //),
                               ],
                             ),
                           ),
@@ -217,7 +217,7 @@ class _CardState extends State<CardPage> {
                                 ),
                                 IconButton(
                                   color: Theme.of(context).iconTheme.color,
-                                  icon: Icon(Icons.favorite_border, size: 25.0),
+                                  icon: Icon(Icons.favorite_border, size: 23.0),
                                   onPressed: () {
                                     addSavedPrefs(_id);
                                     Scaffold.of(context)
@@ -252,7 +252,7 @@ class _CardState extends State<CardPage> {
                                   color: Theme.of(context).iconTheme.color,
                                   icon: Icon(
                                     Icons.share,
-                                    size: 25.0,
+                                    size: 23.0,
                                   ),
                                   onPressed: () {},
                                 ),
@@ -532,46 +532,46 @@ class _CardState extends State<CardPage> {
               height: 10.0,
               color: Theme.of(context).dividerColor,
             ),
-            SizedBox(height: 20.0),
-            Center(
-              child: Text(
-                'Quem vai ?',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
-              ),
-            ),
+           //SizedBox(height: 20.0),
+           //Center(
+           //  child: Text(
+           //    'Quem vai ?',
+           //    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
+           //  ),
+           //),
             SizedBox(height: 10.0),
-            Center(
-                child: Container(
-              height: 100.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                itemCount: 6,
-                itemBuilder: (BuildContext context, int index) {
-                  return _buildFriends(index);
-                },
-              ),
-            )),
+            //Center(
+            //    child: Container(
+            //  height: 100.0,
+            //  child: ListView.builder(
+            //    scrollDirection: Axis.horizontal,
+            //    shrinkWrap: true,
+            //    physics: const ClampingScrollPhysics(),
+            //    itemCount: 6,
+            //    itemBuilder: (BuildContext context, int index) {
+            //      return _buildFriends(index);
+            //    },
+            //  ),
+            //)),
             SizedBox(height: 0.0),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 13.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        'Ver todos',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            //Container(
+            //  child: Row(
+            //    mainAxisAlignment: MainAxisAlignment.end,
+            //    children: <Widget>[
+            //      Container(
+            //        padding:
+            //            EdgeInsets.symmetric(horizontal: 10.0, vertical: 13.0),
+            //        child: GestureDetector(
+            //          onTap: () {},
+            //          child: Text(
+            //            'Ver todos',
+            //            style: TextStyle(fontWeight: FontWeight.bold),
+            //          ),
+            //        ),
+            //      ),
+            //    ],
+            //  ),
+            //),
             SizedBox(
               height: 20.0,
             ),

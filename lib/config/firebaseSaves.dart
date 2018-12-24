@@ -125,26 +125,20 @@ class _SavesListState extends State<SavesList>
                                     //Imagem do evento salvo
                                     GestureDetector(
                                       child: Container(
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              colorFilter: ColorFilter.mode(
-                                                  Colors.grey.withOpacity(0.1),
-                                                  BlendMode.overlay),
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(
-                                                  (document['card']))),
-                                          borderRadius:
-                                              BorderRadius.circular(3.0),
-                                        ),
-                                        width: 140.0,
-                                        height: 80.0,
+                                        width: MediaQuery.of(context).size.width /2.9,
+                                        height:MediaQuery.of(context).size.height / 8.8,
+                                        child: Hero(
+                                          tag: (document['card']),
+                                          child: Image.network(document['card'],
+                                            fit: BoxFit.fill),
+                                          ),  
                                       ),
                                       onTap: () => Navigator.of(context).push(
-                                            MaterialPageRoute<Null>(
-                                              builder: (BuildContext context) =>
-                                                  CardPage(document.documentID),
-                                            ),
-                                          ),
+                                        MaterialPageRoute<Null>(
+                                          builder: (BuildContext context) =>
+                                              CardPage(document.documentID),
+                                        ),
+                                      ),
                                     ),
                                     //Titulo
                                     Container(

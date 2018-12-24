@@ -106,14 +106,6 @@ class Post extends StatelessWidget {
                     //color: Theme.of(context).secondaryHeaderColor,
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height / 3.3,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          colorFilter: ColorFilter.mode(
-                              Colors.black12.withOpacity(.3),
-                              BlendMode.overlay),
-                          fit: BoxFit.fill,
-                          image: NetworkImage(_card)),
-                    ),
                     child: Hero(
                         tag: _card,
                         child: Image.network(_card, fit: BoxFit.fill)),

@@ -23,14 +23,15 @@ class FollowPage extends StatelessWidget {
                   ),
                 ),
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-              width: 50.0,
-              height: 50.0,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: NetworkImage(_promo), fit: BoxFit.cover),
-                boxShadow: [BoxShadow(blurRadius: 3.0, color: Colors.black)],
+              margin: EdgeInsets.symmetric(horizontal: 20.0),
+              width: MediaQuery.of(context).size.width /7.0,
+              height: MediaQuery.of(context).size.height /12.3,
+              child: ClipOval(
+              clipBehavior: Clip.antiAlias,
+              child: Hero(
+                tag: _promo,
+                child: Image.network(_promo, fit: BoxFit.cover),
+              ),
               ),
             ),
           ),
@@ -49,9 +50,6 @@ class FollowPage extends StatelessWidget {
           //    ],
           //  ),
           //),
-          SizedBox(
-            height: 20.0,
-          ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             child: Column(

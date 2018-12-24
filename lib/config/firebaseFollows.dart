@@ -29,7 +29,7 @@ class _FollowListState extends State<FollowList> {
                 decoration: InputDecoration(
                     enabledBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
-                    hintText: 'Buscar em Promoter',
+                    hintText: 'Buscar em Promoters',
                     hintStyle: TextStyle(fontSize: 14.0)),
               ),
             ),
@@ -40,10 +40,10 @@ class _FollowListState extends State<FollowList> {
             textScaleFactor: 0.6,),
           ),
           SizedBox(
-            height: 15.0,
+            height: MediaQuery.of(context).size.height / 30.0,
           ),
           Container(
-            height: MediaQuery.of(context).size.height /6.3,
+            height: MediaQuery.of(context).size.height /8.3,
             child: StreamBuilder<QuerySnapshot>(
               stream: Firestore.instance.collection('promoters').snapshots(),
               builder: (BuildContext context,
@@ -64,13 +64,12 @@ class _FollowListState extends State<FollowList> {
           ),
           Container(
             color: Theme.of(context).secondaryHeaderColor.withOpacity(0.1),
-            height: 50.0,
+            height: MediaQuery.of(context).size.height / 12.0,
             width: double.infinity,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                
                 Tab(
                   child: Row(
                     children: <Widget>[

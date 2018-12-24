@@ -2,14 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:spreadapp/components/cardinfo.dart';
 import 'package:spreadapp/components/eventos.dart';
+import 'dart:ui' as ui;
+
 class ProfilePage extends StatefulWidget {
   ProfilePage(this.id);
   final id;
   @override
-  _ProfilePageState createState() => _ProfilePageState(id); 
+  _ProfilePageState createState() => _ProfilePageState(id);
 }
-class _ProfilePageState extends State<ProfilePage> {
 
+class _ProfilePageState extends State<ProfilePage> {
   _ProfilePageState(this._id);
   String _id;
   String _name = '';
@@ -21,7 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String _tag = '';
   //String _card = '';
   @override
-  void initState(){
+  void initState() {
     super.initState();
     Firestore.instance.collection('promoters').document(_id).get().then((data) {
       setState(() {
@@ -29,216 +31,360 @@ class _ProfilePageState extends State<ProfilePage> {
         this._place = data['localidade'];
         this._promo = data['promoter'];
         this._seg = data['seguidores'];
-        this._tag = data['tag']; 
-        //this._posts = data['posts'].toList(); 
+        this._tag = data['tag'];
+        //this._posts = data['posts'].toList();
         //this._posts = data['posts'].toList();
       });
     });
   }
-  @override
-  Widget build(BuildContext context) {   
+
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Colors.white,
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: ListView(
-        padding: EdgeInsets.only(top:7.0),
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Hero(
-                tag: _tag,
-                child: Container(
-                  height: 125.0,
-                  width: 125.0,
-                  decoration: BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        offset: Offset(0.5,0.6),
-                        blurRadius: 5.5
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              automaticallyImplyLeading: false,
+              snap: false,
+              textTheme: Theme.of(context).primaryTextTheme,
+              expandedHeight: MediaQuery.of(context).size.height / 1.3,
+              elevation: 2.0,
+              pinned: true,
+              floating: false,
+              forceElevated: true,
+              title: null,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: false,
+                background: GestureDetector(
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: <Widget>[
+                      Image.network(
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7jQvJGTuC84pPzSxU1lzbYGyzEuT0d4JxVPvMHPFsonIxD9qS6Q',
+                        fit: BoxFit.cover,
                       ),
-                    ],
-                      borderRadius: BorderRadius.circular(62.5),
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(_promo))),
-                ),
-              ),
-              SizedBox(height: 20.0),
-              Text(
-                _name,
-                style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 4.0),
-              Text(
-                _place,
-                style: TextStyle(fontFamily: 'Montserrat', color: Colors.grey),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Container(
-                color: Theme.of(context).secondaryHeaderColor.withOpacity(0.1),
-                padding: EdgeInsets.all(15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          child: ButtonBar(
+                      BackdropFilter(
+                        filter: ui.ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+                        child: Container(
+                          color: Colors.black.withOpacity(0.5),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children:<Widget>[
-                                  Text(
-                                    _seg,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                  Text('SEGUIDORES',
-                                    style: TextStyle(
-                                      fontFamily: 'MontSerrat',
-                                      fontSize: 12.0,
-                                      color: Theme.of(context).buttonColor
-                                    ),
-                                  ),
-                                ],
+                              SizedBox(
+                                height: 30.0,
                               ),
-                              SizedBox(height: 30.0),
                               Container(
-                                child: Row(
-                                  children:<Widget>[
-                                    SizedBox(height:30.0),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children:<Widget>[
-                                        Container(
-                                          padding: EdgeInsets.only(right: 15.0),
-                                          child: OutlineButton(
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0),
-                                            side: BorderSide(width: 0.5)),
-                                            child: Text('SEGUIR',
-                                              style: TextStyle(
-                                                color: Theme.of(context).buttonColor,
-                                                ),
-                                              ),
-                                            disabledBorderColor: Theme.of(context).buttonColor,
-                                            highlightedBorderColor: Theme.of(context).buttonColor,
-                                            highlightColor: Theme.of(context).buttonColor,
-                                            splashColor: Colors.blue,
-                                            borderSide: BorderSide(
-                                              color: Theme.of(context).buttonColor,
-                                            ),
-                                            onPressed: () {}//{print(_posts);}, 
-                                          ),
+                                padding: EdgeInsets.only(left: 15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    ClipOval(
+                                      child: Hero(
+                                        tag: _promo,
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              9.4,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              5.5,
+                                          decoration: BoxDecoration(
+                                              boxShadow: <BoxShadow>[
+                                                BoxShadow(
+                                                    offset: Offset(0.5, 0.6),
+                                                    blurRadius: 5.5),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(62.5),
+                                              image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(_promo))),
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),   
-                              ),
-                              SizedBox(height: 30.0,),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children:<Widget>[
-                                  IconButton(
-                                    icon: Icon(Icons.event),
-                                    splashColor: Colors.blue,
-                                    onPressed:  () =>  Navigator.of(context).push(
-                                    MaterialPageRoute<Null>(
-                                      builder: (BuildContext context) => EventsPage(),
                                       ),
                                     ),
-                                  ),
-                                  Text('EVENTOS',
-                                    style: TextStyle(
-                                      fontFamily: 'MontSerrat',
-                                      fontSize: 12.0,
-                                      color: Theme.of(context).buttonColor
+                                    SizedBox(height: 20.0),
+                                    Text(
+                                      _name,
+                                      style: TextStyle(
+                                          color: Color(0xfff1f1f1),
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(height: 4.0),
+                                    Text(
+                                      _place,
+                                      style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          color: Colors.grey[400]),
+                                    ),
+                                    SizedBox(
+                                      height: 15.0,
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(right: 40.0),
+                                      child: Divider(
+                                        height: 8.0,
+                                        color: Colors.grey[400],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 135.0,
+                                padding: EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Sobre Lucas',
+                                      style:
+                                          TextStyle(color: Color(0xfff1f1f1)),
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    RichText(
+                                      maxLines: 4,
+                                      softWrap: true,
+                                      overflow: TextOverflow.ellipsis,
+                                      text: TextSpan(
+                                          text:
+                                              'Andrew McLan "Andy" Fraser was an English songwriter and bass '
+                                              'guitarist whose career lasted over forty years, and includes two spells '
+                                              'as a member of the rock band Free, which he helped found in 1968, aged 15.'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 10.0,
+                                color: Theme.of(context)
+                                    .secondaryHeaderColor
+                                    .withOpacity(0.1),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      child: Row(
+                                        children: <Widget>[
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                _seg,
+                                                style: TextStyle(
+                                                  color: Color(0xfff1f1f1),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height /
+                                                      80.0),
+                                              Text(
+                                                'SEGUIDORES',
+                                                style: TextStyle(
+                                                    fontFamily: 'MontSerrat',
+                                                    fontSize: 10.0,
+                                                    color: Color(0xfff1f1f1)),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 50.0,
+                                          ),
+                                          Container(
+                                            child: Row(
+                                              children: <Widget>[
+                                                SizedBox(height: 30.0),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                          right: 15.0),
+                                                      child: OutlineButton(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          30.0),
+                                                              side: BorderSide(
+                                                                  color: Color(
+                                                                      0xfff1f1f1),
+                                                                  width: 0.1)),
+                                                          child: Text(
+                                                            'SEGUIR',
+                                                            style: TextStyle(
+                                                                fontSize: 11.0,
+                                                                color: Color(
+                                                                    0xfff1f1f1)),
+                                                          ),
+                                                          disabledBorderColor:
+                                                              Theme.of(context)
+                                                                  .buttonColor,
+                                                          highlightedBorderColor:
+                                                              Theme.of(context)
+                                                                  .buttonColor,
+                                                          highlightColor:
+                                                              Theme.of(context)
+                                                                  .buttonColor,
+                                                          splashColor:
+                                                              Colors.blue,
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xfff1f1f1)),
+                                                          onPressed: () {} //{print(_posts);},
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 40.0,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                _seg,
+                                                style: TextStyle(
+                                                  color: Color(0xfff1f1f1),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height /
+                                                      80.0),
+                                              Text(
+                                                'EVENTOS',
+                                                style: TextStyle(
+                                                    fontFamily: 'MontSerrat',
+                                                    fontSize: 10.0,
+                                                    color: Color(0xfff1f1f1)),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    )
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text('Ultimos Eventos',
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 13.0,
+            ),
+          ];
+        },
+        body: ListView(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.only(top: 7.0),
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height: 15.0,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Ultimos Eventos',
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 13.0,
+                        ),
                       ),
-                    ),
-                  ],
-                ), 
-              ),
-              buildImages(),
-              buildInfoDetail(),
-              buildImages(),
-              buildInfoDetail(),
-            ],
-          )
-        ],
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Card(
+                        margin: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Column(
+                          children: <Widget>[
+                            buildImages(),
+                            buildInfoDetail(),
+                          ],
+                        ),
+                      ),
+                      Card(
+                        child: Column(
+                          children: <Widget>[
+                            buildImages(),
+                            buildInfoDetail(),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
+
   Widget buildImages() {
-    return Padding(
-      padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
-      child:
-        GestureDetector(
-          onTap: () =>  Navigator.of(context).push(
+    return Container(
+      padding: EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
+      child: GestureDetector(
+        onTap: () => Navigator.of(context).push(
               MaterialPageRoute<Null>(
                 builder: (BuildContext context) => CardPage(_id),
+              ),
             ),
-          ),
-        child:
-        Container(
-          height: 180.0,
+        child: Container(
+          height: 90.0,
+          width: 150.0,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0),
+            borderRadius: BorderRadius.circular(2.0),
             image: DecorationImage(
-              image: NetworkImage('http://amgestoroutput.s3.amazonaws.com/amgestor/img_produtos/no-image.png'),
-              fit: BoxFit.cover
-            ),
+                image: NetworkImage(
+                    'https://firebasestorage.googleapis.com/v0/b/spreadapp-c69a5.appspot.com/o/cardImg%2Fcarnarog.png?alt=media&token=bc622a79-0392-4047-b116-3b157330802a'),
+                fit: BoxFit.fill),
           ),
         ),
       ),
     );
   }
+
   Widget buildInfoDetail() {
-    return Padding(
-      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0, bottom: 15.0),
+    return Container(
+      padding:
+          EdgeInsets.only(top: 10.0, bottom: 15.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -278,54 +424,6 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             ],
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(width: 7.0),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image:NetworkImage('https://cinema10.com.br/upload/filmes/filmes_11871_chap12.jpg')
-                    ),
-                  ),
-                  height: 20.0,
-                  width: 20.0,
-                  
-                ),
-              ),
-              SizedBox(width: 7.0),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image:NetworkImage('https://cinema10.com.br/upload/filmes/filmes_11871_chap12.jpg')
-                    ),
-                  ),
-                  height: 20.0,
-                  width: 20.0,
-                ),
-              ),
-              SizedBox(width: 7.0),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image:NetworkImage('https://cinema10.com.br/upload/filmes/filmes_11871_chap12.jpg')
-                    ),
-                  ),
-                  height: 22.0,
-                  width: 22.0,
-                ),
-              )
-            ],
-          )
         ],
       ),
     );
