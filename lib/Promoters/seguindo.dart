@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spreadapp/profile.dart';
+import 'package:spreadapp/Promoters/profile.dart';
+
 
 class FollowPage extends StatelessWidget {
   final String _nome;

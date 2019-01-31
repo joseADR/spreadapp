@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../components/seguindo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:spreadapp/Promoters/ComponentsPromoters/following.dart';
+import 'package:spreadapp/Promoters/ComponentsPromoters/notify.dart';
+import 'package:spreadapp/Promoters/seguindo.dart';
 
 //Página de promoters seguidos
 class FollowList extends StatefulWidget {
@@ -10,6 +12,7 @@ class FollowList extends StatefulWidget {
 TextEditingController controller = TextEditingController();
 
 class _FollowListState extends State<FollowList> {
+  bool isNotification = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,15 +38,17 @@ class _FollowListState extends State<FollowList> {
             ),
           ),
           Container(
-            child: Text('Sugeridos',
-            style: Theme.of(context).textTheme.title,
-            textScaleFactor: 0.6,),
+            child: Text(
+              'Sugeridos',
+              style: Theme.of(context).textTheme.title,
+              textScaleFactor: 0.6,
+            ),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height / 30.0,
           ),
           Container(
-            height: MediaQuery.of(context).size.height /8.3,
+            height: MediaQuery.of(context).size.height / 8.3,
             child: StreamBuilder<QuerySnapshot>(
               stream: Firestore.instance.collection('promoters').snapshots(),
               builder: (BuildContext context,
@@ -70,46 +75,73 @@ class _FollowListState extends State<FollowList> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Tab(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        child: Icon(
-                          Icons.people,
-                          size: 20.0,
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      if (isNotification) {
+                        isNotification = true;
+                        isNotification = false;
+                      } else {
+                        isNotification = true;
+                      }
+                    });
+                  },
+                  child: Tab(
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          child: Icon(
+                            Icons.people,
+                            size: 20.0,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 15.0,
-                      ),
-                      Container(
-                        child: Text('Seguindo'),
-                      ),
-                    ],
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        Container(
+                          child: Text('Seguindo'),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                Tab(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        child: Icon(
-                          Icons.notifications,
-                          size: 20.0,
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                     if(isNotification) {
+                       isNotification = false;
+                       isNotification = true;
+                     }
+                     else{
+                       isNotification = false;
+                     }
+                    });
+                  },
+                  child: Tab(
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          child: Icon(
+                            Icons.notifications,
+                            size: 20.0,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 15.0,
-                      ),
-                      Container(
-                        child: Text('Notificações'),
-                      ),
-                    ],
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        Container(
+                          child: Text('Notificações'),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          
+          Container(
+            child: isNotification? FollowingList() : Notify(),
+          )
         ],
       ),
     );

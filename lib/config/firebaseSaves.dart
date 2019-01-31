@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
-import 'package:spreadapp/components/cardinfo.dart';
+
+import 'package:spreadapp/Home/ComponentsHome/cardinfo.dart';
+
 
 class SavesList extends StatefulWidget {
   @override

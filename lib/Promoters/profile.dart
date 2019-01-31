@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:spreadapp/components/cardinfo.dart';
-import 'package:spreadapp/components/eventos.dart';
+
+
 import 'dart:ui' as ui;
+
+import 'package:spreadapp/Home/ComponentsHome/cardinfo.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage(this.id);

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spreadapp/config/loginPage.dart' as login;
 import 'package:spreadapp/config/theme.dart' as Temas;
 import 'package:spreadapp/services/auth.service.dart';
@@ -78,6 +79,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    _onChanged(lightThemeEnabled);
     _tabController = TabController(vsync: this, length: 3, initialIndex: 1);
     random = Random();
     refreshList();
@@ -101,6 +103,16 @@ class _HomePageState extends State<HomePage>
       list = List.generate(random.nextInt(10), (i) => "Item $i");
     });
     return null;
+  }
+
+  SharedPreferences sharedPreferences;
+  _onChanged(bool changed) async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      lightThemeEnabled = changed;
+      sharedPreferences.setBool("check", lightThemeEnabled);
+      sharedPreferences.commit();
+    });
   }
 
   bool lightThemeEnabled = true;
@@ -154,9 +166,6 @@ class _HomePageState extends State<HomePage>
           ],
         ),
         appBar: AppBar(
-          //child: Image.asset('android/assets/logo-completa.png',
-          //height: 20.0,
-          //fit: BoxFit.fill,),
           elevation: 0.0,
           actions: <Widget>[
             Container(

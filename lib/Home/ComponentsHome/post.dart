@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:spreadapp/components/cardinfo.dart';
-import 'package:spreadapp/profile.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spreadapp/Home/ComponentsHome/cardinfo.dart';
+import 'package:spreadapp/Promoters/profile.dart';
 
-class Post extends StatelessWidget {
-  Post(this._title, this._card, this._promo, this._data, this._id);
-  final String _title;
-  final String _card;
-  final String _promo;
-  final String _data;
-  final String _id;
+class Post extends StatefulWidget {
+  _PostState createState() => _PostState();
+  Post(this.title, this.card, this.promo, this.data, this.id);
+  final String title;
+  final String card;
+  final String promo;
+  final String data;
+  final String id;
+}
+
+class _PostState extends State<Post> {
   SnackBar snackBar() {
     return SnackBar(
         duration: Duration(seconds: 1),
-        content: Text(_title + ' adicionado aos salvos'),
+        content: Text(widget.title + ' adicionado aos salvos'),
         action: SnackBarAction(
           label: 'DESFAZER',
           onPressed: () {
@@ -60,7 +64,8 @@ class Post extends StatelessWidget {
                 GestureDetector(
                   onTap: () => Navigator.of(context).push(
                         MaterialPageRoute<Null>(
-                          builder: (BuildContext context) => ProfilePage(_id),
+                          builder: (BuildContext context) =>
+                              ProfilePage(widget.id),
                         ),
                       ),
                   child: Container(
@@ -72,7 +77,7 @@ class Post extends StatelessWidget {
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(_promo),
+                        image: NetworkImage(widget.promo),
                       ),
                     ),
                   ),
@@ -83,7 +88,7 @@ class Post extends StatelessWidget {
                 //Title container
                 Expanded(
                   child: Text(
-                    _title.toUpperCase(),
+                    widget.title.toUpperCase(),
                     style: Theme.of(context).textTheme.title,
                     textScaleFactor: .5,
                   ),
@@ -94,7 +99,7 @@ class Post extends StatelessWidget {
             GestureDetector(
               onTap: () => Navigator.of(context).push(
                     MaterialPageRoute<Null>(
-                      builder: (BuildContext context) => CardPage(_id),
+                      builder: (BuildContext context) => CardPage(widget.id),
                     ),
                   ),
               child: Column(
@@ -105,10 +110,10 @@ class Post extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 0.0),
                     //color: Theme.of(context).secondaryHeaderColor,
                     width: double.infinity,
-                    height: MediaQuery.of(context).size.height / 3.3,
+                    height: MediaQuery.of(context).size.height / 3.2,
                     child: Hero(
-                        tag: _card,
-                        child: Image.network(_card, fit: BoxFit.fill)),
+                        tag: widget.card,
+                        child: Image.network(widget.card, fit: BoxFit.fill)),
                   ),
                 ],
               ),
@@ -127,13 +132,15 @@ class Post extends StatelessWidget {
                           IconButton(
                             splashColor: null,
                             onPressed: () {
-                              addSavedPrefs(_id);
+                              addSavedPrefs(widget.id);
                               Scaffold.of(context).showSnackBar(snackBar());
                             },
                             icon:
                                 //color: Colors.transparent,
                                 //padding: EdgeInsets.only(right: 0.0,left: 0.0,bottom: 6.0,top: 3.0),
-                                Icon(Icons.favorite_border, size: 22.0),
+                                Icon(Icons.favorite_border,
+                                    size: MediaQuery.of(context).size.height /
+                                        33.0),
                             // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                           ),
                           //Share Button
@@ -145,7 +152,9 @@ class Post extends StatelessWidget {
                               //padding: EdgeInsets.only(bottom: 6.0,top: 3.0),
                               child: RotatedBox(
                                 quarterTurns: 2,
-                                child: Icon(Icons.reply, size: 22.0),
+                                child: Icon(Icons.reply,
+                                    size: MediaQuery.of(context).size.height /
+                                        33.0),
                               ),
                             ),
                           ),
@@ -157,9 +166,9 @@ class Post extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.only(right: 72.0),
                       child: Text(
-                        _data.toUpperCase(),
+                        widget.data.toUpperCase(),
+                        textScaleFactor: .85,
                         style: TextStyle(
-                          fontSize: 13.0,
                           color: Color(0xffec0000),
                           fontWeight: FontWeight.bold,
                           fontFamily: 'MontSerrat',
@@ -170,8 +179,8 @@ class Post extends StatelessWidget {
                     Container(
                       //padding: EdgeInsets.only(left: 5.0,top: .0),
                       child: Icon(Icons.more_vert,
-                          size:
-                              22.0), // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                          size: MediaQuery.of(context).size.height /
+                              33.0), // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                     ),
                   ],
                 ),
