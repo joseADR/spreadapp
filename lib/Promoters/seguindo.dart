@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spreadapp/Promoters/profile.dart';
 
-
 class FollowPage extends StatelessWidget {
   final String _nome;
   final String _promo;
@@ -25,14 +24,11 @@ class FollowPage extends StatelessWidget {
                 ),
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 20.0),
-              width: MediaQuery.of(context).size.width /7.0,
-              height: MediaQuery.of(context).size.height /12.3,
+              width: MediaQuery.of(context).size.width / 7.0,
+              height: MediaQuery.of(context).size.height / 12.3,
               child: ClipOval(
-              clipBehavior: Clip.antiAlias,
-              child: Hero(
-                tag: _promo,
+                clipBehavior: Clip.antiAlias,
                 child: Image.network(_promo, fit: BoxFit.cover),
-              ),
               ),
             ),
           ),
@@ -54,25 +50,25 @@ class FollowPage extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              //children: <Widget>[
-              //  //remover evento salvo
-              //  Container(
-              //    child: Icon(Icons.remove_circle,
-              //        size: 22.0,
-              //        color:
-              //            Theme.of(context).iconTheme.color.withOpacity(0.7)),
-              //  ),
-              //  //Share Button
-              //  Container(
-              //    margin: const EdgeInsets.only(top: 15.0, right: 6.0),
-              //    child: Icon(Icons.share,
-              //        size: 22.0,
-              //        color:
-              //            Theme.of(context).iconTheme.color.withOpacity(0.7)),
-              //  ),
-              //],
-            ),
+                //mainAxisAlignment: MainAxisAlignment.center,
+                //children: <Widget>[
+                //  //remover evento salvo
+                //  Container(
+                //    child: Icon(Icons.remove_circle,
+                //        size: 22.0,
+                //        color:
+                //            Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                //  ),
+                //  //Share Button
+                //  Container(
+                //    margin: const EdgeInsets.only(top: 15.0, right: 6.0),
+                //    child: Icon(Icons.share,
+                //        size: 22.0,
+                //        color:
+                //            Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                //  ),
+                //],
+                ),
           ),
         ],
       ),

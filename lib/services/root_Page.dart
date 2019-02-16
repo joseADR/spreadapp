@@ -1,9 +1,8 @@
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:spreadapp/Home/home.dart';
 import 'package:spreadapp/config/loginPage.dart';
-import 'package:spreadapp/main.dart';
-
 
 class RootPage extends StatefulWidget {
   @override
@@ -28,18 +27,6 @@ class _RootPageState extends State<RootPage> {
         authStatus =
             userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
       });
-    });
-  }
-
-  void _signedIn() {
-    setState(() {
-      authStatus = AuthStatus.signedIn;
-    });
-  }
-
-  void _signedOut() {
-    setState(() {
-      authStatus = AuthStatus.notSignedIn;
     });
   }
 

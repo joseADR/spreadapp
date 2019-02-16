@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
 import 'dart:ui' as ui;
 
 import 'package:spreadapp/Home/ComponentsHome/cardinfo.dart';
@@ -83,29 +82,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     ClipOval(
-                                      child: Hero(
-                                        tag: _promo,
-                                        child: Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              9.4,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              5.5,
-                                          decoration: BoxDecoration(
-                                              boxShadow: <BoxShadow>[
-                                                BoxShadow(
-                                                    offset: Offset(0.5, 0.6),
-                                                    blurRadius: 5.5),
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(62.5),
-                                              image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: NetworkImage(_promo))),
-                                        ),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                9.4,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5.5,
+                                        decoration: BoxDecoration(
+                                            boxShadow: <BoxShadow>[
+                                              BoxShadow(
+                                                  offset: Offset(0.5, 0.6),
+                                                  blurRadius: 5.5),
+                                            ],
+                                            borderRadius:
+                                                BorderRadius.circular(62.5),
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(_promo))),
                                       ),
                                     ),
                                     SizedBox(height: 20.0),
@@ -384,8 +378,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget buildInfoDetail() {
     return Container(
-      padding:
-          EdgeInsets.only(top: 10.0, bottom: 15.0),
+      padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
       child: Row(
         children: <Widget>[
           Column(

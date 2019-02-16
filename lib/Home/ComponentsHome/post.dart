@@ -15,6 +15,8 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+  List<String> _savedPosts;
+
   SnackBar snackBar() {
     return SnackBar(
         duration: Duration(seconds: 1),
@@ -22,12 +24,62 @@ class _PostState extends State<Post> {
         action: SnackBarAction(
           label: 'DESFAZER',
           onPressed: () {
-            // Some code to undo the change!
+            removeSavedPrefs(widget.id);
+            Scaffold.of(context).showSnackBar(removedSnackBar());
           },
         ));
   }
 
+  SnackBar removedSnackBar() {
+    return SnackBar(
+        duration: Duration(seconds: 1),
+        content: Text(widget.title + ' removido dos salvos'),
+        action: SnackBarAction(
+          label: 'DESFAZER',
+          onPressed: () {
+            addSavedPrefs(widget.id);
+            Scaffold.of(context).showSnackBar(snackBar());
+          },
+        ));
+  }
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _loadSaveValue();
+  }
+
+  bool heartColor = false;
+
+  _loadSaveValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      heartColor = (prefs.getBool('heartColor')) ?? false;
+    });
+  }
+
+  _buttonSave() {
+    setState(() {
+      heartColor = true;
+    });
+    _savenSaveValue();
+  }
+
+  _buttonUnSave() {
+    setState(() {
+      heartColor = false;
+    });
+    _savenSaveValue();
+  }
+
+  _savenSaveValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setBool('heartColor', heartColor);
+    });
+  }
+
   Future<bool> addSavedPrefs(String id) async {
+    _buttonSave();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> aux;
     aux = prefs.getStringList('ids') ?? [];
@@ -36,12 +88,30 @@ class _PostState extends State<Post> {
     return prefs.commit();
   }
 
+  Future<Null> removeSavedPrefs(String id) async {
+    _buttonUnSave();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> aux = _savedPosts;
+    aux.remove(id);
+    updateState(aux);
+    prefs.setStringList('ids', aux);
+    
+  }
+
+  void updateState(List<String> list) {
+    if (list != null)
+      setState(() {
+        this._savedPosts = list;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: true,
       bottom: true,
       child: Container(
+        height: MediaQuery.of(context).size.height / 2.28,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4.0),
           color: Theme.of(context).backgroundColor,
@@ -129,20 +199,28 @@ class _PostState extends State<Post> {
                       child: Row(
                         children: <Widget>[
                           //Save Button
-                          IconButton(
-                            splashColor: null,
-                            onPressed: () {
-                              addSavedPrefs(widget.id);
-                              Scaffold.of(context).showSnackBar(snackBar());
-                            },
-                            icon:
-                                //color: Colors.transparent,
-                                //padding: EdgeInsets.only(right: 0.0,left: 0.0,bottom: 6.0,top: 3.0),
-                                Icon(Icons.favorite_border,
-                                    size: MediaQuery.of(context).size.height /
-                                        33.0),
-                            // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
-                          ),
+                          heartColor
+                              ? IconButton(
+                                  splashColor: null,
+                                  onPressed: () {
+                                    removeSavedPrefs(widget.id);
+                                    Scaffold.of(context)
+                                        .showSnackBar(removedSnackBar());
+                                  },
+                                  icon: Icon(Icons.favorite,
+                                      color: Colors.blue,
+                                      size: MediaQuery.of(context).size.height /
+                                          35.0))
+                              : IconButton(
+                                  splashColor: null,
+                                  onPressed: () {
+                                    addSavedPrefs(widget.id);
+                                    Scaffold.of(context)
+                                        .showSnackBar(snackBar());
+                                  },
+                                  icon: Icon(Icons.favorite_border,
+                                      size: MediaQuery.of(context).size.height /
+                                          33.0)),
                           //Share Button
                           IconButton(
                             splashColor: null,
@@ -151,20 +229,18 @@ class _PostState extends State<Post> {
                               //padding: EdgeInsets.only(left: 0.8),
                               //padding: EdgeInsets.only(bottom: 6.0,top: 3.0),
                               child: RotatedBox(
-                                quarterTurns: 2,
-                                child: Icon(Icons.reply,
-                                    size: MediaQuery.of(context).size.height /
-                                        33.0),
-                              ),
+                                  quarterTurns: 2,
+                                  child: Icon(Icons.reply,
+                                      size: MediaQuery.of(context).size.height /
+                                          35.0)),
                             ),
                           ),
-                          // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
                         ],
                       ),
                     ),
                     SizedBox(),
                     Container(
-                      padding: EdgeInsets.only(right: 72.0),
+                      padding: EdgeInsets.only(right: 52.0),
                       child: Text(
                         widget.data.toUpperCase(),
                         textScaleFactor: .85,
@@ -176,11 +252,18 @@ class _PostState extends State<Post> {
                       ),
                     ),
                     SizedBox(),
-                    Container(
-                      //padding: EdgeInsets.only(left: 5.0,top: .0),
-                      child: Icon(Icons.more_vert,
-                          size: MediaQuery.of(context).size.height /
-                              33.0), // color: Theme.of(context).iconTheme.color.withOpacity(0.7)),
+                    IconButton(
+                      splashColor: null,
+                      onPressed: () {},
+                      icon: Container(
+                        //padding: EdgeInsets.only(left: 0.8),
+                        //padding: EdgeInsets.only(bottom: 6.0,top: 3.0),
+                        child: RotatedBox(
+                          quarterTurns: 2,
+                          child: Icon(Icons.more_vert,
+                              size: MediaQuery.of(context).size.height / 35.0),
+                        ),
+                      ),
                     ),
                   ],
                 ),

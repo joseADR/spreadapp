@@ -12,7 +12,7 @@ class FollowList extends StatefulWidget {
 TextEditingController controller = TextEditingController();
 
 class _FollowListState extends State<FollowList> {
-  bool isNotification = false;
+  bool isNotification = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,7 +80,6 @@ class _FollowListState extends State<FollowList> {
                     setState(() {
                       if (isNotification) {
                         isNotification = true;
-                        isNotification = false;
                       } else {
                         isNotification = true;
                       }
@@ -106,15 +105,13 @@ class _FollowListState extends State<FollowList> {
                   ),
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
-                     if(isNotification) {
-                       isNotification = false;
-                       isNotification = true;
-                     }
-                     else{
-                       isNotification = false;
-                     }
+                      if (isNotification) {
+                        isNotification = false;
+                      } else {
+                        isNotification = false;
+                      }
                     });
                   },
                   child: Tab(
@@ -140,7 +137,7 @@ class _FollowListState extends State<FollowList> {
             ),
           ),
           Container(
-            child: isNotification? FollowingList() : Notify(),
+            child: isNotification ? FollowingList() : Notify(),
           )
         ],
       ),

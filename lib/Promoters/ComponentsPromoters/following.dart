@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:spreadapp/Home/home.dart';
 import 'package:spreadapp/Promoters/profile.dart';
-import 'package:spreadapp/main.dart';
 
 class FollowingList extends StatelessWidget {
   @override

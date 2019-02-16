@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
 import 'package:map_view/camera_position.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:spreadapp/Promoters/profile.dart';
 
@@ -186,19 +185,6 @@ class _CardState extends State<CardPage> {
                                 SizedBox(
                                   height: 12.0,
                                 ),
-                                //IconButton(
-                                //  color: Theme.of(context).iconTheme.color,
-                                //  icon: Icon(Icons.check_circle_outline,
-                                //      size: 25.0),
-                                //  onPressed: () {},
-                                //),
-                                //Text(
-                                //  'eu vou!',
-                                //  style: TextStyle(
-                                //      color: Theme.of(context).iconTheme.color,
-                                //      fontSize: 13.0,
-                                //      fontWeight: FontWeight.bold),
-                                //),
                               ],
                             ),
                           ),
@@ -522,7 +508,7 @@ class _CardState extends State<CardPage> {
                             onTap: showMap,
                           ),
                         ),
-                        //
+                        
                       ],
                     ),
                   ),
@@ -533,46 +519,7 @@ class _CardState extends State<CardPage> {
               height: 10.0,
               color: Theme.of(context).dividerColor,
             ),
-           //SizedBox(height: 20.0),
-           //Center(
-           //  child: Text(
-           //    'Quem vai ?',
-           //    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
-           //  ),
-           //),
             SizedBox(height: 10.0),
-            //Center(
-            //    child: Container(
-            //  height: 100.0,
-            //  child: ListView.builder(
-            //    scrollDirection: Axis.horizontal,
-            //    shrinkWrap: true,
-            //    physics: const ClampingScrollPhysics(),
-            //    itemCount: 6,
-            //    itemBuilder: (BuildContext context, int index) {
-            //      return _buildFriends(index);
-            //    },
-            //  ),
-            //)),
-            SizedBox(height: 0.0),
-            //Container(
-            //  child: Row(
-            //    mainAxisAlignment: MainAxisAlignment.end,
-            //    children: <Widget>[
-            //      Container(
-            //        padding:
-            //            EdgeInsets.symmetric(horizontal: 10.0, vertical: 13.0),
-            //        child: GestureDetector(
-            //          onTap: () {},
-            //          child: Text(
-            //            'Ver todos',
-            //            style: TextStyle(fontWeight: FontWeight.bold),
-            //          ),
-            //        ),
-            //      ),
-            //    ],
-            //  ),
-            //),
             SizedBox(
               height: 20.0,
             ),
@@ -638,51 +585,6 @@ class _CardState extends State<CardPage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildFriends(int index) {
-    return Center(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Card(
-            color: Theme.of(context).backgroundColor,
-            elevation: 1.0,
-            margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-            child: Container(
-              height: 85.0,
-              width: 70.0,
-              margin: EdgeInsets.all(3.0),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 60.0,
-                    width: 60.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                            ('https://img.ibxk.com.br/2015/08/27/27151441599410.jpg?w=1040'),
-                          )),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Container(
-                      margin: EdgeInsets.all(1.0),
-                      child: Text(
-                        'William da Guitarra',
-                        overflow: TextOverflow.ellipsis,
-                      )),
-                ],
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
