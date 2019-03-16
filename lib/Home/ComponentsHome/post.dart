@@ -117,7 +117,7 @@ class _PostState extends State<Post> {
           color: Theme.of(context).backgroundColor,
           boxShadow: <BoxShadow>[
             BoxShadow(
-                color: Theme.of(context).secondaryHeaderColor,
+                color: Theme.of(context).secondaryHeaderColor.withOpacity(0.5),
                 offset: Offset(.0, 0.0),
                 blurRadius: 1.5),
           ],

@@ -5,6 +5,7 @@ import 'package:map_view/camera_position.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:spreadapp/Promoters/profile.dart';
+import 'dart:ui' as ui;
 
 const api_key = "AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
 
@@ -85,9 +86,8 @@ class _CardState extends State<CardPage> {
     staticMapUri = staticMapProvider.getStaticUri(
         Location(-22.506592, -43.185093), 15,
         height: 400, width: 900, mapType: StaticMapViewType.roadmap);
-  }
+  } //
 
-  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +100,7 @@ class _CardState extends State<CardPage> {
               snap: false,
               textTheme: Theme.of(context).primaryTextTheme,
               expandedHeight: 190.0,
-              elevation: 2.0,
+              elevation: .0,
               pinned: true,
               floating: false,
               forceElevated: true,
@@ -108,14 +108,34 @@ class _CardState extends State<CardPage> {
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: false,
                 background: GestureDetector(
-                  child: Hero(
-                    tag: _card,
-                    child: Image.network(
-                      _card,
-                      fit: BoxFit.fill,
+                    child: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    Hero(
+                      tag: _card,
+                      child: Image.network(
+                        _card,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).secondaryHeaderColor,
+                        gradient: LinearGradient(
+                          colors: const [
+                            const Color(0x00000000),
+                            const Color(0x00000000)
+                          ],
+                          begin: FractionalOffset.topCenter,
+                          end: FractionalOffset.bottomCenter,
+                          stops: [0.9,1.9],
+                          tileMode: TileMode.clamp,
+                        ),
+                      ),
+                      height: MediaQuery.of(context).size.height / 20.0,
+                    ),
+                  ],
+                )),
               ),
             ),
           ];
@@ -123,6 +143,19 @@ class _CardState extends State<CardPage> {
         body: ListView(
           children: <Widget>[
             Container(
+              decoration: BoxDecoration(
+                color:Theme.of(context).secondaryHeaderColor,
+                gradient: LinearGradient(
+                  colors: const[
+                    const Color(0x00000000),
+                    const Color(0x00000000)
+                  ],
+                  begin: FractionalOffset.topCenter,
+                          end: FractionalOffset.bottomCenter,
+                          stops: [0.3,1.5],
+                          tileMode: TileMode.clamp,
+                )
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -508,7 +541,6 @@ class _CardState extends State<CardPage> {
                             onTap: showMap,
                           ),
                         ),
-                        
                       ],
                     ),
                   ),

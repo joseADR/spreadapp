@@ -147,50 +147,53 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ],
         ),
-        appBar: AppBar(
-          elevation: 0.0,
-          actions: <Widget>[
-            Container(
-              padding: EdgeInsets.only(right: 108.0),
-              child:
-                  ImageIcon(AssetImage('android/assets/logo.png'), size: 25.0),
-            ),
-            Container(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Switch(
-                value: lightThemeEnabled,
-                onChanged: (changed) {
-                  setState(() {
-                    lightThemeEnabled = changed;
-                    _savenswitchValue();
-                  });
-                },
+        appBar: PreferredSize(
+          preferredSize: MediaQuery.of(context).size/12.5,
+          child: AppBar(
+            elevation: 0.0,
+            actions: <Widget>[
+              Container(
+                padding: EdgeInsets.only(right: 108.0),
+                child: ImageIcon(AssetImage('android/assets/logo.png'),
+                    size: 25.0),
               ),
-            ),
-            IconButton(
-              icon: Icon(Icons.tune),
-              iconSize: MediaQuery.of(context).size.height / 33.0,
-              //color: Theme.of(context).iconTheme.color),
-              onPressed: () {},
-              tooltip: 'Filtrar',
-            ),
-            IconButton(
-              icon: Icon(
-                  Icons.search), // color: Theme.of(context).iconTheme.color),
-              iconSize: MediaQuery.of(context).size.height / 33.0,
-              onPressed: () {
-                //showSearch(context: context, delegate: DataSearch());
-              },
-              tooltip: 'Buscar',
-            ),
-            IconButton(
-                icon: Icon(Icons
-                    .account_circle), // color: Theme.of(context).iconTheme.color),
+              Container(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Switch(
+                  value: lightThemeEnabled,
+                  onChanged: (changed) {
+                    setState(() {
+                      lightThemeEnabled = changed;
+                      _savenswitchValue();
+                    });
+                  },
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.tune),
+                iconSize: MediaQuery.of(context).size.height / 33.0,
+                //color: Theme.of(context).iconTheme.color),
+                onPressed: () {},
+                tooltip: 'Filtrar',
+              ),
+              IconButton(
+                icon: Icon(
+                    Icons.search), // color: Theme.of(context).iconTheme.color),
                 iconSize: MediaQuery.of(context).size.height / 33.0,
                 onPressed: () {
-                  _scaffoldKey.currentState.openEndDrawer();
-                }),
-          ],
+                  //showSearch(context: context, delegate: DataSearch());
+                },
+                tooltip: 'Buscar',
+              ),
+              IconButton(
+                  icon: Icon(Icons
+                      .account_circle), // color: Theme.of(context).iconTheme.color),
+                  iconSize: MediaQuery.of(context).size.height / 33.0,
+                  onPressed: () {
+                    _scaffoldKey.currentState.openEndDrawer();
+                  }),
+            ],
+          ),
         ),
         endDrawer: Drawer(
           child: ListView(

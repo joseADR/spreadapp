@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 final ThemeData SpreadLight = ThemeData(
   backgroundColor: Color(0xfff1f1f1),
   brightness: Brightness.light,
@@ -19,12 +20,12 @@ final ThemeData SpreadLight = ThemeData(
   canvasColor: Colors.white70.withOpacity(0.9),
 );
 final ThemeData SpreadDark = ThemeData(
-  backgroundColor: Color(0xff202121),
-  scaffoldBackgroundColor: Color(0xff202121),
+  backgroundColor: Color(0xff1c1c1c),
+  scaffoldBackgroundColor: Color(0xff1c1c1c),
   secondaryHeaderColor: Colors.black54.withOpacity(0.9),
   brightness: Brightness.dark,
   primarySwatch: Colors.blue,
-  primaryColor: Color(0xff202121),
+  primaryColor: Color(0xff1c1c1c),
   primaryColorBrightness: Brightness.dark,
   accentColor: Colors.blue,
   accentColorBrightness: Brightness.dark,
@@ -35,5 +36,5 @@ final ThemeData SpreadDark = ThemeData(
   unselectedWidgetColor: Colors.grey,
   dividerColor: Colors.grey[700],
   buttonColor: Colors.grey,
-  canvasColor: Color(0xff202121).withOpacity(0.9),
+  canvasColor: Color(0xff1c1c1c).withOpacity(0.9),
 );
