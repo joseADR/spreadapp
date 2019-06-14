@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
 import 'package:map_view/camera_position.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:spreadapp/Promoters/profile.dart';
-
 const api_key = "AIzaSyDQIQ6TK-F0NCvvVvx-eaeqPVUL1K0ClPE";
 
 class CardPage extends StatefulWidget {
